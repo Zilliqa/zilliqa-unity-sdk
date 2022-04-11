@@ -8,7 +8,8 @@ This is the very first public version of the Zilliqa's Unity3D SDK.
 It contains all the blockchain related API rpc calls.
 More to come in terms of features.
 
-* Details:
+
+Details:
 The Zilliqa blockchain API is being covered by this SDK.
 More API documentation details: https://dev.zilliqa.com/docs/apis/api-introduction
 
@@ -21,7 +22,8 @@ Assets/Scenes/  - sample test scene, you can use this one for your tests;
 Assets/Scripts/ - scripts used by each of the prefabs plus general usage scripts;
 
 
-* Install note: in order to use this in your Unity3D project, don't
+Install note:
+In order to use this in your Unity3D project, don't
 forget to first unpack the Zilliqa-Unity3D-SDK-Additional-files.zip.
 
 .
