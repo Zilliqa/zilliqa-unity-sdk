@@ -2,7 +2,7 @@
 Zilliqa's Unity3D SDK
 
 v1.0 beta / 2022.04.11
-by Valenin Cobelea
+by Valentin Cobelea
 
 This is the very first public version of the Zilliqa's Unity3D SDK.
 It contains all the blockchain related API rpc calls.
