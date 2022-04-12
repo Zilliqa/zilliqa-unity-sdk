@@ -1,7 +1,7 @@
 # zilliqa-unity-sdk
 Zilliqa's Unity3D SDK
 
-v1.0 beta / 2022.04.11</br>
+v1.0 / 2022.04.12</br>
 by Valentin Cobelea
 
 This is the very first public version of the Zilliqa's Unity3D SDK.</br>
@@ -23,7 +23,8 @@ Assets/Scripts/ - scripts used by each of the prefabs plus general usage scripts
 
 
 Install note:</br>
-In order to use this in your Unity3D project, don't
-forget to first unpack the Zilliqa-Unity3D-SDK-Additional-files.zip.
+In order to use this in your Unity3D project, don't forget to first unpack:</br>
+ Zilliqa-Unity3D-SDK-Additional-files.zip in the project root folder</br>
+ Assets/ScriptsBouncyCastle.zip in the Assets/ folder.
 
 .
