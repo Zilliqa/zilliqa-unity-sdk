@@ -7,6 +7,7 @@ Folder content:
 Prefabs/ - prefabs for each of the blockchain methods;
 Scenes/  - sample test scene, you can use this one for your tests;
 Scripts/ - scripts used by each of the prefabs plus general usage scripts;
+ScriptsBouncyCastle/ - external scripts needed for blockchain encryption specifics;
 
 More API documentation:
 https://dev.zilliqa.com/docs/apis/api-introduction
