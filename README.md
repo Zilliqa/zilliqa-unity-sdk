@@ -1,7 +1,7 @@
 # zilliqa-unity-sdk
 Zilliqa's Unity3D SDK
 
-v1.0 / 2022.04.12</br>
+v1.1 / 2022.04.14</br>
 by Valentin Cobelea
 
 This is the very first public version of the Zilliqa's Unity3D SDK.</br>

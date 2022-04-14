@@ -8,6 +8,7 @@ using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
 using Org.BouncyCastle.Math.EC.Multiplier;
 using Org.BouncyCastle.Security;
+using System.Collections;
 
 /*
  * Documentation:
@@ -43,6 +44,11 @@ public class CreateTransaction : MonoBehaviour
     public string apiUrl = "https://dev-api.zilliqa.com/";//"https://api.zilliqa.com/";
     public bool showDebug = true;
     public string privKey = "e19d05c5452598e24caad4a0d85a49146f7be089515c905ae6a19e8a578a6930";
+
+    public bool runAtStart = true;
+    public bool runForSeveralTimes = true;
+    public int runTimes = 10;
+    public float runDelay = 5f;//seconds
 
     [Serializable]
     struct CreateTransactionRequest
@@ -154,6 +160,15 @@ public class CreateTransaction : MonoBehaviour
 
     void Start()
     {
+        if (runAtStart)
+            RunMethod();
+
+        if (runForSeveralTimes)
+            StartCoroutine(RunMethodCoroutine());
+    }
+
+    void RunMethod()
+    {
         try
         {
             CreateTransactionRequest createTransaction = new CreateTransactionRequest
@@ -239,6 +254,19 @@ public class CreateTransaction : MonoBehaviour
         catch (UnityException ex)
         {
             Debug.Log(ex.Message);
+        }
+    }
+
+    IEnumerator RunMethodCoroutine()
+    {
+        //if run at start also enabled, then wait before first batch run
+        if (runAtStart)
+            yield return new WaitForSeconds(runDelay);
+
+        for (int i = 1; i <= runTimes; i++)
+        {
+            RunMethod();
+            yield return new WaitForSeconds(runDelay);
         }
     }
 }
