@@ -1,7 +1,7 @@
 # zilliqa-unity-sdk
 Zilliqa's Unity3D SDK
 
-v1.1 / 2022.04.14</br>
+v1.2 / 2022.04.21</br>
 by Valentin Cobelea
 
 This is the very first public version of the Zilliqa's Unity3D SDK.</br>
@@ -20,11 +20,9 @@ Folder content</br>
 Assets/Prefabs/ - prefabs for each of the blockchain methods;</br>
 Assets/Scenes/  - sample test scene, you can use this one for your tests;</br>
 Assets/Scripts/ - scripts used by each of the prefabs plus general usage scripts;</br>
-Assets/ScriptsBouncyCastle/ - external scripts needed for blockchain encryption specifics;</br>
 
 Install note:</br>
 In order to use this in your Unity3D project, don't forget to first unpack:</br>
  Zilliqa-Unity3D-SDK-Additional-files.zip in the project root folder</br>
- Assets/ScriptsBouncyCastle.zip in the Assets/ folder.
 
 .
