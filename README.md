@@ -22,7 +22,9 @@ Assets/Scenes/  - sample test scene, you can use this one for your tests;</br>
 Assets/Scripts/ - scripts used by each of the prefabs plus general usage scripts;</br>
 
 Install note:</br>
-In order to use this in your Unity3D project, don't forget to first unpack:</br>
+In order to use this git in your Unity3D project, don't forget to first unpack:</br>
  Zilliqa-Unity3D-SDK-Additional-files.zip in the project root folder</br>
 
+Or, simply, import into your Unity project the .unitypackage (be sure you get the</br>
+latest released version).
 .
