@@ -13,11 +13,10 @@ using System.Collections;
  *  Developer testnet  | 333
  *  Isolated server	   | 222
  */
-public class GetNetworkId : MonoBehaviour
+public class GetNetworkId : ZilliqaMonoBehaviour
 {
     const string METHOD = "GetNetworkId";
 
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
     public bool showDebug = true;
 
     public bool runAtStart = true;
@@ -37,43 +36,27 @@ public class GetNetworkId : MonoBehaviour
     void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        ZilRequest req = new ZilRequest(METHOD, new object[] { });
+        yield return StartCoroutine(PostRequest<GetNetworkIdResponse>(req, (response, error) =>
         {
-            GetNetworkIdRequest getNetworkId = new GetNetworkIdRequest
+            if (response.result != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<string>()
-            };
-
-            string json = JsonUtility.ToJson(getNetworkId);
-            json = json.Replace("paramsList", "params");
-
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+                Debug.Log(METHOD + " result id " + response.result);
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
     }
 
     IEnumerator RunMethodCoroutine()
@@ -84,8 +67,9 @@ public class GetNetworkId : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            StartCoroutine(RunMethod());
             yield return new WaitForSeconds(runDelay);
         }
     }
+
 }

@@ -7,69 +7,56 @@ using System.Collections;
  * Documentation:
  * https://dev.zilliqa.com/docs/apis/api-blockchain-get-miner-info
  */
-public class GetMinerInfo : MonoBehaviour
+public class GetMinerInfo : ZilliqaMonoBehaviour
 {
     const string METHOD = "GetMinerInfo";
 
     public string DSBlockNumber = "5500";
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
     public bool showDebug = true;
 
     public bool runAtStart = true;
     public bool runForSeveralTimes = true;
     public int runTimes = 10;
     public float runDelay = 5f;//seconds
-
-    [Serializable]
-    struct GetMinerInfoRequest
-    {
-        public int id;
-        public string jsonrpc;
-        public string method;
-        public List<string> paramsList;
-    }
-
     void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        ZilRequest req = new ZilRequest(METHOD, new object[] { DSBlockNumber });
+        yield return StartCoroutine(PostRequest<GetMinerInfoResponse>(req, (response, error) =>
         {
-            GetMinerInfoRequest getMinerInfo = new GetMinerInfoRequest
+            if (response.result != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<string>()
-            };
-            getMinerInfo.paramsList.Add(DSBlockNumber);
-
-            string json = JsonUtility.ToJson(getMinerInfo);
-            json = json.Replace("paramsList", "params");
-
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+                var debugStr = "\n dscommittee: \n";
+                for (int i = 0; i < response.result.dscommittee.Length; i++)
+                {
+                    debugStr += response.result.dscommittee[i] + "\n";
+                }
+                debugStr += "shards: \n";
+                for (int i = 0; i < response.result.shards.Length; i++)
+                {
+                    debugStr += "\n nodes:\n";
+                    for (int j = 0; j < response.result.shards[i].nodes.Length; j++)
+                    {
+                        debugStr += "  "+response.result.shards[i].nodes[j] + "\n";
+                    }
+                    debugStr += " shards size "+response.result.shards[i].size + " ";
+                }
+                Debug.Log(METHOD + " result " + debugStr);
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
     }
 
     IEnumerator RunMethodCoroutine()
@@ -80,8 +67,10 @@ public class GetMinerInfo : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            StartCoroutine(RunMethod());
             yield return new WaitForSeconds(runDelay);
         }
     }
+
+    
 }

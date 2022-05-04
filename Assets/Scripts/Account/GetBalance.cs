@@ -58,7 +58,7 @@ public class GetBalance : ZilliqaMonoBehaviour
         ZilRequest getBalanceReq = new ZilRequest(METHOD, new object[] { accountID });
         yield return StartCoroutine(PostRequest<GetBalanceResponse>(getBalanceReq, (response, error) =>
         {
-            if (response != null)
+            if (response.result != null)
             {
                 Debug.Log("Balance of " + accountID + " : " + response.result.balance);
             }

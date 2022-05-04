@@ -57,7 +57,7 @@ public class TxBlockListing : ZilliqaMonoBehaviour
         ZilRequest getTxBlockListingReq = new ZilRequest(METHOD, new object[] { 1 });
         yield return StartCoroutine(PostRequest<GetTxBlockListingResponse>(getTxBlockListingReq, (response, error) =>
         {
-            if (response != null)
+            if (response.result != null)
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append("Block List:" + Environment.NewLine);
