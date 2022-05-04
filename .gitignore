@@ -7,4 +7,10 @@ UserSettings/
 Logs/
 ProjectSettings/
 Packages/
+.vs/Zilliqa-Unity-SDK/v16/.suo
+*.ide
+*.ide-wal
+*.ide-shm
 .vs/
+*.csproj
+Zilliqa-Unity-SDK.sln

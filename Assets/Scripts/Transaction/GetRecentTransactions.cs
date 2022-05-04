@@ -7,11 +7,10 @@ using System.Collections;
  * Documentation:
  * https://dev.zilliqa.com/docs/apis/api-transaction-get-recent-txs
  */
-public class GetRecentTransactions : MonoBehaviour
+public class GetRecentTransactions : ZilliqaMonoBehaviour
 {
     const string METHOD = "GetRecentTransactions";
 
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
     public bool showDebug = true;
 
     public bool runAtStart = true;
@@ -19,55 +18,37 @@ public class GetRecentTransactions : MonoBehaviour
     public int runTimes = 10;
     public float runDelay = 5f;//seconds
 
-    [Serializable]
-    struct GetRecentTransactionsRequest
-    {
-        public int id;
-        public string jsonrpc;
-        public string method;
-        public List<string> paramsList;
-    }
-
     void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        ZilRequest getTxBlockListingReq = new ZilRequest(METHOD, new object[] { });
+        yield return StartCoroutine(PostRequest<GetRecentTransactionsResponse>(getTxBlockListingReq, (response, error) =>
         {
-            GetRecentTransactionsRequest getRecentTransactions = new GetRecentTransactionsRequest
+            if (response.result != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<string>()
-            };
+                var debugStr = "Hashes \n";
+                for (int i = 0; i < response.result.TxnHashes.Length; i++)
+                {
+                    debugStr += response.result.TxnHashes[i] + "\n";
+                }
 
-            string json = JsonUtility.ToJson(getRecentTransactions);
-            json = json.Replace("paramsList", "params");
-
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+                debugStr += "number " + response.result.number;
+                Debug.Log("Recent transactions:" + debugStr);
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
     }
 
     IEnumerator RunMethodCoroutine()
@@ -78,7 +59,7 @@ public class GetRecentTransactions : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            yield return RunMethod();
             yield return new WaitForSeconds(runDelay);
         }
     }
