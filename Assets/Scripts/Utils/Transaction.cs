@@ -54,3 +54,16 @@ public class Transaction
     }
 
 }
+
+public class ProcessedTransaction : Transaction
+{
+    public string ID;
+    public TransactionReceipt receipt;
+}
+
+public class TransactionReceipt
+{
+    public string cumulative_gas;
+    public string epoch_num;
+    public bool success;
+}

@@ -7,12 +7,12 @@ using System.Collections;
  * Documentation:
  * https://dev.zilliqa.com/docs/apis/api-transaction-get-transaction-status
  */
-public class GetTransactionStatus : MonoBehaviour
+public class GetTransactionStatus : ZilliqaMonoBehaviour
 {
     const string METHOD = "GetTransactionStatus";
 
-    public string transactionID = "fba9cbbaef13767679cc77e62811e74a1a53858db91606a3c7d9ac8ff6aa5a0c";
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
+    public string transactionID = "1bb178b023f816e950d862f6505cd79a32bb97e71fd78441cbc3486940a2e1b7";
+    
     public bool showDebug = true;
 
     public bool runAtStart = true;
@@ -20,56 +20,48 @@ public class GetTransactionStatus : MonoBehaviour
     public int runTimes = 10;
     public float runDelay = 5f;//seconds
 
-    [Serializable]
-    struct GetTransactionStatusRequest
-    {
-        public int id;
-        public string jsonrpc;
-        public string method;
-        public List<string> paramsList;
-    }
-
     void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        ZilRequest getTxBlockListingReq = new ZilRequest(METHOD, new object[] { transactionID });
+        yield return StartCoroutine(PostRequest<GetTransactionStatusResponse>(getTxBlockListingReq, (response, error) =>
         {
-            GetTransactionStatusRequest getTransactionStatus = new GetTransactionStatusRequest
+            if (response.result != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<string>()
-            };
-            getTransactionStatus.paramsList.Add(transactionID);
+                string debugStr = "{\n\t<b>Id</b>: " + response.result.Id + "\n" +
+                    "\t<b>Oid</b>: " + response.result.Oid.ToString() + "\n" +
+                    "\t<b>Amount</b>: " + response.result.Amount + "\n" +
+                    "\t<b>Data</b>: " + response.result.Data + "\n" +
+                    "\t<b>EpochInserted</b>: " + response.result.EpochInserted + "\n" +
+                    "\t<b>EpochUpdated</b>: " + response.result.EpochUpdated + "\n" +
+                    "\t<b>GasLimit</b>: " + response.result.GasLimit + "\n" +
+                    "\t<b>GasPrice</b>: " + response.result.GasPrice + "\n" +
+                    "\t<b>LastModified</b>: " + response.result.LastModified + "\n" +
+                    "\t<b>ModificationState</b>: " + "<color=#39002e>" + response.result.ModificationState + "</color>\n" +
+                    "\t<b>Nonce</b>: " + response.result.Nonce + "\n" +
+                    "\t<b>SenderAddr</b>: " + response.result.SenderAddr + "\n" +
+                    "\t<b>Signature</b>: " + response.result.Signature + "\n" +
+                    "\t<b>Status</b>: " + "<color=#39002e>" + response.result.Status + "</color>\n" +
+                    "\t<b>Success</b>: " + "<color=#39000d>" + response.result.Success + "</color>\n" +
+                    "\t<b>ToAddr</b>: " + response.result.ToAddr + "\n" +
+                    "\t<b>Version</b>: " + response.result.Version + "\n}";
 
-            string json = JsonUtility.ToJson(getTransactionStatus);
-            json = json.Replace("paramsList", "params");
-
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+                Debug.Log("Get transaction: " + debugStr);
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
     }
 
     IEnumerator RunMethodCoroutine()
@@ -80,7 +72,7 @@ public class GetTransactionStatus : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            yield return RunMethod();
             yield return new WaitForSeconds(runDelay);
         }
     }

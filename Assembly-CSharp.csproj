@@ -127,6 +127,15 @@
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
     <Compile Include="Assets\Scripts\Transaction\Responses\GetNetworkIdResponse.cs" />
     <Compile Include="Assets\Scripts\Transaction\Responses\GetNumDSBlocksResponse.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetMinimumGasPriceResponse.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetNumTxnsDSEpochResponse.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetRecentTransactionsResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\Payloads\GetRecentTransactionsPayload.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetTransactionResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\JsonConverters\GetTransactionPayloadConverter.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetTransactionStatusResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionStatusPayload.cs" />
+    <Compile Include="Assets\Scripts\Utils\JsonConverters\ObjectIdConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\README.txt" />
