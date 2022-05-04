@@ -135,15 +135,6 @@
     <Compile Include="Assets\Scripts\Contract\GetSmartContractState.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetMinerInfoPayload.cs" />
     <Compile Include="Assets\Scripts\Transaction\Responses\GetNumDSBlocksResponse.cs" />
-    <Compile Include="Assets\Scripts\Transaction\Responses\GetMinimumGasPriceResponse.cs" />
-    <Compile Include="Assets\Scripts\Transaction\Responses\GetNumTxnsDSEpochResponse.cs" />
-    <Compile Include="Assets\Scripts\Transaction\Responses\GetRecentTransactionsResponse.cs" />
-    <Compile Include="Assets\Scripts\Utils\Payloads\GetRecentTransactionsPayload.cs" />
-    <Compile Include="Assets\Scripts\Transaction\Responses\GetTransactionResponse.cs" />
-    <Compile Include="Assets\Scripts\Utils\JsonConverters\GetTransactionPayloadConverter.cs" />
-    <Compile Include="Assets\Scripts\Transaction\Responses\GetTransactionStatusResponse.cs" />
-    <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionStatusPayload.cs" />
-    <Compile Include="Assets\Scripts\Utils\JsonConverters\ObjectIdConverter.cs" />
     <Compile Include="Assets\Scripts\Utils\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
@@ -160,6 +151,22 @@
     <Compile Include="Assets\Scripts\Contract\Responses\GetSmartContractSubStatePayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Admins.cs" />
     <Compile Include="Assets\Scripts\Utils\AdminsArgs.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetMinimumGasPriceResponse.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetNumTxnsDSEpochResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\JsonConverters\ObjectIdConverter.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetStateProofResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\JsonConverters\GetTransactionPayloadConverter.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetTransactionForTxBlockResponse.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetTransactionResponse.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetTransactionsForTxBlockExResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\Payloads\GetRecentTransactionsPayload.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetTransactionStatusResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\Payloads\GetTxnBodiesForTxBlockExPayload.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetTxnBodiesForTxBlockExResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionsForTxBlockExPayload.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetTxnBodiesForTxBlockResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionStatusPayload.cs" />
+    <Compile Include="Assets\Scripts\Transaction\Responses\GetRecentTransactionsResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\README.txt" />

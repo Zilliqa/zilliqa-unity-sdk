@@ -58,7 +58,7 @@ public class GetContractAddressFromTransactionID : ZilliqaMonoBehaviour
         ZilRequest getContractAddressFromTransactionIDReq = new ZilRequest(METHOD, new object[] { transactionID });
         yield return StartCoroutine(PostRequest<GetContractAddressFromTransactionIDResponse>(getContractAddressFromTransactionIDReq, (response, error) =>
         {
-            if (response != null)
+            if (response.result != null)
             {
                 Debug.Log("Transaction ID:" + response.result);
             }
