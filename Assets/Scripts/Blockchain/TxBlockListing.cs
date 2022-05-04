@@ -2,17 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Text;
 
 /*
  * Documentation:
- * https://dev.zilliqa.com/docs/apis/api-blockchain-tx-block-listing
+ * https://dev.zilliqa.com/docs/apis/api-account-get-balance
  */
-public class TxBlockListing : MonoBehaviour
+public class TxBlockListing : ZilliqaMonoBehaviour
 {
     const string METHOD = "TxBlockListing";
 
-    public int pageNumber = 1;
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
     public bool showDebug = true;
 
     public bool runAtStart = true;
@@ -21,7 +20,7 @@ public class TxBlockListing : MonoBehaviour
     public float runDelay = 5f;//seconds
 
     [Serializable]
-    struct TxBlockListingRequest
+    struct GetTxBlockListing
     {
         public int id;
         public string jsonrpc;
@@ -32,44 +31,50 @@ public class TxBlockListing : MonoBehaviour
     void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        GetTxBlockListing getTxBlockListing = new GetTxBlockListing
         {
-            TxBlockListingRequest TxBlockListing = new TxBlockListingRequest
+            id = 1,
+            jsonrpc = "2.0",
+            method = METHOD,
+            paramsList = new List<int>()
+        };
+        getTxBlockListing.paramsList.Add(1);
+
+        string json = JsonUtility.ToJson(getTxBlockListing);
+        json = json.Replace("paramsList", "params");
+
+        if (showDebug)
+            Debug.Log(METHOD + ":\n" + json);
+
+        ZilRequest getTxBlockListingReq = new ZilRequest(METHOD, new object[] { 1 });
+        yield return StartCoroutine(PostRequest<GetTxBlockListingResponse>(getTxBlockListingReq, (response, error) =>
+        {
+            if (response != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<int>()
-            };
-            TxBlockListing.paramsList.Add(pageNumber);
-
-            string json = JsonUtility.ToJson(TxBlockListing);
-            json = json.Replace("paramsList", "params");
-
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Block List:" + Environment.NewLine);
+                foreach (TransactionBlock item in response.result.data)
+                {
+                    sb.Append("BlockNum:" + item.BlockNum+Environment.NewLine);
+                    sb.Append("Hash:    " + item.Hash + Environment.NewLine);
+                }
+                sb.Append("maxPages:" + response.result.maxPages);
+                Debug.Log(sb.ToString());
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
     }
 
     IEnumerator RunMethodCoroutine()
@@ -80,7 +85,7 @@ public class TxBlockListing : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            yield return RunMethod();
             yield return new WaitForSeconds(runDelay);
         }
     }

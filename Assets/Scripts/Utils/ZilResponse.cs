@@ -1,3 +1,6 @@
+using System;
+
+[Serializable]
 public class ZilResponse
 {
     public class Error
@@ -9,7 +12,7 @@ public class ZilResponse
 
     public string id;
     public string jsonrpc;
-    public object result;
+    
 
     public Error error;
 }

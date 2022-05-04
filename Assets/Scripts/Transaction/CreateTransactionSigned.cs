@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Math;
 
-public class CreateTransactionSigned : MonoBehaviour
+public class CreateTransactionSigned : ZilliqaMonoBehaviour
 {
     private const string CreateTransactionMethod = "CreateTransaction";
     private const string GetBalanceMethod = "GetBalance";
@@ -30,8 +30,7 @@ public class CreateTransactionSigned : MonoBehaviour
     [SerializeField] private string walletAddress = "8Abea7C16e71750D493Eec2F1093A2f38d191628";
     [SerializeField] private bool autoNonce = true;
 
-    [Header("Test Network")]
-    [SerializeField] private string apiUrl = "https://dev-api.zilliqa.com/";//"https://api.zilliqa.com/"
+    
 
     [Header("Debug")]
     [SerializeField] private bool runAtStart = true;
@@ -50,28 +49,7 @@ public class CreateTransactionSigned : MonoBehaviour
             StartCoroutine(Transact());
     }
 
-    private IEnumerator PostRequest(ZilRequest request, Action<object, ZilResponse.Error> onComplete = null)
-    {
-        string json = request.ToJson();
-        using UnityWebRequest webRequest = new UnityWebRequest(apiUrl, "POST");
-        byte[] rawData = Encoding.UTF8.GetBytes(json);
-
-        webRequest.SetRequestHeader("Content-Type", "application/json");
-        webRequest.uploadHandler = new UploadHandlerRaw(rawData);
-        webRequest.downloadHandler = new DownloadHandlerBuffer();
-
-        yield return webRequest.SendWebRequest();
-
-        switch (webRequest.result)
-        {
-            case UnityWebRequest.Result.Success:
-                var response = JsonConvert.DeserializeObject<ZilResponse>(webRequest.downloadHandler.text);
-                onComplete?.Invoke(response.result, response.error);
-                break;
-            default:
-                break;
-        }
-    }
+   
 
     private IEnumerator Transact()
     {
@@ -97,12 +75,11 @@ public class CreateTransactionSigned : MonoBehaviour
             else
             {
                 ZilRequest getBalanceReq = new ZilRequest(GetBalanceMethod, walletAddress);
-                yield return StartCoroutine(PostRequest(getBalanceReq, (result, error) =>
+                yield return StartCoroutine(PostRequest<GetBalanceResponse>(getBalanceReq, (response, error) =>
                     {
-                        if (result != null)
+                        if (response != null)
                         {
-                            Balance balance = ((JObject)result).ToObject<Balance>();
-                            transactionParam.nonce = balance.nonce + 1;
+                            transactionParam.nonce = response.result.nonce + 1;
                         }
                         else if (error != null)
                         {
@@ -122,13 +99,13 @@ public class CreateTransactionSigned : MonoBehaviour
             Debug.Log("Signature: " + transactionParam.signature);
 
         ZilRequest createTxReq = new ZilRequest(CreateTransactionMethod, new object[] { transactionParam });
-        StartCoroutine(PostRequest(createTxReq, (result, error) =>
+        StartCoroutine(PostRequest<CreateTransactionSignedResponse>(createTxReq, (response, error) =>
             {
-                if (result != null)
+                var result = response.result;
+                if (response != null)
                 {
-                    Transaction.Response txResponse = ((JObject)result).ToObject<Transaction.Response>();
                     if (showDebug)
-                        Debug.Log("Info: " + txResponse.Info + "\n" + "Tx hash: " + "0x" + txResponse.TranID);
+                        Debug.Log("Info: " + result.Info + "\n" + "Tx hash: " + "0x" + result.TranID);
                 }
                 else if (error != null)
                 {

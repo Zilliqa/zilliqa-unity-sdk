@@ -1,0 +1,9 @@
+*.csproj
+Library/
+obj/
+Temp/
+UserSettings/
+Logs/
+ProjectSettings/
+Packages/
+.vs/Zilliqa-Unity-SDK/v16/.suo
