@@ -41,7 +41,7 @@ public class GetCurrentDSEpoch : ZilliqaMonoBehaviour
         ZilRequest getCurrentDSEpochReq = new ZilRequest(METHOD, new object[] { });
         yield return StartCoroutine(PostRequest<GetCurrentDSEpochResponse>(getCurrentDSEpochReq, (response, error) =>
         {
-            if (response != null)
+            if (response.result != null)
             {
                 Debug.Log(METHOD + " result " + response.result);
             }

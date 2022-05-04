@@ -33,7 +33,7 @@ public class GetDSBlockRate : ZilliqaMonoBehaviour
         ZilRequest req = new ZilRequest(METHOD, new object[] { });
         yield return StartCoroutine(PostRequest<GetDSBlockRateResponse>(req, (response, error) =>
         {
-            if (response != null)
+            if (response.result != null)
             {
                 Debug.Log(METHOD + " result " + response.result);
             }

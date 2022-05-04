@@ -43,7 +43,7 @@ public class GetDsBlock : ZilliqaMonoBehaviour
         ZilRequest req = new ZilRequest(METHOD, new object[] { DSBlockNumber });
         yield return StartCoroutine(PostRequest<GetDSBlockResponse>(req, (response, error) =>
         {
-            if (response != null)
+            if (response.result != null)
             {
                 string debugStr = "CurrentDSEpoch " + response.result.header.BlockNum + "\n" +
                                   "CurrentMiniEpoch " + response.result.header.Difficulty + "\n" +

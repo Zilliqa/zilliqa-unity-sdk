@@ -41,7 +41,7 @@ public class GetLatestDsBlock : ZilliqaMonoBehaviour
         ZilRequest req = new ZilRequest(METHOD, new object[] { });
         yield return StartCoroutine(PostRequest<GetLatestDSBlockResponse>(req, (response, error) =>
         {
-            if (response != null)
+            if (response.result != null)
             {
                 string debugStr = "CurrentDSEpoch " + response.result.header.BlockNum + "\n" +
                                   "CurrentMiniEpoch " + response.result.header.Difficulty + "\n" +

@@ -41,7 +41,7 @@ public class GetBlockchainInfo : ZilliqaMonoBehaviour
         ZilRequest getBlockchainInfoReq = new ZilRequest(METHOD, new object[] { });
         yield return StartCoroutine(PostRequest<GetBlockchainInfoResponse>(getBlockchainInfoReq, (response, error) =>
         {
-            if (response != null)
+            if (response.result != null)
             {
                 string debugStr = "CurrentDSEpoch" + response.result.CurrentDSEpoch + "\n" + 
                                     "CurrentMiniEpoch" + response.result.CurrentMiniEpoch + "\n" +

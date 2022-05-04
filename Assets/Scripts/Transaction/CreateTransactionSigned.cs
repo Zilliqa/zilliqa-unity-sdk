@@ -77,7 +77,7 @@ public class CreateTransactionSigned : ZilliqaMonoBehaviour
                 ZilRequest getBalanceReq = new ZilRequest(GetBalanceMethod, walletAddress);
                 yield return StartCoroutine(PostRequest<GetBalanceResponse>(getBalanceReq, (response, error) =>
                     {
-                        if (response != null)
+                        if (response.result != null)
                         {
                             transactionParam.nonce = response.result.nonce + 1;
                         }
@@ -102,7 +102,7 @@ public class CreateTransactionSigned : ZilliqaMonoBehaviour
         StartCoroutine(PostRequest<CreateTransactionSignedResponse>(createTxReq, (response, error) =>
             {
                 var result = response.result;
-                if (response != null)
+                if (response.result != null)
                 {
                     if (showDebug)
                         Debug.Log("Info: " + result.Info + "\n" + "Tx hash: " + "0x" + result.TranID);

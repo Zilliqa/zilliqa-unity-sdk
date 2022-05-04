@@ -33,7 +33,7 @@ public class DSBlockListing : ZilliqaMonoBehaviour
         ZilRequest dsBlockListingReq = new ZilRequest(METHOD, new object[] { pageNumber });
         yield return StartCoroutine(PostRequest<GetDSBlockListingResponse>(dsBlockListingReq, (response, error) =>
         {
-            if (response != null)
+            if (response.result != null)
             {
                 string debugStr = METHOD + "\n";
                 for (int i = 0; i < response.result.data.Length; i++)

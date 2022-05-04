@@ -38,25 +38,10 @@ public class TxBlockRate : ZilliqaMonoBehaviour
 
     IEnumerator RunMethod()
     {
-        GetTxBlockRate getTxBlockRate = new GetTxBlockRate
-        {
-            id = 1,
-            jsonrpc = "2.0",
-            method = METHOD,
-            paramsList = new List<string>()
-        };
-        getTxBlockRate.paramsList.Add("");
-
-        string json = JsonUtility.ToJson(getTxBlockRate);
-        json = json.Replace("paramsList", "params");
-
-        if (showDebug)
-            Debug.Log(METHOD + ":\n" + json);
-
         ZilRequest getTxBlockListingReq = new ZilRequest(METHOD, new object[] { 1 });
         yield return StartCoroutine(PostRequest<GetTxBlockRateResponse>(getTxBlockListingReq, (response, error) =>
         {
-            if (response != null)
+            if (response.result != null)
             {
                 Debug.Log("BlockRate:" + response.result.ToString());
             }

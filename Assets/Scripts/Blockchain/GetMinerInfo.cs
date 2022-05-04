@@ -32,7 +32,7 @@ public class GetMinerInfo : ZilliqaMonoBehaviour
         ZilRequest req = new ZilRequest(METHOD, new object[] { DSBlockNumber });
         yield return StartCoroutine(PostRequest<GetMinerInfoResponse>(req, (response, error) =>
         {
-            if (response != null)
+            if (response.result != null)
             {
                 var debugStr = "";
                 for (int i = 0; i < response.result.dscommittee.Length; i++)
