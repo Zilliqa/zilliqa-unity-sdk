@@ -7,11 +7,11 @@ using System.Collections;
  * Documentation:
  * https://dev.zilliqa.com/docs/apis/api-blockchain-get-prev-difficulty
  */
-public class GetPrevDifficulty : MonoBehaviour
+public class GetPrevDifficulty : ZilliqaMonoBehaviour
+
 {
     const string METHOD = "GetPrevDifficulty";
-    
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
+
     public bool showDebug = true;
 
     public bool runAtStart = true;
@@ -20,7 +20,7 @@ public class GetPrevDifficulty : MonoBehaviour
     public float runDelay = 5f;//seconds
 
     [Serializable]
-    struct GetPrevDifficultyRequest
+    struct GetPrevDifficultyStruct
     {
         public int id;
         public string jsonrpc;
@@ -31,43 +31,44 @@ public class GetPrevDifficulty : MonoBehaviour
     void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        GetPrevDifficultyStruct getPrevDifficulty = new GetPrevDifficultyStruct
         {
-            GetPrevDifficultyRequest getPrevDifficulty = new GetPrevDifficultyRequest
+            id = 1,
+            jsonrpc = "2.0",
+            method = METHOD,
+            paramsList = new List<string>()
+        };
+        getPrevDifficulty.paramsList.Add("");
+
+        string json = JsonUtility.ToJson(getPrevDifficulty);
+        json = json.Replace("paramsList", "params");
+
+        if (showDebug)
+            Debug.Log(METHOD + ":\n" + json);
+
+        ZilRequest getPrevDifficultyReq = new ZilRequest(METHOD, new object[] { "" });
+        // Response is identical to GetDSDifficulty
+        yield return StartCoroutine(PostRequest<GetDSDifficultyResponse>(getPrevDifficultyReq, (response, error) =>
+        {
+            if (response != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<string>()
-            };
 
-            string json = JsonUtility.ToJson(getPrevDifficulty);
-            json = json.Replace("paramsList", "params");
-
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+                Debug.Log("Previous difficulty: " + response.result.ToString());
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
     }
 
     IEnumerator RunMethodCoroutine()
@@ -78,7 +79,7 @@ public class GetPrevDifficulty : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            yield return RunMethod();
             yield return new WaitForSeconds(runDelay);
         }
     }

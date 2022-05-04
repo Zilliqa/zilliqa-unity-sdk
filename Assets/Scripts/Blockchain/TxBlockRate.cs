@@ -53,8 +53,8 @@ public class TxBlockRate : ZilliqaMonoBehaviour
         if (showDebug)
             Debug.Log(METHOD + ":\n" + json);
 
-        ZilRequest getTxBlockListingReq = new ZilRequest(METHOD, new object[] { 1 });
-        yield return StartCoroutine(PostRequest<GetTxBlockRateResponse>(getTxBlockListingReq, (response, error) =>
+        ZilRequest getTxBlockRateReq = new ZilRequest(METHOD, new object[] { 1 });
+        yield return StartCoroutine(PostRequest<GetTxBlockRateResponse>(getTxBlockRateReq, (response, error) =>
         {
             if (response != null)
             {

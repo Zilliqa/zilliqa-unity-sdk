@@ -114,6 +114,14 @@
     <Compile Include="Assets\Scripts\Transaction\GetNumTxnsDSEpoch.cs" />
     <Compile Include="Assets\Scripts\Contract\GetSmartContractState.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
+    <Compile Include="Assets\Scripts\Blockchain\Responses\GetTxBlockResponse.cs" />
+    <Compile Include="Assets\Scripts\Blockchain\Responses\GetTxBlockPayload.cs" />
+    <Compile Include="Assets\Scripts\Utils\MicroBlock.cs" />
+    <Compile Include="Assets\Scripts\Utils\BlockBody.cs" />
+    <Compile Include="Assets\Scripts\Utils\TxHeader.cs" />
+    <Compile Include="Assets\Scripts\Blockchain\Responses\GetTotalCoinSupplyResponse.cs" />
+    <Compile Include="Assets\Scripts\Blockchain\Responses\GetDSDifficultyResponse.cs" />
+    <Compile Include="Assets\Scripts\Blockchain\Responses\GetNumTxBlocksResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\README.txt" />
