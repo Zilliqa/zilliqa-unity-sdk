@@ -2,17 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Text;
 
 /*
  * Documentation:
  * https://dev.zilliqa.com/docs/apis/api-contract-get-smartcontracts
  */
-public class GetSmartContracts : MonoBehaviour
+public class GetSmartContracts : ZilliqaMonoBehaviour
 {
     const string METHOD = "GetSmartContracts";
 
-    public string userAccount = "1eefc4f453539e5ee732b49eb4792b268c2f3908";
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
+    public string userAccount = "173Ca6770Aa56EB00511Dac8e6E13B3D7f16a5a5";
+
     public bool showDebug = true;
 
     public bool runAtStart = true;
@@ -20,8 +21,9 @@ public class GetSmartContracts : MonoBehaviour
     public int runTimes = 10;
     public float runDelay = 5f;//seconds
 
+
     [Serializable]
-    struct GetSmartContractsRequest
+    struct GetSmartContractsStruct
     {
         public int id;
         public string jsonrpc;
@@ -32,44 +34,48 @@ public class GetSmartContracts : MonoBehaviour
     void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        GetSmartContractsStruct getSmartContracts = new GetSmartContractsStruct
         {
-            GetSmartContractsRequest getSmartContracts = new GetSmartContractsRequest
+            id = 1,
+            jsonrpc = "2.0",
+            method = METHOD,
+            paramsList = new List<string>()
+        };
+        getSmartContracts.paramsList.Add(userAccount);
+
+        string json = JsonUtility.ToJson(getSmartContracts);
+        json = json.Replace("paramsList", "params");
+
+        if (showDebug)
+            Debug.Log(METHOD + ":\n" + json);
+
+        ZilRequest GetSmartContractsReq = new ZilRequest(METHOD, new object[] { userAccount });
+        yield return StartCoroutine(PostRequest<GetSmartContractsResponse>(GetSmartContractsReq, (response, error) =>
+        {
+            if (response.result != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<string>()
-            };
-            getSmartContracts.paramsList.Add(userAccount);
-
-            string json = JsonUtility.ToJson(getSmartContracts);
-            json = json.Replace("paramsList", "params");
-
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Get smart contract init:" + Environment.NewLine);
+                foreach (GetSmartContractsPayload contract in response.result)
+                {
+                    sb.Append(contract.address + Environment.NewLine);
+                }
+                Debug.Log(sb.ToString());
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
     }
 
     IEnumerator RunMethodCoroutine()
@@ -80,7 +86,7 @@ public class GetSmartContracts : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            yield return RunMethod();
             yield return new WaitForSeconds(runDelay);
         }
     }

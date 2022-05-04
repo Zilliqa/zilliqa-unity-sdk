@@ -7,12 +7,10 @@ using System.Collections;
  * Documentation:
  * https://dev.zilliqa.com/docs/apis/api-contract-get-contractaddress-from-txid
  */
-public class GetContractAddressFromTransactionID : MonoBehaviour
+public class GetContractAddressFromTransactionID : ZilliqaMonoBehaviour
 {
     const string METHOD = "GetContractAddressFromTransactionID";
 
-    public string transactionID = "bc1f85fa950bf18bb8c5d92dca9398a47a5a5287b5fcdf110ae1278775a46991";
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
     public bool showDebug = true;
 
     public bool runAtStart = true;
@@ -20,8 +18,10 @@ public class GetContractAddressFromTransactionID : MonoBehaviour
     public int runTimes = 10;
     public float runDelay = 5f;//seconds
 
+    public string transactionID = "bc1f85fa950bf18bb8c5d92dca9398a47a5a5287b5fcdf110ae1278775a46991";
+
     [Serializable]
-    struct GetContractAddressFromTransactionIDRequest
+    struct GetContractAddressFromTransactionIDStruct
     {
         public int id;
         public string jsonrpc;
@@ -32,44 +32,42 @@ public class GetContractAddressFromTransactionID : MonoBehaviour
     void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        GetContractAddressFromTransactionIDStruct getContractAddressFromTransactionID = new GetContractAddressFromTransactionIDStruct
         {
-            GetContractAddressFromTransactionIDRequest getContractAddressFromTransactionID = new GetContractAddressFromTransactionIDRequest
+            id = 1,
+            jsonrpc = "2.0",
+            method = METHOD,
+            paramsList = new List<string>()
+        };
+        getContractAddressFromTransactionID.paramsList.Add(transactionID);
+
+        string json = JsonUtility.ToJson(getContractAddressFromTransactionID);
+        json = json.Replace("paramsList", "params");
+
+        if (showDebug)
+            Debug.Log(METHOD + ":\n" + json);
+
+        ZilRequest getContractAddressFromTransactionIDReq = new ZilRequest(METHOD, new object[] { transactionID });
+        yield return StartCoroutine(PostRequest<GetContractAddressFromTransactionIDResponse>(getContractAddressFromTransactionIDReq, (response, error) =>
+        {
+            if (response.result != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<string>()
-            };
-            getContractAddressFromTransactionID.paramsList.Add(transactionID);
-
-            string json = JsonUtility.ToJson(getContractAddressFromTransactionID);
-            json = json.Replace("paramsList", "params");
-
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+                Debug.Log("Transaction ID:" + response.result);
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
     }
 
     IEnumerator RunMethodCoroutine()
@@ -80,7 +78,7 @@ public class GetContractAddressFromTransactionID : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            yield return RunMethod();
             yield return new WaitForSeconds(runDelay);
         }
     }
