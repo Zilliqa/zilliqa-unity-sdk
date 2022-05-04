@@ -7,11 +7,10 @@ using System.Collections;
  * Documentation:
  * https://dev.zilliqa.com/docs/apis/api-blockchain-get-current-ds-epoch
  */
-public class GetCurrentDSEpoch : MonoBehaviour
+public class GetCurrentDSEpoch : ZilliqaMonoBehaviour
 {
     const string METHOD = "GetCurrentDSEpoch";
 
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
     public bool showDebug = true;
 
     public bool runAtStart = true;
@@ -31,43 +30,27 @@ public class GetCurrentDSEpoch : MonoBehaviour
     void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        ZilRequest getCurrentDSEpochReq = new ZilRequest(METHOD, new object[] { });
+        yield return StartCoroutine(PostRequest<GetCurrentDSEpochResponse>(getCurrentDSEpochReq, (response, error) =>
         {
-            GetCurrentDSEpochRequest getCurrentDSEpoch = new GetCurrentDSEpochRequest
+            if (response != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<string>()
-            };
-
-            string json = JsonUtility.ToJson(getCurrentDSEpoch);
-            json = json.Replace("paramsList", "params");
-
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+                Debug.Log(METHOD + " result " + response.result);
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
     }
 
     IEnumerator RunMethodCoroutine()
@@ -78,7 +61,7 @@ public class GetCurrentDSEpoch : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            StartCoroutine(RunMethod());
             yield return new WaitForSeconds(runDelay);
         }
     }

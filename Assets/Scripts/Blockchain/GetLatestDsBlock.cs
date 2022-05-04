@@ -7,11 +7,10 @@ using System.Collections;
  * Documentation:
  * https://dev.zilliqa.com/docs/apis/api-blockchain-get-latest-ds-block
  */
-public class GetLatestDsBlock : MonoBehaviour
+public class GetLatestDsBlock : ZilliqaMonoBehaviour
 {
     const string METHOD = "GetLatestDsBlock";
 
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
     public bool showDebug = true;
 
     public bool runAtStart = true;
@@ -28,46 +27,40 @@ public class GetLatestDsBlock : MonoBehaviour
         public List<string> paramsList;
     }
 
-    void Start()
+   void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        ZilRequest req = new ZilRequest(METHOD, new object[] { });
+        yield return StartCoroutine(PostRequest<GetLatestDSBlockResponse>(req, (response, error) =>
         {
-            GetLatestDsBlockRequest getLatestDsBlock = new GetLatestDsBlockRequest
+            if (response != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<string>()
-            };
+                string debugStr = "CurrentDSEpoch " + response.result.header.BlockNum + "\n" +
+                                  "CurrentMiniEpoch " + response.result.header.Difficulty + "\n" +
+                                  "DSBlockRate " + response.result.header.DifficultyDS + "\n" +
+                                  "NumDSBlocks " + response.result.header.GasPrice + "\n" +
+                                  "NumPeers " + response.result.header.LeaderPubKey + "\n" +
+                                  "NumTransactions " + response.result.header.PoWWinners + "\n" +
+                                  "NumTxBlocks " + response.result.header.PrevHash + "\n" +
+                                  "NumTxnsDSEpoch " + response.result.header.Timestamp + "\n" +
+                                  "Signature " + response.result.signature;
 
-            string json = JsonUtility.ToJson(getLatestDsBlock);
-            json = json.Replace("paramsList", "params");
-
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+                Debug.Log(METHOD + " result " + debugStr);
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
     }
 
     IEnumerator RunMethodCoroutine()
@@ -78,7 +71,7 @@ public class GetLatestDsBlock : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            StartCoroutine(RunMethod());
             yield return new WaitForSeconds(runDelay);
         }
     }

@@ -7,11 +7,10 @@ using System.Collections;
  * Documentation:
  * https://dev.zilliqa.com/docs/apis/api-blockchain-get-blockchain-info
  */
-public class GetBlockchainInfo : MonoBehaviour
+public class GetBlockchainInfo : ZilliqaMonoBehaviour
 {
     const string METHOD = "GetBlockchainInfo";
 
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
     public bool showDebug = true;
 
     public bool runAtStart = true;
@@ -31,43 +30,41 @@ public class GetBlockchainInfo : MonoBehaviour
     void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        ZilRequest getBlockchainInfoReq = new ZilRequest(METHOD, new object[] { });
+        yield return StartCoroutine(PostRequest<GetBlockchainInfoResponse>(getBlockchainInfoReq, (response, error) =>
         {
-            GetBlockchainInfoRequest getBlockchainInfo = new GetBlockchainInfoRequest
+            if (response != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<string>()
-            };
+                string debugStr = "CurrentDSEpoch" + response.result.CurrentDSEpoch + "\n" + 
+                                    "CurrentMiniEpoch" + response.result.CurrentMiniEpoch + "\n" +
+                                    "DSBlockRate" + response.result.DSBlockRate + "\n" +
+                                    "NumDSBlocks" + response.result.NumDSBlocks + "\n" +
+                                    "NumPeers" + response.result.NumPeers + "\n" +
+                                    "NumTransactions" + response.result.NumTransactions + "\n" +
+                                    "NumTxBlocks" + response.result.NumTxBlocks + "\n" +
+                                    "NumTxnsDSEpoch" + response.result.NumTxnsDSEpoch + "\n" +
+                                    "NumTxnsTxEpoch" + response.result.NumTxnsTxEpoch + "\n" +
+                                    "ShardingStructure" + response.result.ShardingStructure.ToString() + "\n" +
+                                    "TransactionRate" + response.result.TransactionRate + "\n" +
+                                    "TxBlockRate" + response.result.TxBlockRate;
+                Debug.Log(debugStr);
 
-            string json = JsonUtility.ToJson(getBlockchainInfo);
-            json = json.Replace("paramsList", "params");
-
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
+
     }
 
     IEnumerator RunMethodCoroutine()
@@ -78,7 +75,7 @@ public class GetBlockchainInfo : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            StartCoroutine(RunMethod());
             yield return new WaitForSeconds(runDelay);
         }
     }
