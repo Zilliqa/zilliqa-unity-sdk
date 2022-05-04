@@ -7,11 +7,11 @@ using System.Collections;
  * Documentation:
  * https://dev.zilliqa.com/docs/apis/api-blockchain-get-total-coin-supply
  */
-public class GetTotalCoinSupply : MonoBehaviour
+public class GetTotalCoinSupply : ZilliqaMonoBehaviour
+
 {
     const string METHOD = "GetTotalCoinSupply";
 
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
     public bool showDebug = true;
 
     public bool runAtStart = true;
@@ -20,7 +20,7 @@ public class GetTotalCoinSupply : MonoBehaviour
     public float runDelay = 5f;//seconds
 
     [Serializable]
-    struct GetTotalCoinSupplyRequest
+    struct GetTotalCoinSupplyStruct
     {
         public int id;
         public string jsonrpc;
@@ -31,43 +31,43 @@ public class GetTotalCoinSupply : MonoBehaviour
     void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        GetTotalCoinSupplyStruct getTotalCoinSupply = new GetTotalCoinSupplyStruct
         {
-            GetTotalCoinSupplyRequest getTotalCoinSupply = new GetTotalCoinSupplyRequest
+            id = 1,
+            jsonrpc = "2.0",
+            method = METHOD,
+            paramsList = new List<string>()
+        };
+        getTotalCoinSupply.paramsList.Add("");
+
+        string json = JsonUtility.ToJson(getTotalCoinSupply);
+        json = json.Replace("paramsList", "params");
+
+        if (showDebug)
+            Debug.Log(METHOD + ":\n" + json);
+
+        ZilRequest getTotalCoinSupplyReq = new ZilRequest(METHOD, new object[] { "" });
+        yield return StartCoroutine(PostRequest<GetTotalCoinSupplyResponse>(getTotalCoinSupplyReq, (response, error) =>
+        {
+            if (response != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<string>()
-            };
 
-            string json = JsonUtility.ToJson(getTotalCoinSupply);
-            json = json.Replace("paramsList", "params");
-
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+                Debug.Log("Total coins supply: " + response.result.ToString());
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
     }
 
     IEnumerator RunMethodCoroutine()
@@ -78,7 +78,7 @@ public class GetTotalCoinSupply : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            yield return RunMethod();
             yield return new WaitForSeconds(runDelay);
         }
     }

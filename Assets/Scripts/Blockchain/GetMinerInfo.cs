@@ -34,19 +34,20 @@ public class GetMinerInfo : ZilliqaMonoBehaviour
         {
             if (response.result != null)
             {
-                var debugStr = "";
+                var debugStr = "\n dscommittee: \n";
                 for (int i = 0; i < response.result.dscommittee.Length; i++)
                 {
-                    debugStr += response.result.dscommittee[i] + " ";
+                    debugStr += response.result.dscommittee[i] + "\n";
                 }
-
+                debugStr += "shards: \n";
                 for (int i = 0; i < response.result.shards.Length; i++)
                 {
+                    debugStr += "\n nodes:\n";
                     for (int j = 0; j < response.result.shards[i].nodes.Length; j++)
                     {
-                        debugStr += response.result.shards[i].nodes[j] + " ";
+                        debugStr += "  "+response.result.shards[i].nodes[j] + "\n";
                     }
-                    debugStr +=  response.result.shards[i].size + " ";
+                    debugStr += " shards size "+response.result.shards[i].size + " ";
                 }
                 Debug.Log(METHOD + " result " + debugStr);
             }

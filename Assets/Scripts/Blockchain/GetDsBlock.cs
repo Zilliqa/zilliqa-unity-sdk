@@ -45,14 +45,18 @@ public class GetDsBlock : ZilliqaMonoBehaviour
         {
             if (response.result != null)
             {
-                string debugStr = "CurrentDSEpoch " + response.result.header.BlockNum + "\n" +
-                                  "CurrentMiniEpoch " + response.result.header.Difficulty + "\n" +
-                                  "DSBlockRate " + response.result.header.DifficultyDS + "\n" +
-                                  "NumDSBlocks " + response.result.header.GasPrice + "\n" +
-                                  "NumPeers " + response.result.header.LeaderPubKey + "\n" +
-                                  "NumTransactions " + response.result.header.PoWWinners + "\n" +
-                                  "NumTxBlocks " + response.result.header.PrevHash + "\n" +
-                                  "NumTxnsDSEpoch " + response.result.header.Timestamp + "\n" +
+                string debugStr = "BlockNum " + response.result.header.BlockNum + "\n" +
+                                  "Difficulty " + response.result.header.Difficulty + "\n" +
+                                  "DifficultyDS " + response.result.header.DifficultyDS + "\n" +
+                                  "GasPrice " + response.result.header.GasPrice + "\n" +
+                                  "LeaderPubKey " + response.result.header.LeaderPubKey + "\n"+
+                                  "PoWWinners ";
+                foreach (string str in response.result.header.PoWWinners) {
+                      debugStr += "     " + str + "\n";
+                }
+
+                debugStr+=        "PrevHash " + response.result.header.PrevHash + "\n" +
+                                  "Timestamp " + response.result.header.Timestamp + "\n" +
                                   "Signature " + response.result.signature;
 
                 Debug.Log(METHOD + " result " + debugStr);

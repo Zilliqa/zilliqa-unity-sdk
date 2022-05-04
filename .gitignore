@@ -1,4 +1,5 @@
 *.csproj
+*.sln
 Library/
 obj/
 Temp/
@@ -10,3 +11,4 @@ Packages/
 *.ide
 *.ide-wal
 *.ide-shm
+.vs/
