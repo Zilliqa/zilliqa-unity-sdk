@@ -12,3 +12,5 @@ Packages/
 *.ide-wal
 *.ide-shm
 .vs/
+*.csproj
+Zilliqa-Unity-SDK.sln

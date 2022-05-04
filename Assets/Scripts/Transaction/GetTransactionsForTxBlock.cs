@@ -7,12 +7,12 @@ using System.Collections;
  * Documentation:
  * https://dev.zilliqa.com/docs/apis/api-transaction-get-txs-for-txblock
  */
-public class GetTransactionsForTxBlock : MonoBehaviour
+public class GetTransactionsForTxBlock : ZilliqaMonoBehaviour
 {
     const string METHOD = "GetTransactionsForTxBlock";
 
     public string TXBlockNumber = "1376404";
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
+
     public bool showDebug = true;
 
     public bool runAtStart = true;
@@ -20,56 +20,41 @@ public class GetTransactionsForTxBlock : MonoBehaviour
     public int runTimes = 10;
     public float runDelay = 5f;//seconds
 
-    [Serializable]
-    struct GetTransactionsForTxBlockRequest
-    {
-        public int id;
-        public string jsonrpc;
-        public string method;
-        public List<string> paramsList;
-    }
-
     void Start()
     {
         if (runAtStart)
-            RunMethod();
+            StartCoroutine(RunMethod());
 
         if (runForSeveralTimes)
             StartCoroutine(RunMethodCoroutine());
     }
 
-    void RunMethod()
+    IEnumerator RunMethod()
     {
-        try
+        ZilRequest getTxBlockListingReq = new ZilRequest(METHOD, new object[] { TXBlockNumber });
+        yield return StartCoroutine(PostRequest<GetTransactionForTxBlockResponse>(getTxBlockListingReq, (response, error) =>
         {
-            GetTransactionsForTxBlockRequest getTransactionsForTxBlock = new GetTransactionsForTxBlockRequest
+            if (response.result != null)
             {
-                id = 1,
-                jsonrpc = "2.0",
-                method = METHOD,
-                paramsList = new List<string>()
-            };
-            getTransactionsForTxBlock.paramsList.Add(TXBlockNumber);
+                string debugStr = "";
 
-            string json = JsonUtility.ToJson(getTransactionsForTxBlock);
-            json = json.Replace("paramsList", "params");
+                for (int i = 0; i < response.result.Length; i++)
+                {
+                    for (int j = 0; j < response.result[i].Length; j++)
+                    {
+                        debugStr += response.result[i][j] + "\n"; 
+                    }
+                    debugStr += "\n";
+                }
 
-            if (showDebug)
-                Debug.Log(METHOD + ":\n" + json);
-
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-Type", "application/json");
-            
-            byte[] pData = System.Text.Encoding.ASCII.GetBytes(json.ToCharArray());
-
-            WWW api = new WWW(apiUrl, pData, headers);
-
-            StartCoroutine(Utils.WaitForWWW(api, showDebug, METHOD));
+                Debug.Log("Get transaction: " + debugStr);
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
         }
-        catch (UnityException ex)
-        {
-            Debug.Log(ex.Message);
-        }
+            ));
     }
 
     IEnumerator RunMethodCoroutine()
@@ -80,7 +65,7 @@ public class GetTransactionsForTxBlock : MonoBehaviour
 
         for (int i = 1; i <= runTimes; i++)
         {
-            RunMethod();
+            yield return RunMethod();
             yield return new WaitForSeconds(runDelay);
         }
     }
