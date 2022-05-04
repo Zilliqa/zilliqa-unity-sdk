@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 
 public class ZilliqaMonoBehaviour : MonoBehaviour
 {
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/"
+    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/";
 
     protected IEnumerator PostRequest<T>(ZilRequest request, Action<T, ZilResponse.Error> onComplete = null)
        where T : ZilResponse

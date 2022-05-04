@@ -138,6 +138,19 @@
     <Compile Include="Assets\Scripts\Utils\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
+    <Compile Include="Assets\Scripts\Contract\Responses\GetContractAddressFromTransactionIDResponse.cs" />
+    <Compile Include="Assets\Scripts\Contract\Responses\GetSmartContractCodeResponse.cs" />
+    <Compile Include="Assets\Scripts\Contract\Responses\GetSmartContractCodePayload.cs" />
+    <Compile Include="Assets\Scripts\Contract\Responses\GetSmartContractInitResponse.cs" />
+    <Compile Include="Assets\Scripts\Contract\Responses\GetSmartContractInitPayload.cs" />
+    <Compile Include="Assets\Scripts\Contract\Responses\GetSmartContractsResponse.cs" />
+    <Compile Include="Assets\Scripts\Contract\Responses\GetSmartContractsPayload.cs" />
+    <Compile Include="Assets\Scripts\Contract\Responses\GetSmartContractStateResponse.cs" />
+    <Compile Include="Assets\Scripts\Contract\Responses\GetsmartContractStatePayload.cs" />
+    <Compile Include="Assets\Scripts\Contract\Responses\GetSmartContractSubStateResponse.cs" />
+    <Compile Include="Assets\Scripts\Contract\Responses\GetSmartContractSubStatePayload.cs" />
+    <Compile Include="Assets\Scripts\Utils\Admins.cs" />
+    <Compile Include="Assets\Scripts\Utils\AdminsArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\README.txt" />
