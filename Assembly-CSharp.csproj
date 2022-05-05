@@ -70,7 +70,7 @@
     <Compile Include="Assets\Scripts\Utils\AdminsArgs.cs" />
     <Compile Include="Assets\Scripts\Utils\Schnorr.cs" />
     <Compile Include="Assets\Scripts\Utils\Signature.cs" />
-    <Compile Include="Assets\Scripts\Utils\Payloads\CreateTransactionSignedPayload.cs" />
+    <Compile Include="Assets\Scripts\Utils\Payloads\CreateTransactionPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetsmartContractStatePayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetMinimumGasPriceResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetLatestDSBlockResponse.cs" />
@@ -122,7 +122,7 @@
     <Compile Include="Assets\Scripts\Blockchain\GetNetworkId.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTxBlockPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Balance.cs" />
-    <Compile Include="Assets\Scripts\Transaction\CreateTransactionSigned.cs" />
+    <Compile Include="Assets\Scripts\Transaction\CreateTransaction.cs" />
     <Compile Include="Assets\Scripts\Utils\ECKeyPair.cs" />
     <Compile Include="Assets\Scripts\Utils\ZilResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\StaticVariables.cs" />
@@ -136,7 +136,7 @@
     <Compile Include="Assets\Scripts\Contract\GetStateProof.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionsForTxBlockExPayload.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetNumDSBlocks.cs" />
-    <Compile Include="Assets\Scripts\Utils\Responses\CreateTransactionSignedResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\Responses\CreateTransactionResponse.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetMinerInfo.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetCurrentMiniEpoch.cs" />
     <Compile Include="Assets\Scripts\Blockchain\TxBlockRate.cs" />

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4037260841410221412}
   - component: {fileID: 7280216737922476135}
   m_Layer: 0
-  m_Name: CreateTransactionSigned
+  m_Name: CreateTransaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

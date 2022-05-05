@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Math;
 
-public class CreateTransactionSigned : ZilliqaMonoBehaviour
+public class CreateTransaction : ZilliqaMonoBehaviour
 {
     private const string CreateTransactionMethod = "CreateTransaction";
     private const string GetBalanceMethod = "GetBalance";
@@ -99,7 +99,7 @@ public class CreateTransactionSigned : ZilliqaMonoBehaviour
             Debug.Log("Signature: " + transactionParam.signature);
 
         ZilRequest createTxReq = new ZilRequest(CreateTransactionMethod, new object[] { transactionParam });
-        StartCoroutine(PostRequest<CreateTransactionSignedResponse>(createTxReq, (response, error) =>
+        StartCoroutine(PostRequest<CreateTransactionResponse>(createTxReq, (response, error) =>
             {
                 var result = response.result;
                 if (response.result != null)

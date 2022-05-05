@@ -7,7 +7,7 @@ using UnityEngine;
 public class ResponsePayload {}
 
 [Serializable]
-public class CreateTransactionSignedPayload : ResponsePayload
+public class CreateTransactionPayload : ResponsePayload
 {
     [SerializeField]
     public string Info;
