@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Math;
+using System.Security.Cryptography;
 
 public class CreateTransaction : ZilliqaMonoBehaviour
 {
@@ -25,9 +26,11 @@ public class CreateTransaction : ZilliqaMonoBehaviour
     [SerializeField] private bool priority = false;
 
     [Header("Keys Pair")]
-    private string publicKey = "0x3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC";
-    private string privateKey = "0x0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa";
-    
+    private string publicKey = "3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC";
+    private string privateKey = "0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa";
+    private string publicKey_Prefix = "0x3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC";
+    private string privateKey_Prefix = "0x0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa";
+
     private bool autoNonce = true;
 
 
@@ -41,9 +44,15 @@ public class CreateTransaction : ZilliqaMonoBehaviour
     private void Awake()
     {
         
-        var pubk = new BigInteger(1, Encoding.UTF8.GetBytes(publicKey));
-        var prik = new BigInteger(1, Encoding.UTF8.GetBytes(privateKey));
+        var pubk = new BigInteger(1, Schnorr.ToPublicKey(Encoding.UTF8.GetBytes(privateKey)));
+        var prik = new BigInteger(1, Encoding.UTF32.GetBytes(privateKey));
         ecKeyPair = new ECKeyPair(pubk, prik);
+
+        
+        //var prik = new BigInteger(privateKey, 16);
+        //var pubk = new BigInteger(publicKey, 16);
+
+        //ecKeyPair = new ECKeyPair(pubk, prik);
     }
 
     private void Start()
@@ -132,6 +141,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
                         if (response.result != null)
                         {
                             transactionParam.nonce = response.result.nonce + 1;
+                            Debug.Log("Balance of " + publicKey + " : " + response.result.balance);
                         }
                         else if (error != null)
                         {
@@ -144,6 +154,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
 
         // sign the transaction based on the payload
         byte[] message = transactionParam.Encode();
+         
         Signature signature = Schnorr.Sign(ecKeyPair, message);
         transactionParam.signature = signature.ToString().ToLower();
 

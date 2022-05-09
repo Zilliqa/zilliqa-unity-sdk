@@ -123,6 +123,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &93385829
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1483164372012490, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_Name
+      value: GetBalance
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483164372012490, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162773084094280, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162773084094280, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162773084094280, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162773084094280, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162773084094280, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162773084094280, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162773084094280, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162773084094280, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162773084094280, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162773084094280, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162773084094280, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114979100676122282, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: apiUrl
+      value: https://dev-api.zilliqa.com/
+      objectReference: {fileID: 0}
+    - target: {fileID: 114979100676122282, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
+      propertyPath: accountID
+      value: 0x3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f7003315f78a4724fae5accaeb7c2f99, type: 3}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +587,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CreateTransaction
       objectReference: {fileID: 0}
+    - target: {fileID: 213784995906662266, guid: acc7be14d55222544ab23565369eb4fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4037260841410221412, guid: acc7be14d55222544ab23565369eb4fc, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -564,11 +637,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7280216737922476135, guid: acc7be14d55222544ab23565369eb4fc, type: 3}
       propertyPath: apiUrl
-      value: https://api.zilliqa.com/
+      value: https://dev-api.zilliqa.com/
+      objectReference: {fileID: 0}
+    - target: {fileID: 7280216737922476135, guid: acc7be14d55222544ab23565369eb4fc, type: 3}
+      propertyPath: publicKey
+      value: 3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC
       objectReference: {fileID: 0}
     - target: {fileID: 7280216737922476135, guid: acc7be14d55222544ab23565369eb4fc, type: 3}
       propertyPath: toAddress
-      value: 59e1e7270e90ac36c5f17e740d134fe652a68f69
+      value: 0x638a429b1f0dc1dd206c3030295255d7dbf45501
+      objectReference: {fileID: 0}
+    - target: {fileID: 7280216737922476135, guid: acc7be14d55222544ab23565369eb4fc, type: 3}
+      propertyPath: privateKey
+      value: 0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa
+      objectReference: {fileID: 0}
+    - target: {fileID: 7280216737922476135, guid: acc7be14d55222544ab23565369eb4fc, type: 3}
+      propertyPath: walletAddress
+      value: 3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acc7be14d55222544ab23565369eb4fc, type: 3}

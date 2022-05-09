@@ -11,7 +11,7 @@ public class GetBalance : ZilliqaMonoBehaviour
 {
     const string METHOD = "GetBalance";
 
-    public string accountID = "zil1fxrj57r92djsszx42xv76cqz3uc2t60tnepxvp";
+    public string accountID = "3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC";
 
     public bool showDebug = true;
 

@@ -1,6 +1,7 @@
 using Org.BouncyCastle.Asn1.X9;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Macs;
+using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Crypto.Prng;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
@@ -32,12 +33,25 @@ public class Schnorr
         return signature;
     }
 
+    private static ECDomainParameters domain = new ECDomainParameters(secp256k1);
+    public static byte[] ToPublicKey(byte[] privateKey)
+    {
+        BigInteger d = new BigInteger(privateKey);
+        ECPoint q = domain.G.Multiply(d);
+
+        var publicParams = new ECPublicKeyParameters(q, domain);
+        return publicParams.Q.GetEncoded();
+    }
+
+
     public static Signature TrySign(ECKeyPair kp, byte[] msg, BigInteger k)
     {
         BigInteger n = secp256k1.N;
         BigInteger privateKey = kp.privateKey;
-        ECPoint publicKey = secp256k1.Curve.DecodePoint(kp.publicKey.ToByteArray());
-
+        var pubB = kp.publicKey.ToByteArray();
+        
+        ECPoint publicKey = secp256k1.Curve.DecodePoint(pubB);
+        
         if (privateKey == (BigInteger.Zero))
         {
             throw new Exception("Private key must be >= 0");
