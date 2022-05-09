@@ -20,7 +20,7 @@ public class Transaction
     public string gasPrice;
     public string gasLimit;
     public string code;
-    public string data;
+    public ContractTransactionData[] data;
     public string signature;
     public bool priority;
 
@@ -45,10 +45,10 @@ public class Transaction
             protoTx.Code = ByteString.CopyFrom(Encoding.Default.GetBytes(code));
         }
 
-        if (!string.IsNullOrEmpty(data))
-        {
-            protoTx.Data = ByteString.CopyFrom(System.Text.Encoding.Default.GetBytes(data));
-        }
+        //if (!string.IsNullOrEmpty(data))
+        //{
+        //    protoTx.Data = ByteString.CopyFrom(System.Text.Encoding.Default.GetBytes(data));
+        //}
 
         return protoTx.ToByteArray();
     }

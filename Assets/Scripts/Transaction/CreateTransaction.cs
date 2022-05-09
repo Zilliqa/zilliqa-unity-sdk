@@ -30,7 +30,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
     [SerializeField] private string walletAddress = "8Abea7C16e71750D493Eec2F1093A2f38d191628";
     [SerializeField] private bool autoNonce = true;
 
-    
+
 
     [Header("Debug")]
     [SerializeField] private bool runAtStart = true;
@@ -49,10 +49,37 @@ public class CreateTransaction : ZilliqaMonoBehaviour
             StartCoroutine(Transact());
     }
 
-   
+
 
     private IEnumerator Transact()
     {
+
+        var txParam = new ContractTransactionData[]
+                   {
+                        new ContractTransactionData()
+                        {
+                            _tag = "Mint",
+                            args = new ContractTransitionArg[]
+                            {
+                                new ContractTransitionArg()
+                                {
+                                    vname = "to",
+                                    type = "ByStr20",
+                                    value = "0xb643b429d53a9ed8be8a0b8883edd9b6835d5fc1"
+                                },
+                                new ContractTransitionArg()
+                                {
+                                    vname = "token_uri",
+                                    type = "String",
+                                    value = "https://ivefwfclqyyavklisqgz.supabase.co/storage/v1/object/public/nftstorage/collection_example/metadata/4"
+                                }
+                            }
+                        }
+                   };
+
+        string json = JsonConvert.SerializeObject(txParam);
+
+        Debug.Log(json);
         Transaction transactionParam = new Transaction()
         {
             version = this.version,
@@ -63,8 +90,29 @@ public class CreateTransaction : ZilliqaMonoBehaviour
             gasPrice = this.gasPrice,
             gasLimit = this.gasLimit,
             code = this.code,
-            data = this.data,
             priority = this.priority,
+            data = new ContractTransactionData[]
+                {
+                    new ContractTransactionData()
+                    {
+                        _tag = "Mint",
+                        args = new ContractTransitionArg[]
+                        {
+                            new ContractTransitionArg()
+                            {
+                                vname = "to",
+                                type = "ByStr20",
+                                value = "0xb643b429d53a9ed8be8a0b8883edd9b6835d5fc1"
+                            },
+                            new ContractTransitionArg()
+                            {
+                                vname = "token_uri",
+                                type = "String",
+                                value = "https://ivefwfclqyyavklisqgz.supabase.co/storage/v1/object/public/nftstorage/collection_example/metadata/4"
+                            }
+                        }
+                    }
+                }
         };
 
         // GetBalance rpc is being called to get nonce counter if autoNonce is used
@@ -74,6 +122,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
                 Debug.LogError("Error: Failed to auto increase nonce. Please input wallet address.");
             else
             {
+                
                 ZilRequest getBalanceReq = new ZilRequest(GetBalanceMethod, walletAddress);
                 yield return StartCoroutine(PostRequest<GetBalanceResponse>(getBalanceReq, (response, error) =>
                     {
