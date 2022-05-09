@@ -18,8 +18,23 @@ public class CreateTransactionPayload : ResponsePayload
 
 public class requestParam { }
 
+public class CreateTransactionRequestParams
+{
+    public int version;
+    public int nonce;
+    public string toAddr;
+    public string amount;
+    public string pubKey;
+    public string gasPrice;
+    public string gasLimit;
+    public string code;
+    public ContractTransactionParams[] data;
+    public string signature;
+    public bool priority;
+}
+
 [Serializable]
-public class ContractTransactionData
+public class ContractTransactionParams
 {
     public string _tag;
     [JsonProperty("params")]

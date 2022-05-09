@@ -20,7 +20,7 @@ public class Transaction
     public string gasPrice;
     public string gasLimit;
     public string code;
-    public ContractTransactionData[] data;
+    public ContractTransactionParams[] data;
     public string signature;
     public bool priority;
 
