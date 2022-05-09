@@ -26,8 +26,9 @@ public class CreateTransaction : ZilliqaMonoBehaviour
     [SerializeField] private bool priority = false;
 
     [Header("Keys Pair")]
-    private string publicKey = "3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC";
+    private string Adress = "3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC";
     private string privateKey = "0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa";
+    //private string publicKey = "zil182rfgd0a8v6dxyascka9e4rcez7shy9vqvx49r";
     private string publicKey_Prefix = "0x3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC";
     private string privateKey_Prefix = "0x0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa";
 
@@ -40,19 +41,26 @@ public class CreateTransaction : ZilliqaMonoBehaviour
     [SerializeField] private bool showDebug = true;
 
     private ECKeyPair ecKeyPair;
+    private string StringToHex(string hexstring)
+    {
+        StringBuilder sb = new StringBuilder();
+        foreach (char t in hexstring)
+        {
+            //Note: X for upper, x for lower case letters
+            sb.Append(Convert.ToInt32(t).ToString("x"));
+        }
+        return sb.ToString();
+    }
 
+   
     private void Awake()
     {
-        
-        var pubk = new BigInteger(1, Schnorr.ToPublicKey(Encoding.UTF8.GetBytes(privateKey)));
-        var prik = new BigInteger(1, Encoding.UTF32.GetBytes(privateKey));
+        var schnorr = Schnorr.ToPublicKey(Encoding.UTF8.GetBytes(privateKey));
+        var pub = Schnorr.GetPublicKey(privateKey);
+        var pubk = new BigInteger(pub, 16);
+        var prik = new BigInteger(privateKey, 16);
+
         ecKeyPair = new ECKeyPair(pubk, prik);
-
-        
-        //var prik = new BigInteger(privateKey, 16);
-        //var pubk = new BigInteger(publicKey, 16);
-
-        //ecKeyPair = new ECKeyPair(pubk, prik);
     }
 
     private void Start()
@@ -98,7 +106,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
             nonce = this.nonce,
             toAddr = this.toAddress,
             amount = this.amount,
-            pubKey = this.publicKey,
+            pubKey = Schnorr.ToPublicKey(Encoding.UTF8.GetBytes(privateKey)),
             gasPrice = this.gasPrice,
             gasLimit = this.gasLimit,
             code = this.code,
@@ -114,7 +122,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
                                 {
                                     vname = "to",
                                     type = "ByStr20",
-                                    value = publicKey
+                                    value = Adress
                                 },
                                 new ContractTransitionArg()
                                 {
@@ -130,18 +138,18 @@ public class CreateTransaction : ZilliqaMonoBehaviour
         // GetBalance rpc is being called to get nonce counter if autoNonce is used
         if (autoNonce)
         {
-            if (string.IsNullOrEmpty(publicKey))
+            if (string.IsNullOrEmpty(Adress))
                 Debug.LogError("Error: Failed to auto increase nonce. Please input wallet address.");
             else
             {
 
-                ZilRequest getBalanceReq = new ZilRequest(GetBalanceMethod, publicKey);
+                ZilRequest getBalanceReq = new ZilRequest(GetBalanceMethod, Adress);
                 yield return StartCoroutine(PostRequest<GetBalanceResponse>(getBalanceReq, (response, error) =>
                     {
                         if (response.result != null)
                         {
                             transactionParam.nonce = response.result.nonce + 1;
-                            Debug.Log("Balance of " + publicKey + " : " + response.result.balance);
+                            Debug.Log("Balance of " + Adress + " : " + response.result.balance);
                         }
                         else if (error != null)
                         {
@@ -154,7 +162,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
 
         // sign the transaction based on the payload
         byte[] message = transactionParam.Encode();
-         
+
         Signature signature = Schnorr.Sign(ecKeyPair, message);
         transactionParam.signature = signature.ToString().ToLower();
 

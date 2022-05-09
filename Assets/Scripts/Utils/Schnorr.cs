@@ -1,3 +1,5 @@
+using Base58Check;
+using Merkator.BitCoin;
 using Org.BouncyCastle.Asn1.X9;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Macs;
@@ -14,7 +16,7 @@ public class Schnorr
     static private X9ECParameters secp256k1 = ECNamedCurveTable.GetByName("secp256k1");
     static private byte[] ALG = System.Text.Encoding.Default.GetBytes("Schnorr+SHA256 ");
     static private int PUBKEY_COMPRESSED_SIZE_BYTES = 33;
-    static private int ENT_BITS = 256;    
+    static private int ENT_BITS = 256;
 
     public static Signature Sign(ECKeyPair kp, byte[] message)
     {
@@ -34,22 +36,31 @@ public class Schnorr
     }
 
     private static ECDomainParameters domain = new ECDomainParameters(secp256k1);
-    public static byte[] ToPublicKey(byte[] privateKey)
+    public static string ToPublicKey(byte[] privateKey)
     {
         BigInteger d = new BigInteger(privateKey);
         ECPoint q = domain.G.Multiply(d);
 
         var publicParams = new ECPublicKeyParameters(q, domain);
-        return publicParams.Q.GetEncoded();
+        return Convert.ToBase64String(publicParams.Q.GetEncoded());
     }
 
+    public static string GetPublicKey(string privKey)
+    {
+        BigInteger d = new BigInteger(Base58Encoding.Decode(privKey));
+        //var privKeyParameters = new Org.BouncyCastle.Crypto.Parameters.ECPrivateKeyParameters(d, domain);
+        ECPoint q = domain.G.Multiply(d);
+        //var pubKeyParameters = new Org.BouncyCastle.Crypto.Parameters.ECPublicKeyParameters(q, domain);
+        var res = Base58Encoding.Encode(q.GetEncoded());
+        return res;
+    }
 
     public static Signature TrySign(ECKeyPair kp, byte[] msg, BigInteger k)
     {
         BigInteger n = secp256k1.N;
         BigInteger privateKey = kp.privateKey;
         var pubB = kp.publicKey.ToByteArray();
-        
+
         ECPoint publicKey = secp256k1.Curve.DecodePoint(pubB);
         
         if (privateKey == (BigInteger.Zero))
