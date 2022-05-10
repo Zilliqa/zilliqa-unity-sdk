@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Math;
 using System.Security.Cryptography;
+using MusZil_Core.Utils;
 
 public class CreateTransaction : ZilliqaMonoBehaviour
 {
@@ -17,7 +18,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
     [Header("Transaction Payload")]
     [SerializeField] private int version = 21823489;
     [SerializeField] private long nonce = 0;
-    [SerializeField] private string toAddress = "0x3aca9ce184ee8237bd6426553aec5beca53c76207754a0b3f8ebebdb4ee553a6";
+    [SerializeField] private string toAddress = "0x638a429b1f0dc1dd206c3030295255d7dbf45501";
     [SerializeField] private string amount = "1000000000000";
     [SerializeField] private string gasPrice = "2000000000";
     [SerializeField] private string gasLimit = "50";
@@ -28,6 +29,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
     [Header("Keys Pair")]
     private string Adress = "3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC";
     private string privateKey = "0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa";
+    private string publicKey;
     //private string publicKey = "zil182rfgd0a8v6dxyascka9e4rcez7shy9vqvx49r";
     private string publicKey_Prefix = "0x3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC";
     private string privateKey_Prefix = "0x0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa";
@@ -52,15 +54,15 @@ public class CreateTransaction : ZilliqaMonoBehaviour
         return sb.ToString();
     }
 
-   
+
     private void Awake()
     {
-        var schnorr = Schnorr.ToPublicKey(Encoding.UTF8.GetBytes(privateKey));
-        var pub = Schnorr.GetPublicKey(privateKey);
-        var pubk = new BigInteger(pub, 16);
-        var prik = new BigInteger(privateKey, 16);
+        publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
+        ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
 
-        ecKeyPair = new ECKeyPair(pubk, prik);
+        //var pu = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
+        //var add = CryptoUtil.GetAddressFromPrivateKey(privateKey);
+        //Debug.Log("pubk " + pu + " addfpri " + add);
     }
 
     private void Start()
@@ -106,7 +108,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
             nonce = this.nonce,
             toAddr = this.toAddress,
             amount = this.amount,
-            pubKey = Schnorr.ToPublicKey(Encoding.UTF8.GetBytes(privateKey)),
+            pubKey = publicKey,
             gasPrice = this.gasPrice,
             gasLimit = this.gasLimit,
             code = this.code,

@@ -1,5 +1,4 @@
 using Base58Check;
-using Merkator.BitCoin;
 using Org.BouncyCastle.Asn1.X9;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Macs;
@@ -7,9 +6,11 @@ using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Crypto.Prng;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
+using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities;
 using System;
+using Org.BouncyCastle.Crypto.Generators;
 
 public class Schnorr
 {
@@ -47,13 +48,15 @@ public class Schnorr
 
     public static string GetPublicKey(string privKey)
     {
-        BigInteger d = new BigInteger(Base58Encoding.Decode(privKey));
+        
+        BigInteger d = new BigInteger(privKey,16);
         //var privKeyParameters = new Org.BouncyCastle.Crypto.Parameters.ECPrivateKeyParameters(d, domain);
         ECPoint q = domain.G.Multiply(d);
         //var pubKeyParameters = new Org.BouncyCastle.Crypto.Parameters.ECPublicKeyParameters(q, domain);
-        var res = Base58Encoding.Encode(q.GetEncoded());
+        var res = Base58CheckEncoding.Encode(q.GetEncoded());
         return res;
     }
+   
 
     public static Signature TrySign(ECKeyPair kp, byte[] msg, BigInteger k)
     {
