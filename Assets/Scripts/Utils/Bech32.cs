@@ -26,6 +26,14 @@ namespace MusZil_Core
             this._address = address;
         }
 
+        public string ToCheckSumAddress(string address)
+        {
+            string result = string.Empty;
+            string lower = address.ToLower();
+            lower=lower.Replace("0x", "");
+            return result;
+        }
+
         public override string ToString()
         {
             return _address;

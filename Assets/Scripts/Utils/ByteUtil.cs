@@ -122,7 +122,20 @@ namespace MusZil_Core.Utils
 
         }
 
+        public static sbyte[] ToSbyte(byte[] bytes)
+        {
+            sbyte[] sbytes = new sbyte[bytes.Length];
 
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                if (bytes[i] > 127)
+                    sbytes[i] = (sbyte)(bytes[i] - 256);
+                else
+                    sbytes[i] = (sbyte)bytes[i];
+            }
+
+            return sbytes;
+        }
         public static int GetHexVal(char hex)
         {
             int val = (int)hex;
@@ -162,6 +175,15 @@ namespace MusZil_Core.Utils
                 sb.Append(Convert.ToString(b, 16).PadLeft(2, '0').PadRight(3, ' '));
             }
             return sb.ToString().ToUpper().Replace(" ", "");
+        }
+        public static string ByteArrayToHexString(sbyte[] bytes)
+        {
+            StringBuilder sb = new StringBuilder(bytes.Length * 3);
+            foreach (byte b in bytes)
+            {
+                sb.Append(Convert.ToString(b, 16).PadLeft(2, '0').PadRight(3, ' '));
+            }
+            return sb.ToString().ToUpper();
         }
         public static List<int> ConvertBits(byte[] data, int fromWidth, int toWidth, bool pad)
         {

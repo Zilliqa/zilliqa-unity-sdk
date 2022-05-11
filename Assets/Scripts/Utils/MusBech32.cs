@@ -168,7 +168,7 @@ namespace MusZil_Core.Utils
         #endregion
 
         #region Checksum
-        private static byte[] CreateChecksum(string hrp, byte[] data)
+        public static byte[] CreateChecksum(string hrp, byte[] data)
         {
             byte[] hrpExpanded = GetBytesFromHRP(hrp);
             byte[] enc = new byte[hrpExpanded.Length + data.Length + 6];
@@ -183,7 +183,7 @@ namespace MusZil_Core.Utils
             return ret;
         }
 
-        private static bool VerifyChecksum(string hrp, byte[] data)
+        public static bool VerifyChecksum(string hrp, byte[] data)
         {
             var hrpBytes = GetBytesFromHRP(hrp);
             var hrpLength = hrpBytes.Length;
