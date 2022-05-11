@@ -19,7 +19,7 @@ public class CreateTransactionSigned : ZilliqaMonoBehaviour
     [SerializeField] private string toAddress = "b85B7B67288Ed648AB817F477B50FB45CA8E432b";
     [SerializeField] private string amount = "1000000000000";
     [SerializeField] private string gasPrice = "2000000000";
-    [SerializeField] private string gasLimit = "50";
+    [SerializeField] private string gasLimit = "25000";
     [SerializeField] private string code = "";
     [SerializeField] private string data = "";
     [SerializeField] private bool priority = false;
@@ -30,7 +30,7 @@ public class CreateTransactionSigned : ZilliqaMonoBehaviour
     [SerializeField] private string walletAddress = "8Abea7C16e71750D493Eec2F1093A2f38d191628";
     [SerializeField] private bool autoNonce = true;
 
-    
+
 
     [Header("Debug")]
     [SerializeField] private bool runAtStart = true;
@@ -49,10 +49,34 @@ public class CreateTransactionSigned : ZilliqaMonoBehaviour
             StartCoroutine(Transact());
     }
 
-   
+
 
     private IEnumerator Transact()
     {
+        var txparams = new ContractTransactionParams[]
+                   {
+                        new ContractTransactionParams()
+                        {
+                            _tag = "Mint",
+                            args = new ContractTransitionArg[]
+                            {
+                                new ContractTransitionArg()
+                                {
+                                    vname = "to",
+                                    type = "ByStr20",
+                                    value = walletAddress
+                                },
+                                new ContractTransitionArg()
+                                {
+                                    vname = "token_uri",
+                                    type = "String",
+                                    value = "1"
+                                }
+                            }
+                        }
+                   };
+
+        var txstring = JsonConvert.SerializeObject(txparams);
         Transaction transactionParam = new Transaction()
         {
             version = this.version,
@@ -63,7 +87,7 @@ public class CreateTransactionSigned : ZilliqaMonoBehaviour
             gasPrice = this.gasPrice,
             gasLimit = this.gasLimit,
             code = this.code,
-            data = this.data,
+            data = txstring,
             priority = this.priority,
         };
 
