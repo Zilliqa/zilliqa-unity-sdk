@@ -11,6 +11,7 @@ using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities;
 using System;
 using Org.BouncyCastle.Crypto.Generators;
+using UnityEngine;
 
 public class Schnorr
 {
@@ -36,28 +37,6 @@ public class Schnorr
         return signature;
     }
 
-    private static ECDomainParameters domain = new ECDomainParameters(secp256k1);
-    public static string ToPublicKey(byte[] privateKey)
-    {
-        BigInteger d = new BigInteger(privateKey);
-        ECPoint q = domain.G.Multiply(d);
-
-        var publicParams = new ECPublicKeyParameters(q, domain);
-        return Convert.ToBase64String(publicParams.Q.GetEncoded());
-    }
-
-    public static string GetPublicKey(string privKey)
-    {
-        
-        BigInteger d = new BigInteger(privKey,16);
-        //var privKeyParameters = new Org.BouncyCastle.Crypto.Parameters.ECPrivateKeyParameters(d, domain);
-        ECPoint q = domain.G.Multiply(d);
-        //var pubKeyParameters = new Org.BouncyCastle.Crypto.Parameters.ECPublicKeyParameters(q, domain);
-        var res = Base58CheckEncoding.Encode(q.GetEncoded());
-        return res;
-    }
-   
-
     public static Signature TrySign(ECKeyPair kp, byte[] msg, BigInteger k)
     {
         BigInteger n = secp256k1.N;
@@ -65,6 +44,7 @@ public class Schnorr
         var pubB = kp.publicKey.ToByteArray();
 
         ECPoint publicKey = secp256k1.Curve.DecodePoint(pubB);
+        
         
         if (privateKey == (BigInteger.Zero))
         {
@@ -94,7 +74,11 @@ public class Schnorr
             return null;
         }
 
-        return new Signature() { R = r, S = s };
+        var sig = new Signature() { R = r, S = s };
+
+        Debug.Log("verifying " + Verify(msg, sig, publicKey));
+
+        return sig;
     }
 
     static private BigInteger Hash(ECPoint q, ECPoint pubKey, byte[] msg)
@@ -125,5 +109,46 @@ public class Schnorr
                 .SetEntropyBitsRequired(ENT_BITS)
                 .SetPersonalizationString(ALG)
                 .BuildHMac(hMac, message, true);
+    }
+
+    public static bool Verify(byte[] msg, Signature sig, ECPoint publicKey)
+    {
+        if (sig.R == BigInteger.Zero || sig.S == BigInteger.Zero)
+        {
+            throw new Exception("Invalid R or S value: cannot be zero.");
+        }
+
+        if (sig.R.SignValue == -1 || sig.S.SignValue == -1)
+        {
+            throw new Exception("Invalid R or S value: cannot be negative.");
+        }
+
+        if (publicKey.Curve != (secp256k1.Curve))
+        {
+            throw new Exception("The public key must be a point on secp256k1.");
+        }
+
+        if (!publicKey.IsValid())
+        {
+            throw new Exception("Invalid public key.");
+        }
+
+        ECPoint l = publicKey.Multiply(sig.R);
+        ECPoint r = secp256k1.G.Multiply(sig.S);
+        ECPoint Q = l.Add(r);
+
+        if (Q.IsInfinity || !Q.IsValid())
+        {
+            throw new Exception("Invalid intermediate point.");
+        }
+
+        BigInteger r1 = Hash(Q, publicKey, msg).Mod(secp256k1.N);
+
+        if (r1 == (BigInteger.Zero))
+        {
+            throw new Exception("Invalid hash.");
+        }
+
+        return r1.Equals(sig.R);
     }
 }

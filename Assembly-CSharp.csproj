@@ -183,6 +183,7 @@
     <Compile Include="Assets\Scripts\Utils\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
+    <Compile Include="Assets\Scripts\Utils\Checksum16.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\README.txt" />
