@@ -14,6 +14,7 @@ public class ZilliqaMonoBehaviour : MonoBehaviour
        where T : ZilResponse
     {
         string json = request.ToJson();
+        Debug.Log(json);
         using UnityEngine.Networking.UnityWebRequest webRequest = new UnityWebRequest(apiUrl, "POST");
         byte[] rawData = Encoding.UTF8.GetBytes(json);
 

@@ -153,8 +153,8 @@ public class CreateTransaction : ZilliqaMonoBehaviour
                                 new ContractTransitionArg()
                                 {
                                     vname = "to",
-                                    type = "Bech32",
-                                    value = Address
+                                    type = "ByStr20",
+                                    value = "0x"+Address
                                 },
                                 new ContractTransitionArg()
                                 {
