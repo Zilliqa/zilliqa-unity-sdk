@@ -3,12 +3,18 @@ using Org.BouncyCastle.Crypto.Macs;
 using Org.BouncyCastle.Crypto.Parameters;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace MusZil_Core.Utils
 {
     public class HashUtil
     {
+        public static byte[] Sha256(byte[] bytes)
+        {
+            SHA256 sha = new SHA256Managed();
+            return sha.ComputeHash(bytes);
+        }
         public static byte[] CalculateSha256Hash(byte[] value)
         {
             var digest = new Sha256Digest();

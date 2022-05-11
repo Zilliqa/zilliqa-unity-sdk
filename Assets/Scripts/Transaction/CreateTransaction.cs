@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Math;
 using System.Security.Cryptography;
 using MusZil_Core.Utils;
+using Zilliqa.Testing;
 
 public class CreateTransaction : ZilliqaMonoBehaviour
 {
@@ -28,9 +29,11 @@ public class CreateTransaction : ZilliqaMonoBehaviour
     [SerializeField] private bool priority = false;
 
     [Header("Keys Pair")]
+
     private string Address = "";
     //private string privateKey = "3375F915F3F9AE35E6B301B7670F53AD1A5BE15D8221EC7FD5E503F21D3450C8";
     private string privateKey = "0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa";
+
     private string publicKey;
     //private string publicKey = "zil182rfgd0a8v6dxyascka9e4rcez7shy9vqvx49r";
     private string publicKey_Prefix = "0x3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC";
@@ -59,7 +62,11 @@ public class CreateTransaction : ZilliqaMonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Checksum " + Checksum16.Checksum("638a429b1f0dc1dd206c3030295255d7dbf45501"));
+        string checksummed = ToCheckSumAddress(toAddress);
+        Debug.Log("\n " +
+          "Address unchecksummed: " + toAddress + "\n" +
+          " Bech32              : " + MusBech32.Base16ToBech32Address(toAddress)+"\n"+
+          "Checksummed:         : " + checksummed);
         publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
         ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
         Address = CryptoUtil.GetAddressFromPrivateKey(privateKey);
@@ -74,7 +81,31 @@ public class CreateTransaction : ZilliqaMonoBehaviour
             StartCoroutine(Transact());
     }
 
-
+    public static string ToCheckSumAddress(string address)
+    {
+        if (!Validation.IsAddress(address))
+        {
+            throw new Exception("not a valid base 16 address");
+        }
+        address = address.ToLower().Replace("0x", "");
+        string hash = ByteUtil.ByteArrayToHexString(HashUtil.Sha256(ByteUtil.HexStringToByteArray(address)));
+        StringBuilder ret = new StringBuilder("0x");
+        byte[] x = ByteUtil.HexStringToByteArray(hash);
+        BigInteger v = new BigInteger(ByteUtil.HexStringToByteArray(hash));
+        for (int i = 0; i < address.Length; i++)
+        {
+            if ("1234567890".IndexOf(address.ToCharArray()[i]) != -1)
+            {
+                ret.Append(address.ToCharArray()[i]);
+            }
+            else
+            {
+                BigInteger checker = v.And(BigInteger.ValueOf(2).Pow(255 - 6 * i));//(BigInteger.valueOf(2l).pow(255 - 6 * i))
+                ret.Append(checker.CompareTo(BigInteger.ValueOf(1)) < 0 ? address.ToCharArray()[i].ToString().ToLower() : address.ToCharArray()[i].ToString().ToUpper());
+            }
+        }
+        return ret.ToString();
+    }
 
     private IEnumerator Transact()
     {
@@ -109,7 +140,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
         {
             version = this.version,
             nonce = this.nonce,
-            toAddr = this.toAddress,
+            toAddr = ToCheckSumAddress(this.toAddress),
             amount = this.amount,
             pubKey = publicKey,
             gasPrice = this.gasPrice,
