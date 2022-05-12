@@ -143,9 +143,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
             gasLimit = this.gasLimit,
             code = this.code,
             priority = this.priority,
-            data = new ContractTransactionParams[]
-                   {
-                        new ContractTransactionParams()
+            data =JsonConvert.SerializeObject(new ContractTransactionParams()
                         {
                             _tag = "Mint",
                             args = new ContractTransitionArg[]
@@ -154,19 +152,19 @@ public class CreateTransaction : ZilliqaMonoBehaviour
                                 {
                                     vname = "to",
                                     type = "ByStr20",
-                                    value = "0x"+Address
+                                    value = "0x"+Address.ToUpper()
                                 },
                                 new ContractTransitionArg()
                                 {
                                     vname = "token_uri",
                                     type = "String",
-                                    value = "1"
+                                    value = "https://ivefwfclqyyavklisqgz.supabase.co/storage/v1/object/public/nftstorage/collection_example/metadata/4"
                                 }
                             }
-                        }
-                   }
+                        
+                   })
         };
-
+        Debug.Log("Data:" + transactionParam.data);
         // GetBalance rpc is being called to get nonce counter if autoNonce is used
         if (autoNonce)
         {
@@ -180,6 +178,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
                     {
                         if (response.result != null)
                         {
+                            nonce = response.result.nonce;
                             transactionParam.nonce = response.result.nonce + 1;
                             Debug.Log("Balance of " + Address + " : " + response.result.balance);
                         }
@@ -192,6 +191,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
             }
         }
 
+        Debug.Log(transactionParam.data);
         // sign the transaction based on the payload
         byte[] message = transactionParam.Encode();
 
