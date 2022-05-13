@@ -105,6 +105,7 @@
     <Compile Include="Assets\Scripts\Transaction\GetTransaction.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionStatusPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTxnBodiesForTxBlockResponse.cs" />
+    <Compile Include="Assets\Scripts\Transaction\NFTMint.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTransactionResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetCurrentMiniEpochResponse.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetNumTransactions.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Assets\Scripts\Utils\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Assets\Scripts\Utils\LKS\KeyTools.cs" />
     <Compile Include="Assets\Scripts\Utils\LKS\Keystore.cs" />
     <Compile Include="Assets\Scripts\Utils\LKS\KDFType.cs" />
@@ -200,6 +202,8 @@
     <Compile Include="Assets\Scripts\Utils\ByteUtility.cs" />
     <Compile Include="Assets\Scripts\Utils\LKS\KDFParams.cs" />
     <Compile Include="Assets\Scripts\Utils\LKS\SCrypt.cs" />
+=======
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\README.txt" />
