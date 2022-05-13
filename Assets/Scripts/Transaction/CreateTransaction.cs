@@ -2,14 +2,12 @@ using System;
 using System.Collections;
 using System.Text;
 using UnityEngine;
-using UnityEngine.Networking;
-
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Math;
-using System.Security.Cryptography;
-using MusZil_Core.Utils;
-using Zilliqa.Testing;
+using Zilliqa.Core;
+using Zilliqa.Utils;
+using Zilliqa.Core.Crypto;
+using Zilliqa.Requests;
 
 public class CreateTransaction : ZilliqaMonoBehaviour
 {
@@ -31,44 +29,23 @@ public class CreateTransaction : ZilliqaMonoBehaviour
     private string Address = "8254b2C9aCdf181d5d6796d63320fBb20D4Edd12";
     private string privateKey = "3375F915F3F9AE35E6B301B7670F53AD1A5BE15D8221EC7FD5E503F21D3450C8";
     private string publicKey;
-    //private string publicKey = "zil182rfgd0a8v6dxyascka9e4rcez7shy9vqvx49r";
-    private string publicKey_Prefix = "0x3a869435fd3B34d313B0C5BA5cd478c8bD0B90aC";
-    private string privateKey_Prefix = "0x0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa";
-
     private bool autoNonce = true;
-
-
 
     [Header("Debug")]
     [SerializeField] private bool runAtStart = true;
     [SerializeField] private bool showDebug = true;
 
-    private ECKeyPair ecKeyPair;
-    private string StringToHex(string hexstring)
-    {
-        StringBuilder sb = new StringBuilder();
-        foreach (char t in hexstring)
-        {
-            //Note: X for upper, x for lower case letters
-            sb.Append(Convert.ToInt32(t).ToString("x"));
-        }
-        return sb.ToString();
-    }
+    [SerializeField] private float getTransactionStatusIntervalSeconds = 5f;
+    [Tooltip("Set a negative number for infinite attempts")]
+    [SerializeField] private int getTransactionStatusMaxAttempts = 50;
 
+    public ECKeyPair ecKeyPair;
 
     private void Awake()
     {
-        string checksummed = ToCheckSumAddress(toAddress);
-        Debug.Log("\n " +
-          "Address unchecksummed: " + toAddress + "\n" +
-          " Bech32              : " + MusBech32.Base16ToBech32Address(toAddress)+"\n"+
-          "Checksummed:         : " + checksummed);
+        string checksummed = AddressUtils.ToCheckSumAddress(toAddress);
         publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
         ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
-
-        //var pu = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
-        //var add = CryptoUtil.GetAddressFromPrivateKey(privateKey);
-        //Debug.Log("pubk " + pu + " addfpri " + add);
     }
 
     private void Start()
@@ -77,76 +54,16 @@ public class CreateTransaction : ZilliqaMonoBehaviour
             StartCoroutine(Transact());
     }
 
-    public static string ToCheckSumAddress(string address)
-    {
-        if (!Validation.IsAddress(address))
-        {
-            throw new Exception("not a valid base 16 address");
-        }
-        address = address.ToLower().Replace("0x", "");
-        string hash = ByteUtil.ByteArrayToHexString(HashUtil.Sha256(ByteUtil.HexStringToByteArray(address)));
-        StringBuilder ret = new StringBuilder("0x");
-        byte[] x = ByteUtil.HexStringToByteArray(hash);
-        BigInteger v = new BigInteger(ByteUtil.HexStringToByteArray(hash));
-        for (int i = 0; i < address.Length; i++)
-        {
-            if ("1234567890".IndexOf(address.ToCharArray()[i]) != -1)
-            {
-                ret.Append(address.ToCharArray()[i]);
-            }
-            else
-            {
-                BigInteger checker = v.And(BigInteger.ValueOf(2).Pow(255 - 6 * i));//(BigInteger.valueOf(2l).pow(255 - 6 * i))
-                ret.Append(checker.CompareTo(BigInteger.ValueOf(1)) < 0 ? address.ToCharArray()[i].ToString().ToLower() : address.ToCharArray()[i].ToString().ToUpper());
-            }
-        }
-        return ret.ToString();
-    }
+
 
     private IEnumerator Transact()
     {
-
-        //var txParam = new ContractTransactionParams[]
-        //           {
-        //                new ContractTransactionParams()
-        //                {
-        //                    _tag = "Mint",
-        //                    args = new ContractTransitionArg[]
-        //                    {
-        //                        new ContractTransitionArg()
-        //                        {
-        //                            vname = "to",
-        //                            type = "ByStr20",
-        //                            value = publicKey
-        //                        },
-        //                        new ContractTransitionArg()
-        //                        {
-        //                            vname = "token_uri",
-        //                            type = "String",
-        //                            value = "1"
-        //                        }
-        //                    }
-        //                }
-        //           };
-
-        //string json = JsonConvert.SerializeObject(txParam);
-
-        //Debug.Log(json);
-        Transaction transactionParam = new Transaction()
+        //data needs to be a stringified json, more info on the structure can be found here:
+        //https://dev.zilliqa.com/docs/apis/api-transaction-create-tx
+        data = JsonConvert.SerializeObject(new ContractTransactionParams()
         {
-            version = this.version,
-            nonce = this.nonce,
-            toAddr = ToCheckSumAddress(this.toAddress),
-            amount = this.amount,
-            pubKey = publicKey,
-            gasPrice = this.gasPrice,
-            gasLimit = this.gasLimit,
-            code = this.code,
-            priority = this.priority,
-            data =JsonConvert.SerializeObject(new ContractTransactionParams()
-                        {
-                            _tag = "Mint",
-                            args = new ContractTransitionArg[]
+            _tag = "Mint",
+            args = new ContractTransitionArg[]
                             {
                                 new ContractTransitionArg()
                                 {
@@ -161,10 +78,23 @@ public class CreateTransaction : ZilliqaMonoBehaviour
                                     value = "https://ivefwfclqyyavklisqgz.supabase.co/storage/v1/object/public/nftstorage/collection_example/metadata/4"
                                 }
                             }
-                        
-                   })
+
+        });
+        Transaction transactionParam = new Transaction()
+        {
+            version = this.version,
+            nonce = this.nonce,
+            // the contract address needs to be checksummed
+            toAddr = AddressUtils.ToCheckSumAddress(this.toAddress),
+            amount = this.amount,
+            pubKey = publicKey,
+            gasPrice = this.gasPrice,
+            gasLimit = this.gasLimit,
+            code = this.code,
+            priority = this.priority,
+            data = this.data
         };
-        Debug.Log("Data:" + transactionParam.data);
+        
         // GetBalance rpc is being called to get nonce counter if autoNonce is used
         if (autoNonce)
         {
@@ -172,7 +102,6 @@ public class CreateTransaction : ZilliqaMonoBehaviour
                 Debug.LogError("Error: Failed to auto increase nonce. Please input wallet address.");
             else
             {
-
                 ZilRequest getBalanceReq = new ZilRequest(GetBalanceMethod, Address);
                 yield return StartCoroutine(PostRequest<GetBalanceResponse>(getBalanceReq, (response, error) =>
                     {
@@ -190,16 +119,11 @@ public class CreateTransaction : ZilliqaMonoBehaviour
                 ));
             }
         }
-
-        Debug.Log(transactionParam.data);
-        // sign the transaction based on the payload
+        //Encode the protobuf object to byte array
         byte[] message = transactionParam.Encode();
-
+        // sign the transaction based on the payload
         Signature signature = Schnorr.Sign(ecKeyPair, message);
         transactionParam.signature = signature.ToString().ToLower();
-
-        if (showDebug)
-            Debug.Log("Signature: " + transactionParam.signature);
 
         ZilRequest createTxReq = new ZilRequest(CreateTransactionMethod, new object[] { transactionParam });
         StartCoroutine(PostRequest<CreateTransactionResponse>(createTxReq, (response, error) =>
@@ -209,6 +133,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
                 {
                     if (showDebug)
                         Debug.Log("Info: " + result.Info + "\n" + "Tx hash: " + "0x" + result.TranID);
+                    StartCoroutine(ListenForTransactionStatusUpdate(result.TranID));
                 }
                 else if (error != null)
                 {
@@ -216,5 +141,56 @@ public class CreateTransaction : ZilliqaMonoBehaviour
                 }
             }
         ));
+    }
+
+    private IEnumerator ListenForTransactionStatusUpdate(string transactionID)
+    {
+        int currentAttemptCount = 0;
+        bool hasFinalState = false;
+        while ((currentAttemptCount < getTransactionStatusMaxAttempts || getTransactionStatusMaxAttempts < 0) && !hasFinalState)
+        {
+            yield return new WaitForSeconds(getTransactionStatusIntervalSeconds);
+            yield return GetTransactionStatus(transactionID, (txStatus) =>
+            {
+                hasFinalState = txStatus.HasFinalState;
+            });
+            currentAttemptCount++;
+        }
+    }
+
+    private IEnumerator GetTransactionStatus(string transactionID, Action<GetTransactionStatusPayload> txStatus = null)
+    {
+        ZilRequest getTxBlockListingReq = new ZilRequest("GetTransactionStatus", new object[] { transactionID });
+        yield return StartCoroutine(PostRequest<GetTransactionStatusResponse>(getTxBlockListingReq, (response, error) =>
+        {
+            if (response.result != null)
+            {
+                string debugStr = "{\n\t<b>Id</b>: " + response.result.Id + "\n" +
+                    "\t<b>Oid</b>: " + response.result.Oid.ToString() + "\n" +
+                    "\t<b>Amount</b>: " + response.result.Amount + "\n" +
+                    "\t<b>Data</b>: " + response.result.Data + "\n" +
+                    "\t<b>EpochInserted</b>: " + response.result.EpochInserted + "\n" +
+                    "\t<b>EpochUpdated</b>: " + response.result.EpochUpdated + "\n" +
+                    "\t<b>GasLimit</b>: " + response.result.GasLimit + "\n" +
+                    "\t<b>GasPrice</b>: " + response.result.GasPrice + "\n" +
+                    "\t<b>LastModified</b>: " + response.result.LastModified + "\n" +
+                    "\t<b>ModificationState</b>: " + "<color=#39002e>" + response.result.ModificationState + "</color>\n" +
+                    "\t<b>Nonce</b>: " + response.result.Nonce + "\n" +
+                    "\t<b>SenderAddr</b>: " + response.result.SenderAddr + "\n" +
+                    "\t<b>Signature</b>: " + response.result.Signature + "\n" +
+                    "\t<b>Status</b>: " + "<color=#39002e>" + response.result.Status + "</color>\n" +
+                    "\t<b>Success</b>: " + "<color=#39000d>" + response.result.Success + "</color>\n" +
+                    "\t<b>ToAddr</b>: " + response.result.ToAddr + "\n" +
+                    "\t<b>Version</b>: " + response.result.Version + "\n}";
+
+                Debug.Log("Get transaction: " + debugStr);
+                txStatus?.Invoke(response.result);
+            }
+            else if (error != null)
+            {
+                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
+            }
+        }
+            ));
     }
 }

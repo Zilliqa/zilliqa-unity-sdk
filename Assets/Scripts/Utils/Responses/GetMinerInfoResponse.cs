@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetMinerInfoResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public GetMinerInfoPayload result;
+
+    public class GetMinerInfoResponse : ZilResponse
+    {
+        public GetMinerInfoPayload result;
+    }
 }

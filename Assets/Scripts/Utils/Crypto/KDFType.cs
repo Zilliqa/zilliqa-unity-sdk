@@ -1,4 +1,4 @@
-﻿namespace MusZil_Core
+﻿namespace Zilliqa.Core
 {
     public enum KDFType
     {

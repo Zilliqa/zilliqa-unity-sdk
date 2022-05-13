@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetStateProofResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public string[] accountProof;
-    public string[] stateProof;
+    public class GetStateProofResponse : ZilResponse
+    {
+        public string[] accountProof;
+        public string[] stateProof;
+    }
 }

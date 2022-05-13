@@ -1,12 +1,13 @@
-using Newtonsoft.Json;
 using System.Collections.Generic;
-
-public class GetsmartContractStatePayload
+namespace Zilliqa.Requests
 {
-    public decimal _balance;
-    public string admin;
-    public Dictionary<string, string> balances { get; set; } = new();
-    public Dictionary<string, Dictionary<string, string>> allowances { get; set; } =new();
-    public string implementation;
-    public string total_supply;
+    public class GetsmartContractStatePayload
+    {
+        public decimal _balance;
+        public string admin;
+        public Dictionary<string, string> balances { get; set; } = new();
+        public Dictionary<string, Dictionary<string, string>> allowances { get; set; } = new();
+        public string implementation;
+        public string total_supply;
+    }
 }

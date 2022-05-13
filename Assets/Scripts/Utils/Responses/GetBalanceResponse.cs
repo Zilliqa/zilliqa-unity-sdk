@@ -1,7 +1,10 @@
 using System;
-
-[Serializable]
-public class GetBalanceResponse : ZilResponse
+using Zilliqa.Wallet;
+namespace Zilliqa.Requests
 {
-    public Balance result;
+    [Serializable]
+    public class GetBalanceResponse : ZilResponse
+    {
+        public Balance result;
+    }
 }

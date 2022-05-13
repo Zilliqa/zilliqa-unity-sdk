@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetLatestDSBlockResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public GetDSBlockPayload result;
+
+    public class GetLatestDSBlockResponse : ZilResponse
+    {
+        public GetDSBlockPayload result;
+    }
 }

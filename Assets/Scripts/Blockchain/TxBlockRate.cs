@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using Zilliqa.Requests;
 
 /*
  * Documentation:
@@ -41,7 +42,7 @@ public class TxBlockRate : ZilliqaMonoBehaviour
         ZilRequest getTxBlockListingReq = new ZilRequest(METHOD, new object[] { 1 });
         yield return StartCoroutine(PostRequest<GetTxBlockRateResponse>(getTxBlockListingReq, (response, error) =>
         {
-            if (response.result != null)
+            if (response != null)
             {
                 Debug.Log("BlockRate:" + response.result.ToString());
             }

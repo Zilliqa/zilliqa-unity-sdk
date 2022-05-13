@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Google.Protobuf;
-
-public class CreateTransactionProto  
+namespace Zilliqa.Requests
 {
+    public class CreateTransactionProto
+    {
 
+    }
 }

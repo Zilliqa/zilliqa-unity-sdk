@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace MusZil_Core.Crypto
+namespace Zilliqa.Core.Crypto
 {
     public class KDFParams
     {

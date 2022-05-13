@@ -1,5 +1,8 @@
-public class GetNumTxBlocksResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public string result;
+    public class GetNumTxBlocksResponse : ZilResponse
+    {
+        public string result;
+    }
 }
 

@@ -1,4 +1,7 @@
-public class GetSmartContractsPayload
+namespace Zilliqa.Requests
 {
-    public string address;
+    public class GetSmartContractsPayload
+    {
+        public string address;
+    }
 }

@@ -1,10 +1,10 @@
-﻿using MusZil_Core.Utils;
+﻿using Zilliqa.Utils;
 using Org.BouncyCastle.Math;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MusZil_Core.Crypto
+namespace Zilliqa.Core.Crypto
 {
     public class Signature
     {

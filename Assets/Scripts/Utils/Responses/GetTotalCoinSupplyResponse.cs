@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetTotalCoinSupplyResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public decimal result;
+    public class GetTotalCoinSupplyResponse : ZilResponse
+    {
+        public decimal result;
+    }
 }

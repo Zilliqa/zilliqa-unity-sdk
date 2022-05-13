@@ -1,6 +1,7 @@
-
-
-public class GetSmartContractInitResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public GetSmartContractInitPayload[] result;
+    public class GetSmartContractInitResponse : ZilResponse
+    {
+        public GetSmartContractInitPayload[] result;
+    }
 }

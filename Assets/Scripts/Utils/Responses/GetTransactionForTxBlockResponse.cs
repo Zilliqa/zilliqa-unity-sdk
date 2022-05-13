@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetTransactionForTxBlockResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public string[][] result;
+    public class GetTransactionForTxBlockResponse : ZilResponse
+    {
+        public string[][] result;
+    }
 }

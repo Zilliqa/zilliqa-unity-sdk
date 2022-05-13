@@ -4,8 +4,9 @@ using Org.BouncyCastle.Crypto.Parameters;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Zilliqa.Utils;
 
-namespace MusZil_Core.Crypto
+namespace Zilliqa.Core.Crypto
 {
     public class Pbkdf2 : KDFParams
     {

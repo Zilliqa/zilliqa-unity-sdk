@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetNetworkIdResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public string result;
+
+    public class GetNetworkIdResponse : ZilResponse
+    {
+        public string result;
+    }
 }

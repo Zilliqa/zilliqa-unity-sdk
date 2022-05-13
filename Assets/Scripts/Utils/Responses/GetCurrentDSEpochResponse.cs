@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetCurrentDSEpochResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public string result;
+    public class GetCurrentDSEpochResponse : ZilResponse
+    {
+        public string result;
+    }
 }

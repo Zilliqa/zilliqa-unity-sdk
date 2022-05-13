@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetRecentTransactionsResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public GetRecentTransactionsPayload result;
+    public class GetRecentTransactionsResponse : ZilResponse
+    {
+        public GetRecentTransactionsPayload result;
+    }
 }

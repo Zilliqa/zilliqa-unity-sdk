@@ -1,4 +1,7 @@
-public class GetSmartContractCodeResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public GetSmartContractCodePayload result;
+    public class GetSmartContractCodeResponse : ZilResponse
+    {
+        public GetSmartContractCodePayload result;
+    }
 }

@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetTxnBodiesForTxBlockResponse : ZilResponse
+using Zilliqa.Utils;
+namespace Zilliqa.Requests
 {
-    public ProcessedTransaction[] result;
+    public class GetTxnBodiesForTxBlockResponse : ZilResponse
+    {
+        public ProcessedTransaction[] result;
+    }
 }

@@ -1,6 +1,7 @@
-
-
-public class GetSmartContractSubStatePayload 
+namespace Zilliqa.Requests
 {
-    public string admin;
+    public class GetSmartContractSubStatePayload
+    {
+        public string admin;
+    }
 }

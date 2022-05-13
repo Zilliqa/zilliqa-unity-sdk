@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetSmartContractInitPayload
+namespace Zilliqa.Requests
 {
-    public string type, value, vname;
+    public class GetSmartContractInitPayload
+    {
+        public string type, value, vname;
+    }
 }

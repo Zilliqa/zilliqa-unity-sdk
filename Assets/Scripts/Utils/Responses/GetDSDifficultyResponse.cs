@@ -1,4 +1,7 @@
-public class GetDSDifficultyResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public int result;
+    public class GetDSDifficultyResponse : ZilResponse
+    {
+        public int result;
+    }
 }

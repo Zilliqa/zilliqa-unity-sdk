@@ -1,24 +1,27 @@
 ﻿using Org.BouncyCastle.Asn1.X9;
+using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.EC;
+using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
 using Org.BouncyCastle.Math.EC.Multiplier;
+using Org.BouncyCastle.Security;
 using System;
 using System.Linq;
 
-namespace MusZil_Core.Crypto
+namespace Zilliqa.Core.Crypto
 {
     public class ECKeyPair
     {
         static X9ECParameters CURVE_PARAMS = CustomNamedCurves.GetByName("secp256k1");
         static ECDomainParameters CURVE = new ECDomainParameters(
                 CURVE_PARAMS.Curve, CURVE_PARAMS.G, CURVE_PARAMS.N, CURVE_PARAMS.H);
+        static readonly SecureRandom secureRandom = new SecureRandom();
+        public BigInteger privateKey;
+        public BigInteger publicKey;
 
-        private BigInteger privateKey;
-        private BigInteger publicKey;
-
-        public ECKeyPair(BigInteger privateKey, BigInteger publicKey)
+        public ECKeyPair(BigInteger publicKey , BigInteger privateKey)
         {
             this.privateKey = privateKey;
             this.publicKey = publicKey;
@@ -43,6 +46,17 @@ namespace MusZil_Core.Crypto
         public static ECKeyPair Create(BigInteger privateKey)
         {
             return new ECKeyPair(privateKey, PublicKeyFromPrivate(privateKey));
+        }
+        public static ECKeyPair GenerateKeyPair()
+        {
+            var gen = new ECKeyPairGenerator("EC");
+            var keyGenParam = new KeyGenerationParameters(secureRandom, 256);
+            gen.Init(keyGenParam);
+            var keyPair = gen.GenerateKeyPair();
+            var d = ((ECPrivateKeyParameters)keyPair.Private).D;
+            var q = ((ECPublicKeyParameters)keyPair.Public).Q;
+
+            return new ECKeyPair(d, new BigInteger(1, q.GetEncoded(true)));
         }
 
         public static ECKeyPair Create(byte[] privateKey)

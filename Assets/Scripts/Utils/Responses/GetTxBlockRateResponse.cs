@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetTxBlockRateResponse: ZilResponse
+namespace Zilliqa.Requests
 {
-    public float result;
+    public class GetTxBlockRateResponse : ZilResponse
+    {
+        public float result;
+    }
 }

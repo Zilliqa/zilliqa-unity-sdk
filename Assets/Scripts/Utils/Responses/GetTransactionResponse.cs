@@ -1,7 +1,9 @@
-using Newtonsoft.Json;
+using Zilliqa.Utils;
 
-
-public class GetTransactionResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public ProcessedTransaction result;
+    public class GetTransactionResponse : ZilResponse
+    {
+        public ProcessedTransaction result;
+    }
 }
