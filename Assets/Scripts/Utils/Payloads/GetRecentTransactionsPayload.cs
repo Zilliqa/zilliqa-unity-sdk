@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetRecentTransactionsPayload : ResponsePayload
+namespace Zilliqa.Requests
 {
-    public string[] TxnHashes;
-    public int number;
+    public class GetRecentTransactionsPayload : ResponsePayload
+    {
+        public string[] TxnHashes;
+        public int number;
+    }
 }

@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetCurrentDSEpochPayload : ResponsePayload
+namespace Zilliqa.Requests
 {
-  
+    public class GetCurrentDSEpochPayload : ResponsePayload
+    {
+
+    }
 }

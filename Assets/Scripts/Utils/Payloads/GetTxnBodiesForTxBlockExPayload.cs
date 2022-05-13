@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Zilliqa.Utils;
 
-public class GetTxnBodiesForTxBlockExPayload : ResponsePayload
+namespace Zilliqa.Requests
 {
-    public int CurrPage;
-    public int NumPages;
-    public ProcessedTransaction[] Transactions;
+    public class GetTxnBodiesForTxBlockExPayload : ResponsePayload
+    {
+        public int CurrPage;
+        public int NumPages;
+        public ProcessedTransaction[] Transactions;
+    }
 }

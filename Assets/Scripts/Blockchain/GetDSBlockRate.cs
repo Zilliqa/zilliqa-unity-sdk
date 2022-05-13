@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using Zilliqa.Requests;
 
 /*
  * Documentation:
@@ -33,7 +34,7 @@ public class GetDSBlockRate : ZilliqaMonoBehaviour
         ZilRequest req = new ZilRequest(METHOD, new object[] { });
         yield return StartCoroutine(PostRequest<GetDSBlockRateResponse>(req, (response, error) =>
         {
-            if (response.result != null)
+            if (response != null)
             {
                 Debug.Log(METHOD + " result " + response.result);
             }

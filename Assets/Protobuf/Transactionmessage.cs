@@ -227,7 +227,7 @@ public sealed partial class ByteArray : pb::IMessage<ByteArray>
   #endif
 
 }
-
+[System.Serializable]
 public sealed partial class ProtoTransaction : pb::IMessage<ProtoTransaction>
 #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     , pb::IBufferMessage
