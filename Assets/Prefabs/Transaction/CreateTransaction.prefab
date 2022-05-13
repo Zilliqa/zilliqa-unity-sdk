@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f8baf7cef1338148812983293645dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  apiUrl: https://dev-api.zilliqa.com/
   version: 21823489
   nonce: 0
   toAddress: b85B7B67288Ed648AB817F477B50FB45CA8E432b
@@ -53,8 +54,5 @@ MonoBehaviour:
   code: 
   data: 
   priority: 0
-  publicKey: 03cbf8f0cb1ca9a27a1a7477bcd17577237d2a44e6a5b89224f45554cf6cd3734c
-  privateKey: 76ba8a7f35bca7714feb842f746c0467fc66150df4d686fe83fcdc497f972e55
-  autoNonce: 1
-  walletAddress: 8Abea7C16e71750D493Eec2F1093A2f38d191628
-  apiUrl: https://dev-api.zilliqa.com/
+  runAtStart: 1
+  showDebug: 1
