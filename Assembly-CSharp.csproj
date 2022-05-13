@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\Transaction\GetTransaction.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionStatusPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTxnBodiesForTxBlockResponse.cs" />
+    <Compile Include="Assets\Scripts\Transaction\NFTMint.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTransactionResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetCurrentMiniEpochResponse.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetNumTransactions.cs" />
@@ -188,7 +189,6 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
-    <Compile Include="Assets\Scripts\Transaction\NFTMint.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\README.txt" />
