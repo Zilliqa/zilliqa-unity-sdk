@@ -1,8 +1,10 @@
 using System;
-
-[Serializable]
-public class CreateTransactionResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public CreateTransactionPayload result;
+    [Serializable]
+    public class CreateTransactionResponse : ZilResponse
+    {
+        public CreateTransactionPayload result;
+    }
 }
 

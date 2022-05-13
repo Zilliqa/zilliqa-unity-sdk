@@ -1,9 +1,10 @@
 using System;
-using System.Collections.Generic;
 
-[Serializable]
-public class GetTxBlockListingResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public GetTxBlockListingPayload result;
-
+    [Serializable]
+    public class GetTxBlockListingResponse : ZilResponse
+    {
+        public GetTxBlockListingPayload result;
+    }
 }

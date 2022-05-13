@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using Zilliqa.Requests;
 
 /*
  * Documentation:

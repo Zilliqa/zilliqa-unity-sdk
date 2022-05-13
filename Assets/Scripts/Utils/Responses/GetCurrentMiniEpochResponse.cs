@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetCurrentMiniEpochResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public string result;
+    public class GetCurrentMiniEpochResponse : ZilResponse
+    {
+        public string result;
+    }
 }

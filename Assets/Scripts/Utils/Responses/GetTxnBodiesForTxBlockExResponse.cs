@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetTxnBodiesForTxBlockExResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public GetTxnBodiesForTxBlockExPayload result;
+    public class GetTxnBodiesForTxBlockExResponse : ZilResponse
+    {
+        public GetTxnBodiesForTxBlockExPayload result;
+    }
 }

@@ -1,9 +1,9 @@
-
 using System.Collections.Generic;
-
-
-public class GetTxBlockListingPayload
+namespace Zilliqa.Requests
 {
-    public List<TransactionBlock> data;
-    public decimal maxPages;
+    public class GetTxBlockListingPayload
+    {
+        public List<TransactionBlock> data;
+        public decimal maxPages;
+    }
 }

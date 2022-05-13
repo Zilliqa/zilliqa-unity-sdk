@@ -1,4 +1,4 @@
-﻿using MusZil_Core.Crypto;
+﻿using Zilliqa.Core.Crypto;
 using System;
 using System.Text;
 using Org.BouncyCastle.Crypto.Digests;
@@ -6,16 +6,18 @@ using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Security;
-using MusZil_Core.Utils;
+using Zilliqa.Utils;
 using Newtonsoft.Json;
+using PBKDF2Params = Zilliqa.Utils.PBKDF2Params;
 
-namespace MusZil_Core
+namespace Zilliqa.Core
 {
     public class KeyStore
     {
-
+        private PBKDF2Wrapper pbkdf2Wrapper;
+        private ScryptWrapper scryptWrapper;
         public string Address { get; set; }
-        public MusCipher Crypto { get; set; }
+        public ZilCipher Crypto { get; set; }
         public string Id { get; set; }
         public int Version { get; set; }
 
@@ -24,13 +26,21 @@ namespace MusZil_Core
             
         }
 
-        
+        public static KeyStore DefaultKeyStore()
+        {
+            return new KeyStore(new PBKDF2Wrapper(), new ScryptWrapper());
+        }
 
         public byte[] GenerateCipherKey(byte[] derivedKey)
         {
             var cypherKey = new byte[16];
             Array.Copy(derivedKey, cypherKey, 16);
             return cypherKey;
+        }
+        public KeyStore(PBKDF2Wrapper pbkdf2Wrapper, ScryptWrapper scryptWrapper)
+        {
+            this.pbkdf2Wrapper = pbkdf2Wrapper;
+            this.scryptWrapper = scryptWrapper;
         }
 
         public byte[] GenerateDerivedScryptKey(string pwd)
@@ -162,7 +172,7 @@ namespace MusZil_Core
             cipherParams.Iv = ByteUtil.ByteArrayToHexString(iv);
 
             var kp = new KDFParams() { Salt = Encoding.UTF8.GetString(salt)};
-            var crypto = new MusCipher();
+            var crypto = new ZilCipher();
             crypto.Cipher = "aes-128-ctr";
             crypto.Cipherparams = cipherParams;
             crypto.Ciphertext = ByteUtil.ByteArrayToHexString(ciphertext);

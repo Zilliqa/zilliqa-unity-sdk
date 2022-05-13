@@ -1,16 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GetDSBlockListingPayload : ResponsePayload
+namespace Zilliqa.Requests
 {
-    public DSBlock[] data;
-}
+    public class GetDSBlockListingPayload : ResponsePayload
+    {
+        public DSBlock[] data;
+    }
 
-[Serializable]
-public class DSBlock
-{
-    public int BlockNum;
-    public string Hash;
+    [Serializable]
+    public class DSBlock
+    {
+        public int BlockNum;
+        public string Hash;
+    }
 }

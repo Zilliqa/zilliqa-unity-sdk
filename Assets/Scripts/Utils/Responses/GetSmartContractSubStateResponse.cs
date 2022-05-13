@@ -1,6 +1,7 @@
-
-
-public class GetSmartContractSubStateResponse : ZilResponse
+namespace Zilliqa.Requests
 {
-    public GetSmartContractSubStatePayload result;
+    public class GetSmartContractSubStateResponse : ZilResponse
+    {
+        public GetSmartContractSubStatePayload result;
+    }
 }
