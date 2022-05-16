@@ -48,7 +48,7 @@ MonoBehaviour:
   version: 21823489
   nonce: 0
   toAddress: e52cb846a86ffe28b3c40e99f3c842e6ad55b594
-  amount: 1000000000000
+  amount: 0
   gasPrice: 2000000000
   gasLimit: 50000
   code: 
