@@ -58,6 +58,11 @@ namespace Zilliqa.Requests
         [JsonProperty("version")]
         public string Version;
 
+        /// <summary>
+        /// Final state achieved status:
+        /// true : achieved
+        /// false : not yet, it is pending
+        /// </summary>
         public bool HasFinalState => ModificationState == TransactionModificationState.Final;
     }
 
