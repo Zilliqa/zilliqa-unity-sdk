@@ -189,6 +189,7 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
+    <Compile Include="Assets\Scripts\Transaction\TransferFrom.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\README.txt" />
