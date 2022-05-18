@@ -26,7 +26,7 @@ public class TransferFrom : ZilliqaMonoBehaviour
     [SerializeField] private bool priority = false;
 
     [Header("Keys Pair")]
-    private string Address = "8254b2C9aCdf181d5d6796d63320fBb20D4Edd12";
+    private string Address = "6cCB37905edcFa5213B01b14c7b0C4CDd5Ca708C";
     private string privateKey = "3375F915F3F9AE35E6B301B7670F53AD1A5BE15D8221EC7FD5E503F21D3450C8";
     private string publicKey;
     private bool autoNonce = true;
@@ -75,7 +75,7 @@ public class TransferFrom : ZilliqaMonoBehaviour
                                 {
                                     vname = "token_id",
                                     type = "Uint256",
-                                    value = "6"
+                                    value = "45"
                                 }
                             }
 
@@ -102,7 +102,7 @@ public class TransferFrom : ZilliqaMonoBehaviour
                 Debug.LogError("Error: Failed to auto increase nonce. Please input wallet address.");
             else
             {
-                ZilRequest getBalanceReq = new ZilRequest(GetBalanceMethod, Address);
+                ZilRequest getBalanceReq = new ZilRequest(GetBalanceMethod, CryptoUtil.GetAddressFromPrivateKey(privateKey));
                 yield return StartCoroutine(PostRequest<GetBalanceResponse>(getBalanceReq, (response, error) =>
                     {
                         if (response.result != null)
@@ -133,6 +133,7 @@ public class TransferFrom : ZilliqaMonoBehaviour
                 {
                     if (showDebug)
                         Debug.Log("Info: " + result.Info + "\n" + "Tx hash: " + "0x" + result.TranID);
+
                     StartCoroutine(ListenForTransactionStatusUpdate(result.TranID));
                 }
                 else if (error != null)
