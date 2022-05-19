@@ -69,7 +69,7 @@
     <Compile Include="Assets\graphQl-client\Scripts\EventCallbacks\Event.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetCurrentDSEpochResponse.cs" />
     <Compile Include="Assets\Scripts\Contract\GetSmartContracts.cs" />
-    <Compile Include="Assets\Scripts\NFT\GetNFTsByUser.cs" />
+    <Compile Include="Assets\Scripts\NFT\GetNFTsByWalletAddress.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetContractAddressFromTransactionIDResponse.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetCurrentDSEpoch.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\KeyStore.cs" />

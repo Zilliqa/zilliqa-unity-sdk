@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using System;
 using Zilliqa.Requests;
 
-public class GetNFTsByUser : MonoBehaviour
+public class GetNFTsByWalletAddress : MonoBehaviour
 {
     public string walletAddress = "0x8254b2c9acdf181d5d6796d63320fbb20d4edd12";
     public GraphApi indexer;
@@ -19,7 +19,7 @@ public class GetNFTsByUser : MonoBehaviour
     {
         indexer.SetAuthToken(indexerToken);
         
-        Query query = indexer.GetQueryByName("NFTsByWallet", Query.Type.Query);
+        Query query = indexer.GetQueryByName("GetNFTsByWalletAddress", Query.Type.Query);
         query.SetArgs(new { input = new { address = walletAddress} });
 
         UnityWebRequest re = await indexer.Post(query);

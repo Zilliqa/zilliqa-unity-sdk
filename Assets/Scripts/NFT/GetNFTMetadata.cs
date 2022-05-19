@@ -20,7 +20,7 @@ public class GetNFTMetadata : MonoBehaviour
     {
         indexer.SetAuthToken(indexerToken);
 
-        Query query = indexer.GetQueryByName("NFTMetadata", Query.Type.Query);
+        Query query = indexer.GetQueryByName("GetNFTMetadata", Query.Type.Query);
         query.SetArgs(new { input = new { contractAddress, tokenId } });
 
         UnityWebRequest re = await indexer.Post(query);

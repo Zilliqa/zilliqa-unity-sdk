@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   url: https://stg-indexer-api.rialto.studio/zilliqa
   queries:
-  - name: RecentlyMintedNFTs
+  - name: GetRecentlyMintedNFTs
     type: 0
     query: "query RecentlyMintedNFTs{\n    assets{\n        cursor\n        assetsList{\n           
       contractAddress\n            contractAddress\n            tokenUri\n       
@@ -310,9 +310,9 @@ MonoBehaviour:
         type: ListingData
       hasChanged: 0
     isComplete: 1
-  - name: NFTsByWallet
+  - name: GetNFTsByWalletAddress
     type: 0
-    query: "query NFTsByWallet{\n    user(  input :{ address :\"0x8254b2c9acdf181d5d6796d63320fbb20d4edd12\"}
+    query: "query GetNFTsByWalletAddress{\n    user(  input :{ address :\"0x8254b2c9acdf181d5d6796d63320fbb20d4edd12\"}
       ){\n        address\n        ownedAssets{\n            assetsList{\n               
       contractAddress\n                spenderAddress\n                operatorAddress\n               
       tokenId\n                tokenUri\n                minterAddress\n           
@@ -994,10 +994,10 @@ MonoBehaviour:
         type: ListingData
       hasChanged: 0
     isComplete: 1
-  - name: NFTMetadata
+  - name: GetNFTMetadata
     type: 0
-    query: "query NFTMetadata{\n    assetById(  input :{ contractAddress :\"0x8254b2c9acdf181d5d6796d63320fbb20d4edd12\",
-      tokenId :\"1\"} ){\n        tokenId\n        tokenUri\n        name\n       
+    query: "query GetNFTMetadata{\n    assetById(  input :{ contractAddress :\"0xe52cb846a86ffe28b3c40e99f3c842e6ad55b594\",
+      tokenId :\"47\"} ){\n        tokenId\n        tokenUri\n        name\n       
       description\n        externalUrl\n        ownerAddress\n        minterAddress\n       
       contractAddress\n        resource\n        attributes{\n            traitType\n           
       value\n        }\n        resourceMimetype\n    }\n}"
