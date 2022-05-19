@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Utils\Responses\GetTxBlockResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Wallet\AdminsArgs.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\Schnorr.cs" />
+    <Compile Include="Assets\Scripts\NFT\GetNFTMetadata.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\CreateTransactionPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetsmartContractStatePayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetMinimumGasPriceResponse.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Assets\Scripts\Utils\Generic\ZilliqaMonoBehaviour.cs" />
     <Compile Include="Assets\Scripts\Contract\GetSmartContractInit.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetNetworkId.cs" />
+    <Compile Include="Assets\Scripts\Account\CheckForZilliqaWallet.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTxBlockPayload.cs" />
     <Compile Include="Assets\src\Base58Check\ArrayHelpers.cs" />
     <Compile Include="Assets\Scripts\Utils\Wallet\Balance.cs" />
@@ -194,8 +196,10 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
-    <Compile Include="Assets\Scripts\NFT\GetNFTMetadata.cs" />
-    <Compile Include="Assets\Scripts\Account\CheckForZilliqaWallet.cs" />
+    <Compile Include="Assets\Scripts\Utils\Responses\GetNFTMetadataResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\Payloads\GetNFTMetadataPayload.cs" />
+    <Compile Include="Assets\Scripts\Utils\Responses\NFTsByUserResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\Payloads\NFTsByUserPayload.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\NFTQueriesschema.txt" />

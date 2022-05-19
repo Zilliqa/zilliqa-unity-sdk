@@ -6,9 +6,11 @@ using static GraphQlClient.Core.GraphApi;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using System;
+using Zilliqa.Requests;
 
 public class GetNFTsByUser : MonoBehaviour
 {
+    public string walletAddress = "0x8254b2c9acdf181d5d6796d63320fbb20d4edd12";
     public GraphApi indexer;
     private string indexerToken = "yQqD5eiBkK4mvkrXrNdvAUi2pJ03DTpdCe6a0gvUMyUW9KELHBJdGULvVi2WeaVc";
 
@@ -17,14 +19,12 @@ public class GetNFTsByUser : MonoBehaviour
     {
         indexer.SetAuthToken(indexerToken);
         
-        Query q = indexer.GetQueryByName("NFTsByWallet", Query.Type.Query);
-        q.SetArgs(new { input = new { address = "0x8254b2c9acdf181d5d6796d63320fbb20d4edd12"} });
+        Query query = indexer.GetQueryByName("NFTsByWallet", Query.Type.Query);
+        query.SetArgs(new { input = new { address = walletAddress} });
 
-        UnityWebRequest re = await indexer.Post(q);
-        
+        UnityWebRequest re = await indexer.Post(query);
         var response = JsonConvert.DeserializeObject<NFTsByUserResponse>(re.downloadHandler.text);
 
-        
         Debug.Log("GetNFTsByUser Object\n" + JsonConvert.SerializeObject(response));
     }
 
@@ -34,41 +34,5 @@ public class GetNFTsByUser : MonoBehaviour
     }
 }
 
-[Serializable]
-public class NFTsByUserResponse
-{
-    public NFTsByUserPayload data;
-}
 
-[Serializable]
-public class NFTsByUserPayload
-{
-    public UserNFTs user;
-}
 
-[Serializable]
-public class UserNFTs
-{
-    public string address;
-    public NFTListPayload ownedAssets;
-    public NFTListPayload mintedAssets;
-}
-
-[Serializable]
-public class NFTListPayload
-{
-    public NFTAsset[] assetsList;
-}
-
-[Serializable]
-public class NFTAsset
-{
-    public string contractAddress;
-    public string tokenId;
-    public string tokenUri;
-    public string name;
-    public string resource;
-    public string minterAddress;
-    public string spenderAddress;
-    public string[] operatorAddress;
-}

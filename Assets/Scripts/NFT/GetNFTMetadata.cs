@@ -6,6 +6,7 @@ using static GraphQlClient.Core.GraphApi;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using System;
+using Zilliqa.Requests;
 
 public class GetNFTMetadata : MonoBehaviour
 {
@@ -19,15 +20,11 @@ public class GetNFTMetadata : MonoBehaviour
     {
         indexer.SetAuthToken(indexerToken);
 
-        Query q = indexer.GetQueryByName("NFTMetadata", Query.Type.Query);
-        q.SetArgs(new { input = new { contractAddress, tokenId } });
+        Query query = indexer.GetQueryByName("NFTMetadata", Query.Type.Query);
+        query.SetArgs(new { input = new { contractAddress, tokenId } });
 
-        UnityWebRequest re = await indexer.Post(q);
-        Debug.Log("GetNFTMetadata GraphQL query\n" + q.query);
-        Debug.Log("GetNFTMetadata response\n" + re.downloadHandler.text);
-
+        UnityWebRequest re = await indexer.Post(query);
         var response = JsonConvert.DeserializeObject<GetNFTMetadataResponse>(re.downloadHandler.text);
-
 
         Debug.Log("GetNFTMetadata Object\n" + JsonConvert.SerializeObject(response));
     }
@@ -37,34 +34,5 @@ public class GetNFTMetadata : MonoBehaviour
         DoQuery();
     }
 
-    public class GetNFTMetadataResponse
-    {
-        public GetNFTMetadataPayload data;
-    }
 
-    public class GetNFTMetadataPayload
-    {
-        public NFTById assetById;
-    }
-
-    public class NFTById
-    {
-        public string tokenId;
-        public string tokenUri;
-        public string name;
-        public string description;
-        public string externalUrl;
-        public string ownerAddress;
-        public string minterAddress;
-        public string contractAddress;
-        public string resource;
-        public string resourceMimetype;
-        public NFTAttributes[] attributes;
-    }
-
-    public class NFTAttributes
-    {
-        public string traitType;
-        public string value;
-    }
 }
