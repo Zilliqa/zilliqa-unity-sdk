@@ -126,7 +126,6 @@
     <Compile Include="Assets\graphQl-client\Scripts\Core\HttpHandler.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetNetworkIdResponse.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetTotalCoinSupply.cs" />
-    <Compile Include="Assets\Scripts\Account\ZilPayConnect.cs" />
     <Compile Include="Assets\Protobuf\Transactionmessage.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetPrevDSDifficulty.cs" />
     <Compile Include="Assets\Scripts\Utils\Extensions\AsyncOpsExtensions.cs" />
@@ -152,7 +151,6 @@
     <Compile Include="Assets\Scripts\Transaction\CreateTransaction.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\ZilResponse.cs" />
     <Compile Include="Assets\Scripts\Transaction\TransferFrom.cs" />
-    <Compile Include="Assets\Scripts\Wallet\ZilPay\ZilPayWallet.cs" />
     <Compile Include="Assets\src\Base58Check\Base58CheckEncoding.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\StaticVariables.cs" />
     <Compile Include="Assets\Scripts\Utils\Wallet\Admins.cs" />
@@ -188,11 +186,11 @@
     <Compile Include="Assets\Scripts\Utils\Wallet\PBKDF2Wrapper.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetNumTxBlocksResponse.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetTxnBodiesForTxBlockEx.cs" />
-    <Compile Include="Assets\Scripts\Transaction\NFTMintZilpay.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetLatestDSBlockPayload.cs" />
     <Compile Include="Assets\Scripts\Blockchain\DSBlockListing.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetRecentTransactionsResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetSmartContractInitPayload.cs" />
+    <Compile Include="Assets\Scripts\Utils\Wallet\TestWallets.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetNumTxnsDSEpoch.cs" />
     <Compile Include="Assets\graphQl-client\Scripts\Core\GraphApi.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetMinerInfoResponse.cs" />
@@ -208,13 +206,9 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
-    <Compile Include="Assets\Scripts\Utils\Wallet\TestWallets.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Scripts\Utils\Wallet\ZilPay\Resources\ZilConnect.txt" />
     <None Include="Assets\NFTQueriesschema.txt" />
-    <None Include="Assets\Scripts\Utils\Wallet\ZilPay\Resources\ZilPaySign.txt" />
-    <None Include="Assets\Scripts\Utils\Wallet\ZilPay\Resources\CreateTransaction.txt" />
     <None Include="Assets\README.txt" />
   </ItemGroup>
   <ItemGroup>
