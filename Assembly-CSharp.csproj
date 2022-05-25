@@ -137,7 +137,7 @@
     <Compile Include="Assets\Scripts\Utils\Responses\GetSmartContractInitResponse.cs" />
     <Compile Include="Assets\Scripts\Account\GetBalance.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetLatestDsBlock.cs" />
-    <Compile Include="Assets\Scripts\NFT\FulfilTokenOrder.cs" />
+    <Compile Include="Assets\Scripts\NFT\FulfillNFTOrder.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetCurrentDSEpochPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetNFTMetadataResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Wallet\Transaction.cs" />
@@ -170,7 +170,7 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\Bech32Utils.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetNumDSBlocks.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\CreateTransactionResponse.cs" />
-    <Compile Include="Assets\Scripts\NFT\CancelTokenOrder.cs" />
+    <Compile Include="Assets\Scripts\NFT\CancelNFTOrder.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\CreateTransactionProto.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetMinerInfo.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetCurrentMiniEpoch.cs" />

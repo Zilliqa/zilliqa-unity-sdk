@@ -9,7 +9,7 @@ using Zilliqa.Utils;
 using Zilliqa.Core.Crypto;
 using Zilliqa.Requests;
 
-public class CancelTokenOrder : ZilliqaMonoBehaviour
+public class FulfillNFTOrder : ZilliqaMonoBehaviour
 {
     private const string CreateTransactionMethod = "CreateTransaction";
     private const string GetBalanceMethod = "GetBalance";
@@ -19,9 +19,9 @@ public class CancelTokenOrder : ZilliqaMonoBehaviour
     [SerializeField] private long nonce = 0;
     [SerializeField] private string TokenSmartContract = "0x638a429b1f0dc1dd206c3030295255d7dbf45501";
     [SerializeField] private string MarketplaceSmartContract = "0xa959d76cb0749d94f823a306fbba00703c534a23";
-    [SerializeField] private string amount = "1000000000000";
+    [SerializeField] private int salePrice = 10000;
     [SerializeField] private string gasPrice = "2000000000";
-    [SerializeField] private string gasLimit = "50";
+    [SerializeField] private string gasLimit = "50000";
     [SerializeField] private string code = "";
     [SerializeField] private string data = "";
     [SerializeField] private bool priority = false;
@@ -43,13 +43,13 @@ public class CancelTokenOrder : ZilliqaMonoBehaviour
 
     public ECKeyPair ecKeyPair;
 
-    private int salePrice = 10000;
+
 
     private void Awake()
     {
-        Address = CryptoUtil.GetAddressFromPrivateKey(TestWallets.WalletPK1);
-        publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(TestWallets.WalletPK1, true);
-        privateKey = TestWallets.WalletPK1;
+        Address = CryptoUtil.GetAddressFromPrivateKey(TestWallets.WalletPK0);
+        publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(TestWallets.WalletPK0, true);
+        privateKey = TestWallets.WalletPK0;
         ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
 
         MarketplaceSmartContract = TestWallets.FixedPriceSmartContract0;
@@ -70,7 +70,7 @@ public class CancelTokenOrder : ZilliqaMonoBehaviour
         //https://dev.zilliqa.com/docs/apis/api-transaction-create-tx
         data = JsonConvert.SerializeObject(new ContractTransactionParams()
         {
-            _tag = "CancelOrder",
+            _tag = "FulfillOrder",
             args = new ContractTransitionArg[]
                             {
                                 new ContractTransitionArg()
@@ -103,6 +103,13 @@ public class CancelTokenOrder : ZilliqaMonoBehaviour
                                     type = "Uint32",
                                     value = "0"
                                 },
+                                new ContractTransitionArg()
+                                {
+                                    vname = "dest",
+                                    type = "ByStr20",
+                                    value = "0x" + Address
+                                }
+
                             }
 
         });
@@ -113,7 +120,7 @@ public class CancelTokenOrder : ZilliqaMonoBehaviour
             nonce = this.nonce,
             // the contract address needs to be checksummed
             toAddr = AddressUtils.ToCheckSumAddress(MarketplaceSmartContract),
-            amount = this.amount,
+            amount = "" + salePrice,
             pubKey = publicKey,
             gasPrice = this.gasPrice,
             gasLimit = this.gasLimit,
