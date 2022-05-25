@@ -8,13 +8,13 @@ using UnityEngine.Networking;
 
 public class ZilliqaMonoBehaviour : MonoBehaviour
 {
-    public string apiUrl = "https://api.zilliqa.com/";//"https://dev-api.zilliqa.com/";
+    public string apiUrl = "https://dev-api.zilliqa.com/";//"https://api.zilliqa.com/";
 
     protected IEnumerator PostRequest<T>(ZilRequest request, Action<T, ZilResponse.Error> onComplete = null)
        where T : ZilResponse
     {
         string json = request.ToJson();
-        Debug.Log(json);
+        //Debug.Log(json);
         using UnityEngine.Networking.UnityWebRequest webRequest = new UnityWebRequest(apiUrl, "POST");
         byte[] rawData = Encoding.UTF8.GetBytes(json);
 

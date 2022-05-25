@@ -154,6 +154,20 @@ namespace Scrypt
             return EncodeV2(password, saltBytes, _iterationCount, _blockSize, _threadCount);
         }
 
+        public string Encode(string password, byte[] saltBytes)
+        {
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new ArgumentNullException("password");
+            }
+
+            //var saltBytes = new byte[SaltLength];
+
+            //_saltGenerator.GetBytes(saltBytes);
+
+            return EncodeV2(password, saltBytes, _iterationCount, _blockSize, _threadCount);
+        }
+
         /// <summary>
         /// Checks if the given hash is a valid scrypt hash
         /// </summary>
