@@ -162,12 +162,6 @@ public class CreateTransaction : ZilliqaMonoBehaviour
         transactionParam.signature = signature.ToString().ToLower();
         Debug.Log("working signature" + signature.ToString().ToLower());
 
-        var wallet = new ZilPayWalletBrowserExtension();
-        var signPL = JsonConvert.SerializeObject(transactionParamZil);
-        Debug.Log("ZilPay signature \n" + signPL);
-        transactionParam.signature = wallet.ZilPaySign(signPL);
-        wallet.driver.Quit();
-
         ZilRequest createTxReq = new ZilRequest(CreateTransactionMethod, new object[] { transactionParam });
         StartCoroutine(PostRequest<CreateTransactionResponse>(createTxReq, (response, error) =>
             {
