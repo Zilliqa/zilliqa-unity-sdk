@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7320188940723096957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7320188940723096959}
+  - component: {fileID: 7320188940723096958}
+  m_Layer: 0
+  m_Name: FulfillNFTOrder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7320188940723096959
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7320188940723096957}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7320188940723096958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7320188940723096957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edb9ced697af5cc499abd7253dbc9d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiUrl: https://dev-api.zilliqa.com/
+  version: 21823489
+  nonce: 0
+  TokenSmartContract: 0x638a429b1f0dc1dd206c3030295255d7dbf45501
+  MarketplaceSmartContract: 0xa959d76cb0749d94f823a306fbba00703c534a23
+  salePrice: 10000
+  gasPrice: 2000000000
+  gasLimit: 50000
+  code: 
+  data: 
+  priority: 0
+  tokenId: 4
+  runAtStart: 1
+  showDebug: 1
+  getTransactionStatusIntervalSeconds: 5
+  getTransactionStatusMaxAttempts: 50

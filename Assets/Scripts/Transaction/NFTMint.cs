@@ -43,8 +43,9 @@ public class NFTMint : ZilliqaMonoBehaviour
 
     private void Awake()
     {
-        string checksummed = AddressUtils.ToCheckSumAddress(toAddress);
-        publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
+        Address = CryptoUtil.GetAddressFromPrivateKey(TestWallets.WalletPK0);
+        publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(TestWallets.WalletPK0, true);
+        privateKey = TestWallets.WalletPK0;
         ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
     }
 
@@ -69,7 +70,7 @@ public class NFTMint : ZilliqaMonoBehaviour
                                 {
                                     vname = "to",
                                     type = "ByStr20",
-                                    value = "0x"+Address.ToUpper()
+                                    value = "0x" + CryptoUtil.GetAddressFromPrivateKey(TestWallets.WalletPK1)
                                 },
                                 new ContractTransitionArg()
                                 {
@@ -85,7 +86,7 @@ public class NFTMint : ZilliqaMonoBehaviour
             version = this.version,
             nonce = this.nonce,
             // the contract address needs to be checksummed
-            toAddr = AddressUtils.ToCheckSumAddress(this.toAddress),
+            toAddr = AddressUtils.ToCheckSumAddress(TestWallets.TokenSmartContract0),
             amount = this.amount,
             pubKey = publicKey,
             gasPrice = this.gasPrice,

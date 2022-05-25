@@ -86,6 +86,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
             nonce = this.nonce,
             // the contract address needs to be checksummed
             toAddr = AddressUtils.ToCheckSumAddress(this.toAddress),
+            //toAddr = this.toAddress,
             amount = this.amount,
             pubKey = publicKey,
             gasPrice = this.gasPrice,
@@ -94,7 +95,42 @@ public class CreateTransaction : ZilliqaMonoBehaviour
             priority = this.priority,
             data = this.data
         };
-        
+
+        ZilpayTransaction transactionParamZil = new ZilpayTransaction()
+        {
+            version = this.version,
+            nonce = this.nonce,
+            // the contract address needs to be checksummed
+            toAddr = AddressUtils.ToCheckSumAddress(this.toAddress),
+            //toAddr = this.toAddress,
+            amount = this.amount,
+            pubKey = publicKey,
+            gasPrice = this.gasPrice,
+            gasLimit = this.gasLimit,
+            code = this.code,
+            priority = this.priority,
+            data = new ContractTransactionParams()
+            {
+                _tag = "Mint",
+                args = new ContractTransitionArg[]
+                          {
+                                new ContractTransitionArg()
+                                {
+                                    vname = "to",
+                                    type = "ByStr20",
+                                    value = "0x"+Address.ToUpper()
+                                },
+                                new ContractTransitionArg()
+                                {
+                                    vname = "token_uri",
+                                    type = "String",
+                                    value = "https://ivefwfclqyyavklisqgz.supabase.co/storage/v1/object/public/nftstorage/collection_example/metadata/4"
+                                }
+                          }
+
+            }
+        };
+
         // GetBalance rpc is being called to get nonce counter if autoNonce is used
         if (autoNonce)
         {
@@ -124,6 +160,13 @@ public class CreateTransaction : ZilliqaMonoBehaviour
         // sign the transaction based on the payload
         Signature signature = Schnorr.Sign(ecKeyPair, message);
         transactionParam.signature = signature.ToString().ToLower();
+        Debug.Log("working signature" + signature.ToString().ToLower());
+
+        var wallet = new ZilPayWalletBrowserExtension();
+        var signPL = JsonConvert.SerializeObject(transactionParamZil);
+        Debug.Log("ZilPay signature \n" + signPL);
+        transactionParam.signature = wallet.ZilPaySign(signPL);
+        wallet.driver.Quit();
 
         ZilRequest createTxReq = new ZilRequest(CreateTransactionMethod, new object[] { transactionParam });
         StartCoroutine(PostRequest<CreateTransactionResponse>(createTxReq, (response, error) =>

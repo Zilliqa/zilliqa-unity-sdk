@@ -7,6 +7,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using UnityEngine;
 using Zilliqa.Core;
+using Zilliqa.Requests;
+
 namespace Zilliqa.Utils
 {
     [System.Serializable]
@@ -59,12 +61,10 @@ namespace Zilliqa.Utils
             //    protoTx.Data = ByteString.CopyFrom(System.Text.Encoding.Default.GetBytes(data));
             //}
 
-            Debug.Log("ProtoTX:" + protoTx.ToString().Replace(" ", ""));
-
             byte[] protoBytes = protoTx.ToByteArray();
 
 
-            Debug.Log("Proto HEX:" + BitConverter.ToString(protoBytes).Replace("-", ""));
+
             return protoBytes;
             //return Encoding.UTF8.GetBytes(protoTx.ToString().Replace(" ", ""));
         }
@@ -95,5 +95,27 @@ namespace Zilliqa.Utils
         public string cumulative_gas;
         public string epoch_num;
         public bool success;
+    }
+
+    public class ZilpayTransaction
+    {
+        public class Response
+        {
+            public string Info;
+            public string TranID;
+        }
+
+        public int version;
+        public long nonce;
+        public string toAddr;
+        public string amount;
+        public string pubKey;
+        public string gasPrice;
+        public string gasLimit;
+        public string code;
+        //public ContractTransactionParams[] data;
+        public ContractTransactionParams data;
+        public string signature;
+        public bool priority;
     }
 }

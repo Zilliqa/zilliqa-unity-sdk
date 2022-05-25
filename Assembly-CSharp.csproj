@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\NFT\GetNFTsByWalletAddress.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetContractAddressFromTransactionIDResponse.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetCurrentDSEpoch.cs" />
+    <Compile Include="Assets\Scripts\Utils\Responses\NFTsByUserResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\KeyStore.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTxBlockListingPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTxBlockResponse.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Assets\Scripts\Utils\Responses\GetTransactionForTxBlockResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetDSBlockListingPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetSmartContractStateResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\Payloads\NFTsByUserPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\ScryptEncoder.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetBlockchainInfoResponse.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetDSBlockRate.cs" />
@@ -110,9 +112,12 @@
     <Compile Include="Assets\Scripts\Transaction\GetTransaction.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionStatusPayload.cs" />
     <Compile Include="Assets\graphQl-client\Scripts\Core\Introspection.cs" />
+    <Compile Include="Assets\Scripts\Utils\Crypto\KeyStoreV2.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTxnBodiesForTxBlockResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\Payloads\GetNFTMetadataPayload.cs" />
     <Compile Include="Assets\Scripts\Transaction\NFTMint.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTransactionResponse.cs" />
+    <Compile Include="Assets\Scripts\NFT\CreateNFTOrder.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetCurrentMiniEpochResponse.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetNumTransactions.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTxBlockListingResponse.cs" />
@@ -131,7 +136,9 @@
     <Compile Include="Assets\Scripts\Utils\Responses\GetSmartContractInitResponse.cs" />
     <Compile Include="Assets\Scripts\Account\GetBalance.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetLatestDsBlock.cs" />
+    <Compile Include="Assets\Scripts\NFT\FulfillNFTOrder.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetCurrentDSEpochPayload.cs" />
+    <Compile Include="Assets\Scripts\Utils\Responses\GetNFTMetadataResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Wallet\Transaction.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetBalanceResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\ZilliqaMonoBehaviour.cs" />
@@ -156,10 +163,12 @@
     <Compile Include="Assets\Scripts\Transaction\GetTransactionsForTxBlock.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\HashUtil.cs" />
     <Compile Include="Assets\Scripts\Contract\GetStateProof.cs" />
+    <Compile Include="Assets\Prefabs\Auth\KeyStoreLogin.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionsForTxBlockExPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\Bech32Utils.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetNumDSBlocks.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\CreateTransactionResponse.cs" />
+    <Compile Include="Assets\Scripts\NFT\CancelNFTOrder.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\CreateTransactionProto.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetMinerInfo.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetCurrentMiniEpoch.cs" />
@@ -181,6 +190,7 @@
     <Compile Include="Assets\Scripts\Blockchain\DSBlockListing.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetRecentTransactionsResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetSmartContractInitPayload.cs" />
+    <Compile Include="Assets\Scripts\Utils\Wallet\TestWallets.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetNumTxnsDSEpoch.cs" />
     <Compile Include="Assets\graphQl-client\Scripts\Core\GraphApi.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetMinerInfoResponse.cs" />
@@ -196,10 +206,6 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
-    <Compile Include="Assets\Scripts\Utils\Responses\GetNFTMetadataResponse.cs" />
-    <Compile Include="Assets\Scripts\Utils\Payloads\GetNFTMetadataPayload.cs" />
-    <Compile Include="Assets\Scripts\Utils\Responses\NFTsByUserResponse.cs" />
-    <Compile Include="Assets\Scripts\Utils\Payloads\NFTsByUserPayload.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\NFTQueriesschema.txt" />
@@ -454,6 +460,9 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>Assets\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver">
+      <HintPath>Assets\Plugins\WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.6\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
