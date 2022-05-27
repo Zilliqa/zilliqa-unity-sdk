@@ -9,6 +9,12 @@ using Zilliqa.Utils;
 using Zilliqa.Core.Crypto;
 using Zilliqa.Requests;
 
+public enum OrderType
+{
+    SellOrder = 0,
+    BuyOrder = 1
+}
+
 public class FulfillNFTOrder : ZilliqaMonoBehaviour
 {
     private const string CreateTransactionMethod = "CreateTransaction";
@@ -26,6 +32,7 @@ public class FulfillNFTOrder : ZilliqaMonoBehaviour
     [SerializeField] private string data = "";
     [SerializeField] private bool priority = false;
     [SerializeField] private int tokenId = 1;
+    [SerializeField] private OrderType orderType;
 
     [Header("Keys Pair")]
     private string Address = "8254b2C9aCdf181d5d6796d63320fBb20D4Edd12";
@@ -47,9 +54,10 @@ public class FulfillNFTOrder : ZilliqaMonoBehaviour
 
     private void Awake()
     {
-        Address = CryptoUtil.GetAddressFromPrivateKey(TestWallets.WalletPK0);
-        publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(TestWallets.WalletPK0, true);
         privateKey = TestWallets.WalletPK0;
+        Address = CryptoUtil.GetAddressFromPrivateKey(privateKey);
+        publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
+
         ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
 
         MarketplaceSmartContract = TestWallets.FixedPriceSmartContract0;
@@ -101,7 +109,7 @@ public class FulfillNFTOrder : ZilliqaMonoBehaviour
                                 {
                                     vname = "side",
                                     type = "Uint32",
-                                    value = "0"
+                                    value = "" + (int)orderType
                                 },
                                 new ContractTransitionArg()
                                 {
