@@ -26,6 +26,7 @@ public class CancelNFTOrder : ZilliqaMonoBehaviour
     [SerializeField] private string data = "";
     [SerializeField] private bool priority = false;
     [SerializeField] private int tokenId = 1;
+    [SerializeField] private OrderType orderType;
 
     [Header("Keys Pair")]
     private string Address = "8254b2C9aCdf181d5d6796d63320fBb20D4Edd12";
@@ -47,9 +48,10 @@ public class CancelNFTOrder : ZilliqaMonoBehaviour
 
     private void Awake()
     {
-        Address = CryptoUtil.GetAddressFromPrivateKey(TestWallets.WalletPK1);
-        publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(TestWallets.WalletPK1, true);
         privateKey = TestWallets.WalletPK1;
+        Address = CryptoUtil.GetAddressFromPrivateKey(privateKey);
+        publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
+
         ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
 
         MarketplaceSmartContract = TestWallets.FixedPriceSmartContract0;
@@ -101,7 +103,7 @@ public class CancelNFTOrder : ZilliqaMonoBehaviour
                                 {
                                     vname = "side",
                                     type = "Uint32",
-                                    value = "0"
+                                    value = "" + (int)orderType
                                 },
                             }
 
@@ -113,7 +115,7 @@ public class CancelNFTOrder : ZilliqaMonoBehaviour
             nonce = this.nonce,
             // the contract address needs to be checksummed
             toAddr = AddressUtils.ToCheckSumAddress(MarketplaceSmartContract),
-            amount = this.amount,
+            amount = "" + salePrice,
             pubKey = publicKey,
             gasPrice = this.gasPrice,
             gasLimit = this.gasLimit,

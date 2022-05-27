@@ -1467,6 +1467,315 @@ MonoBehaviour:
         type: ListingData
       hasChanged: 0
     isComplete: 1
+  - name: GetFixedPriceOffers
+    type: 0
+    query: "query GetFixedPriceOffers{\n    assetById(  input :{ contractAddress
+      :\"0x0184398def9b2e48a826d67116229e79b889873c\", tokenId :\"1\"} ){\n       
+      listingData{\n            sourceId\n            data{\n                ZILLIQA_FIXED_PRICE{\n                   
+      othersOffers{\n                        maker\n                        unit\n                       
+      amount\n                        currency\n                        expirationInBlockNumber\n       
+      }\n                    ownerOffers{\n                        maker\n                       
+      unit\n                        amount\n                        currency\n                       
+      expirationInBlockNumber\n        }\n                    marketplaceContractAddress\n               
+      }\n            }\n        }\n    }\n}"
+    queryString: assetById
+    returnType: Asset
+    queryOptions:
+    - events
+    - sources
+    - sourceById
+    - sourceEvents
+    - assets
+    - assetById
+    - assetEvents
+    - assetSourceEvents
+    - contractByAddress
+    - user
+    fields:
+    - index: 15
+      name: listingData
+      type: ListingData
+      parentIndexes: 
+      hasSubField: 1
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 0
+      name: sourceId
+      type: String
+      parentIndexes: 00000000
+      hasSubField: 0
+      possibleFields:
+      - name: sourceId
+        type: String
+      - name: data
+        type: SourceListingData
+      hasChanged: 0
+    - index: 1
+      name: data
+      type: SourceListingData
+      parentIndexes: 00000000
+      hasSubField: 1
+      possibleFields:
+      - name: sourceId
+        type: String
+      - name: data
+        type: SourceListingData
+      hasChanged: 0
+    - index: 0
+      name: ZILLIQA_FIXED_PRICE
+      type: ZilliqaFixedPriceListingV1
+      parentIndexes: 0000000002000000
+      hasSubField: 1
+      possibleFields:
+      - name: ZILLIQA_FIXED_PRICE
+        type: ZilliqaFixedPriceListingV1
+      - name: ZILLIQA_ENGLISH_AUCTION
+        type: ZilliqaEnglishAuctionV1
+      - name: fulfilled
+        type: FulfilledOrder
+      hasChanged: 0
+    - index: 1
+      name: othersOffers
+      type: ZilliqaFixedPriceOrderV1
+      parentIndexes: 000000000200000003000000
+      hasSubField: 1
+      possibleFields:
+      - name: ownerOffers
+        type: ZilliqaFixedPriceOrderV1
+      - name: othersOffers
+        type: ZilliqaFixedPriceOrderV1
+      - name: marketplaceContractAddress
+        type: String
+      hasChanged: 0
+    - index: 0
+      name: maker
+      type: String
+      parentIndexes: 00000000020000000300000004000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 1
+      name: unit
+      type: String
+      parentIndexes: 00000000020000000300000004000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 2
+      name: amount
+      type: Float
+      parentIndexes: 00000000020000000300000004000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 3
+      name: currency
+      type: String
+      parentIndexes: 00000000020000000300000004000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 4
+      name: expirationInBlockNumber
+      type: String
+      parentIndexes: 00000000020000000300000004000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 0
+      name: ownerOffers
+      type: ZilliqaFixedPriceOrderV1
+      parentIndexes: 000000000200000003000000
+      hasSubField: 1
+      possibleFields:
+      - name: ownerOffers
+        type: ZilliqaFixedPriceOrderV1
+      - name: othersOffers
+        type: ZilliqaFixedPriceOrderV1
+      - name: marketplaceContractAddress
+        type: String
+      hasChanged: 0
+    - index: 0
+      name: maker
+      type: String
+      parentIndexes: 0000000002000000030000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 1
+      name: unit
+      type: String
+      parentIndexes: 0000000002000000030000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 2
+      name: amount
+      type: Float
+      parentIndexes: 0000000002000000030000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 3
+      name: currency
+      type: String
+      parentIndexes: 0000000002000000030000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 4
+      name: expirationInBlockNumber
+      type: String
+      parentIndexes: 0000000002000000030000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 2
+      name: marketplaceContractAddress
+      type: String
+      parentIndexes: 000000000200000003000000
+      hasSubField: 0
+      possibleFields:
+      - name: ownerOffers
+        type: ZilliqaFixedPriceOrderV1
+      - name: othersOffers
+        type: ZilliqaFixedPriceOrderV1
+      - name: marketplaceContractAddress
+        type: String
+      hasChanged: 0
+    isComplete: 1
   mutations: []
   subscriptions: []
   loading: 0

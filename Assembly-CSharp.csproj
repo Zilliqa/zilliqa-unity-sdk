@@ -122,6 +122,7 @@
     <Compile Include="Assets\Scripts\Blockchain\GetNumTransactions.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTxBlockListingResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\Signature.cs" />
+    <Compile Include="Assets\Scripts\NFT\GetFixedPriceOffers.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\Bech32.cs" />
     <Compile Include="Assets\graphQl-client\Scripts\Core\HttpHandler.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetNetworkIdResponse.cs" />
