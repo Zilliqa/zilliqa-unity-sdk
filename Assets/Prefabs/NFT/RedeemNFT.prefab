@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &381820381885113608
+--- !u!1 &2870925126139115040
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 381820381885113610}
-  - component: {fileID: 381820381885113611}
+  - component: {fileID: 2870925126139115042}
+  - component: {fileID: 2870925126139115041}
   m_Layer: 0
-  m_Name: GetAllNFTsByWalletAddress
+  m_Name: RedeemNFT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &381820381885113610
+--- !u!4 &2870925126139115042
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381820381885113608}
+  m_GameObject: {fileID: 2870925126139115040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,17 +32,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &381820381885113611
+--- !u!114 &2870925126139115041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381820381885113608}
+  m_GameObject: {fileID: 2870925126139115040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13817c6ea64de3a458ccfad25c47ed3b, type: 3}
+  m_Script: {fileID: 11500000, guid: a8f11905f9a150741b634d82cd851e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walletAddress: 0x8254b2c9acdf181d5d6796d63320fbb20d4edd12
-  indexer: {fileID: 11400000, guid: d6076b153f3904f4080e105d598ea8a2, type: 2}
+  apiUrl: https://dev-api.zilliqa.com/
+  version: 21823489
+  nonce: 0
+  TokenSmartContract: 0x638a429b1f0dc1dd206c3030295255d7dbf45501
+  MarketplaceSmartContract: 0xa959d76cb0749d94f823a306fbba00703c534a23
+  amount: 1000000000000
+  gasPrice: 2000000000
+  gasLimit: 50000
+  code: 
+  data: 
+  priority: 0
+  tokenId: 3
+  bidPrice: 10000
+  runAtStart: 1
+  showDebug: 1
+  getTransactionStatusIntervalSeconds: 0.5
+  getTransactionStatusMaxAttempts: -1

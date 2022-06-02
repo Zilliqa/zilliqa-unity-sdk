@@ -1,7 +1,11 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace Zilliqa.Requests
 {
     public class GetSmartContractSubStateResponse : ZilResponse
     {
-        public GetSmartContractSubStatePayload result;
+        //[JsonConverter(typeof(GetSmartContractSubStateConverter))]
+        public JObject result;
     }
 }

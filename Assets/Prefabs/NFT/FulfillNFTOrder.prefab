@@ -56,6 +56,9 @@ MonoBehaviour:
   data: 
   priority: 0
   tokenId: 4
+  orderType: 0
+  useNonSavedPrivateKey: 0
+  privateKey: 0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa
   runAtStart: 1
   showDebug: 1
   getTransactionStatusIntervalSeconds: 5

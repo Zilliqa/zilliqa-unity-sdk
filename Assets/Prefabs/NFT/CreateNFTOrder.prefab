@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4277622520618120683
 Transform:
   m_ObjectHideFlags: 0
@@ -56,6 +56,7 @@ MonoBehaviour:
   data: 
   priority: 0
   tokenId: 4
+  orderType: 0
   runAtStart: 1
   showDebug: 1
   getTransactionStatusIntervalSeconds: 5

@@ -58,9 +58,11 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\ZilCipher.cs" />
     <Compile Include="Assets\Scripts\Contract\GetContractAddressFromTransactionID.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\Pbkdf2.cs" />
+    <Compile Include="Assets\Scripts\Utils\JsonConverters\GetSmartContractSubStateConverter.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetLatestTxBlock.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTxnBodiesForTxBlockExPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetSmartContractsPayload.cs" />
+    <Compile Include="Assets\Scripts\NFT\EndNFTAuctionOrder.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\ECKeyPair.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\ScryptParams.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetBlockchainInfo.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="Assets\Scripts\Utils\Payloads\GetRecentTransactionsPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\ZilRequest.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetNumTxnsTxEpoch.cs" />
+    <Compile Include="Assets\Scripts\Core\Zilliqa.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetTransactionsForTxBlockEx.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetTransaction.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionStatusPayload.cs" />
@@ -127,7 +130,6 @@
     <Compile Include="Assets\graphQl-client\Scripts\Core\HttpHandler.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetNetworkIdResponse.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetTotalCoinSupply.cs" />
-    <Compile Include="Assets\Scripts\Account\ZilPayConnect.cs" />
     <Compile Include="Assets\Protobuf\Transactionmessage.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetPrevDSDifficulty.cs" />
     <Compile Include="Assets\Scripts\Utils\Extensions\AsyncOpsExtensions.cs" />
@@ -136,6 +138,7 @@
     <Compile Include="Assets\Scripts\Transaction\GetTransactionStatus.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\ScryptWrapper.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetSmartContractInitResponse.cs" />
+    <Compile Include="Assets\Scripts\NFT\CreateNFTAuctionOrder.cs" />
     <Compile Include="Assets\Scripts\Account\GetBalance.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetLatestDsBlock.cs" />
     <Compile Include="Assets\Scripts\NFT\FulfillNFTOrder.cs" />
@@ -153,7 +156,6 @@
     <Compile Include="Assets\Scripts\Transaction\CreateTransaction.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\ZilResponse.cs" />
     <Compile Include="Assets\Scripts\Transaction\TransferFrom.cs" />
-    <Compile Include="Assets\Scripts\Wallet\ZilPay\ZilPayWallet.cs" />
     <Compile Include="Assets\src\Base58Check\Base58CheckEncoding.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\StaticVariables.cs" />
     <Compile Include="Assets\Scripts\Utils\Wallet\Admins.cs" />
@@ -162,9 +164,11 @@
     <Compile Include="Assets\Scripts\Utils\Responses\GetDSBlockListingResponse.cs" />
     <Compile Include="Assets\Scripts\Contract\GetSmartContractSubState.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\CipherParams.cs" />
+    <Compile Include="Assets\Scripts\NFT\BidNFTAuctionOrder.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetTxBlock.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetTransactionsForTxBlock.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\HashUtil.cs" />
+    <Compile Include="Assets\Scripts\NFT\CancelNFTAuctionOrder.cs" />
     <Compile Include="Assets\Scripts\Contract\GetStateProof.cs" />
     <Compile Include="Assets\Prefabs\Auth\KeyStoreLogin.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionsForTxBlockExPayload.cs" />
@@ -189,7 +193,6 @@
     <Compile Include="Assets\Scripts\Utils\Wallet\PBKDF2Wrapper.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetNumTxBlocksResponse.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetTxnBodiesForTxBlockEx.cs" />
-    <Compile Include="Assets\Scripts\Transaction\NFTMintZilpay.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetLatestDSBlockPayload.cs" />
     <Compile Include="Assets\Scripts\Blockchain\DSBlockListing.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetRecentTransactionsResponse.cs" />
@@ -197,6 +200,7 @@
     <Compile Include="Assets\Scripts\Utils\Wallet\TestWallets.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetNumTxnsDSEpoch.cs" />
     <Compile Include="Assets\graphQl-client\Scripts\Core\GraphApi.cs" />
+    <Compile Include="Assets\Scripts\NFT\RedeemNFT.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetMinerInfoResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\KDFType.cs" />
     <Compile Include="Assets\Scripts\Utils\JsonConverters\GetTransactionPayloadConverter.cs" />
@@ -204,18 +208,18 @@
     <Compile Include="Assets\Scripts\Contract\GetSmartContractState.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetMinerInfoPayload.cs" />
     <Compile Include="Assets\src\ArrayHelpers.cs" />
+    <Compile Include="Assets\Scripts\NFT\WithdrawLockedFundsFromAuction.cs" />
     <Compile Include="Assets\Scripts\Utils\JsonConverters\ObjectIdConverter.cs" />
     <Compile Include="Assets\Scripts\Utils\Wallet\AddressUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetNumDSBlocksResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
+    <Compile Include="Assets\Scripts\NFT\GetEnglishAuctionOffers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Scripts\Utils\Wallet\ZilPay\Resources\ZilConnect.txt" />
     <None Include="Assets\NFTQueriesschema.txt" />
-    <None Include="Assets\Scripts\Utils\Wallet\ZilPay\Resources\ZilPaySign.txt" />
-    <None Include="Assets\Scripts\Utils\Wallet\ZilPay\Resources\CreateTransaction.txt" />
+    <None Include="Assets\EnglishAuctionschema.txt" />
     <None Include="Assets\README.txt" />
   </ItemGroup>
   <ItemGroup>

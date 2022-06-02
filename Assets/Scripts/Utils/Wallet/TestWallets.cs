@@ -15,6 +15,11 @@ public static class TestWallets
     /// </summary>
     public static string WalletPK1 = "3375F915F3F9AE35E6B301B7670F53AD1A5BE15D8221EC7FD5E503F21D3450C8";
     /// <summary>
+    /// Private key 3375F915F3F9AE35E6B301B7670F53AD1A5BE15D8221EC7FD5E503F21D3450C8 |
+    /// Address 0x2A426909Dfa2851eBE68c34Cd7f7c34b07dB12e4
+    /// </summary>
+    public static string WalletPK2 = "675ff8a4445b3107a5ff17d1d37f0917ebddd2a3df471c1b1b863c5eb0ac1a52";
+    /// <summary>
     /// Address 0x638a429b1f0dc1dd206c3030295255d7dbf45501
     /// </summary>
     public static string TokenSmartContract0 = "0x638a429b1f0dc1dd206c3030295255d7dbf45501";
@@ -22,5 +27,9 @@ public static class TestWallets
     /// Address 0xfa35fa8fe0736596adb04920bea09641bcc3ebf0
     /// </summary>
     public static string FixedPriceSmartContract0 = "0xfa35fa8fe0736596adb04920bea09641bcc3ebf0";
+    /// <summary>
+    /// Address 0x2bbbee1327ac2b9595a35f20bafe009260199a4b
+    /// </summary>
+    public static string AuctionSmartContract0 = "0x2bbbee1327ac2b9595a35f20bafe009260199a4b";
 
 }

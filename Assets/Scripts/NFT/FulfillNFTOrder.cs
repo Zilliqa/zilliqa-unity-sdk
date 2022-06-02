@@ -36,7 +36,8 @@ public class FulfillNFTOrder : ZilliqaMonoBehaviour
 
     [Header("Keys Pair")]
     private string Address = "8254b2C9aCdf181d5d6796d63320fBb20D4Edd12";
-    private string privateKey = "0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa";
+    [SerializeField] private bool useNonSavedPrivateKey = false;
+    [SerializeField] private string privateKey = "0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa";
     private string publicKey;
     private bool autoNonce = true;
 
@@ -54,7 +55,7 @@ public class FulfillNFTOrder : ZilliqaMonoBehaviour
 
     private void Awake()
     {
-        privateKey = TestWallets.WalletPK0;
+        privateKey = useNonSavedPrivateKey? privateKey : TestWallets.WalletPK0;
         Address = CryptoUtil.GetAddressFromPrivateKey(privateKey);
         publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
 

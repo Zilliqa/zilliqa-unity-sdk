@@ -47,4 +47,19 @@ namespace Zilliqa.Requests
         public string type;
         public string value;
     }
+
+    public class OrderContractTransitionArg : ContractTransitionArg
+    {
+        public new OrderParam value;
+    }
+
+    public class OrderParam
+    {
+        public ContractTransitionArg token_address;
+        public ContractTransitionArg token_id;
+        public ContractTransitionArg payment_token_address;
+        public ContractTransitionArg start_amount;
+        public ContractTransitionArg expiration_bnum;
+
+    }
 }

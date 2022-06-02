@@ -10,7 +10,7 @@ using Zilliqa.Requests;
 
 public class GetNFTsByWalletAddress : MonoBehaviour
 {
-    public string walletAddress = "0x8254b2c9acdf181d5d6796d63320fbb20d4edd12";
+    public string walletAddress = "0x8254b2C9aCdf181d5d6796d63320fBb20D4Edd12";
     public GraphApi indexer;
     private string indexerToken = "yQqD5eiBkK4mvkrXrNdvAUi2pJ03DTpdCe6a0gvUMyUW9KELHBJdGULvVi2WeaVc";
 
