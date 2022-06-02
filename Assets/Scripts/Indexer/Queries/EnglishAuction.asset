@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   url: https://stg-indexer-api.rialto.studio/zilliqa
   queries:
-  - name: GetOffers
+  - name: GetAuctionOffers
     type: 0
-    query: "query GetOffers{\n    assetById(  input :{ contractAddress :\"0x638a429b1f0dc1dd206c3030295255d7dbf45501\",
+    query: "query GetAuctionOffers{\n    assetById(  input :{ contractAddress :\"0x638a429b1f0dc1dd206c3030295255d7dbf45501\",
       tokenId :\"8\"} ){\n        tokenId\n        tokenUri\n        listingData{\n           
       sourceId\n            data{\n                ZILLIQA_ENGLISH_AUCTION{\n                   
       startingBid{\n                        unit\n                        amount\n                       

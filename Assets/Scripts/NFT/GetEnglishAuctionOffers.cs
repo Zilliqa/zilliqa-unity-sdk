@@ -21,7 +21,7 @@ public class GetEnglishAuctionOffers : MonoBehaviour
         //contractAddress = TestWallets.FixedPriceSmartContract0;
         indexer.SetAuthToken(indexerToken);
 
-        Query query = indexer.GetQueryByName("GetOffers", Query.Type.Query);
+        Query query = indexer.GetQueryByName("GetAuctionOffers", Query.Type.Query);
         query.SetArgs(new { input = new { contractAddress = this.contractAddress, tokenId = this.tokenId } });
 
         UnityWebRequest re = await indexer.Post(query);
