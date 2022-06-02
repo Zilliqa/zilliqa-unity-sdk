@@ -27,7 +27,8 @@ public class NFTMint : ZilliqaMonoBehaviour
 
     [Header("Keys Pair")]
     private string Address = "8254b2C9aCdf181d5d6796d63320fBb20D4Edd12";
-    private string privateKey = "3375F915F3F9AE35E6B301B7670F53AD1A5BE15D8221EC7FD5E503F21D3450C8";
+    [SerializeField] private bool useNonSavedPrivateKey = false;
+    [SerializeField] private string privateKey = "0899282aaf67e341dc618cbfde25abdbe14f8fc17ec0fc142ebaa6544075ffaa";
     private string publicKey;
     private bool autoNonce = true;
 
@@ -43,9 +44,9 @@ public class NFTMint : ZilliqaMonoBehaviour
 
     private void Awake()
     {
-        Address = CryptoUtil.GetAddressFromPrivateKey(TestWallets.WalletPK0);
-        publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(TestWallets.WalletPK0, true);
-        privateKey = TestWallets.WalletPK0;
+        privateKey = useNonSavedPrivateKey ? privateKey : TestWallets.WalletPK0;
+        Address = CryptoUtil.GetAddressFromPrivateKey(privateKey);
+        publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
         ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
     }
 
@@ -70,7 +71,7 @@ public class NFTMint : ZilliqaMonoBehaviour
                                 {
                                     vname = "to",
                                     type = "ByStr20",
-                                    value = "0x" + CryptoUtil.GetAddressFromPrivateKey(TestWallets.WalletPK1)
+                                    value = "0x" + Address
                                 },
                                 new ContractTransitionArg()
                                 {

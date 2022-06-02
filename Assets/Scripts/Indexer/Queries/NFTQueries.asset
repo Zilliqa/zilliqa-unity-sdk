@@ -312,7 +312,7 @@ MonoBehaviour:
     isComplete: 1
   - name: GetNFTsByWalletAddress
     type: 0
-    query: "query GetNFTsByWalletAddress{\n    user(  input :{ address :\"0x8254b2c9acdf181d5d6796d63320fbb20d4edd12\"}
+    query: "query GetNFTsByWalletAddress{\n    user(  input :{ address :\"0x3a869435fd3b34d313b0c5ba5cd478c8bd0b90ac\"}
       ){\n        address\n        ownedAssets{\n            assetsList{\n               
       contractAddress\n                spenderAddress\n                operatorAddress\n               
       tokenId\n                tokenUri\n                minterAddress\n           
@@ -1470,7 +1470,7 @@ MonoBehaviour:
   - name: GetFixedPriceOffers
     type: 0
     query: "query GetFixedPriceOffers{\n    assetById(  input :{ contractAddress
-      :\"0x0184398def9b2e48a826d67116229e79b889873c\", tokenId :\"1\"} ){\n       
+      :\"0x638a429b1f0dc1dd206c3030295255d7dbf45501\", tokenId :\"9\"} ){\n       
       listingData{\n            sourceId\n            data{\n                ZILLIQA_FIXED_PRICE{\n                   
       othersOffers{\n                        maker\n                        unit\n                       
       amount\n                        currency\n                        expirationInBlockNumber\n       

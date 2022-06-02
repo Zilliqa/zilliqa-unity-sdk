@@ -9,7 +9,7 @@ using Zilliqa.Utils;
 using Zilliqa.Core.Crypto;
 using Zilliqa.Requests;
 
-public class CreateNFTOrder : ZilliqaMonoBehaviour
+public class EndNFTAuctionOrder : ZilliqaMonoBehaviour
 {
     private const string CreateTransactionMethod = "CreateTransaction";
     private const string GetBalanceMethod = "GetBalance";
@@ -26,7 +26,7 @@ public class CreateNFTOrder : ZilliqaMonoBehaviour
     [SerializeField] private string data = "";
     [SerializeField] private bool priority = false;
     [SerializeField] private int tokenId = 1;
-    [SerializeField] private OrderType orderType;
+    [SerializeField] private int bidPrice = 10000;
 
     [Header("Keys Pair")]
     private string Address = "8254b2C9aCdf181d5d6796d63320fBb20D4Edd12";
@@ -44,39 +44,27 @@ public class CreateNFTOrder : ZilliqaMonoBehaviour
 
     public ECKeyPair ecKeyPair;
 
-    private int salePrice = 10000;
+
 
     private void Awake()
     {
         privateKey = TestWallets.WalletPK2;
         Address = CryptoUtil.GetAddressFromPrivateKey(privateKey);
         publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
-        
+
         ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
 
-        MarketplaceSmartContract = TestWallets.FixedPriceSmartContract0;
+        MarketplaceSmartContract = TestWallets.AuctionSmartContract0;
         TokenSmartContract = TestWallets.TokenSmartContract0;
     }
 
     private void Start()
     {
-        //if (runAtStart)
-        //    StartCoroutine(Transact());
-
-        StartCoroutine(CreateSellOrder());
-    }
-
-    private IEnumerator CreateSellOrder()
-    {
-        //StartCoroutine(Transact());
-        StartCoroutine(SetSpender((txStatus) =>
-        {
+        if (runAtStart)
             StartCoroutine(Transact());
-
-        }));
-
-        yield return null;
     }
+
+
 
     private IEnumerator Transact()
     {
@@ -84,7 +72,7 @@ public class CreateNFTOrder : ZilliqaMonoBehaviour
         //https://dev.zilliqa.com/docs/apis/api-transaction-create-tx
         data = JsonConvert.SerializeObject(new ContractTransactionParams()
         {
-            _tag = "SetOrder",
+            _tag = "End",
             args = new ContractTransitionArg[]
                             {
                                 new ContractTransitionArg()
@@ -98,41 +86,17 @@ public class CreateNFTOrder : ZilliqaMonoBehaviour
                                     vname = "token_id",
                                     type = "Uint256",
                                     value = "" + tokenId
-                                },
-                                new ContractTransitionArg()
-                                {
-                                    vname = "payment_token_address",
-                                    type = "ByStr20",
-                                    value = "0x0000000000000000000000000000000000000000"
-                                },
-                                new ContractTransitionArg()
-                                {
-                                    vname = "sale_price",
-                                    type = "Uint128",
-                                    value = "" + salePrice
-                                },
-                                 new ContractTransitionArg()
-                                {
-                                    vname = "side",
-                                    type = "Uint32",
-                                    value = "" + (int)orderType
-                                },
-                                new ContractTransitionArg()
-                                {
-                                    vname = "expiration_bnum",
-                                    type = "BNum",
-                                    value = "5240908"
                                 }
-                            }
-
+                         }
         });
+
         Transaction transactionParam = new Transaction()
         {
             version = this.version,
             nonce = this.nonce,
             // the contract address needs to be checksummed
             toAddr = AddressUtils.ToCheckSumAddress(MarketplaceSmartContract),
-            amount = "" + salePrice,
+            amount = "" + bidPrice,
             pubKey = publicKey,
             gasPrice = this.gasPrice,
             gasLimit = this.gasLimit,
@@ -190,95 +154,7 @@ public class CreateNFTOrder : ZilliqaMonoBehaviour
         ));
     }
 
-    private IEnumerator SetSpender(Action<GetTransactionStatusPayload> onTransactionProcessed)
-    {
-
-
-        data = JsonConvert.SerializeObject(new ContractTransactionParams()
-        {
-            _tag = "SetSpender",
-            args = new ContractTransitionArg[]
-                           {
-                                new ContractTransitionArg()
-                                {
-                                    vname = "spender",
-                                    type = "ByStr20",
-                                    value = MarketplaceSmartContract
-                                },
-                                new ContractTransitionArg()
-                                {
-                                    vname = "token_id",
-                                    type = "Uint256",
-                                    value = "" + tokenId
-                                },
-                           }
-
-        });
-
-        Transaction transactionParam = new Transaction()
-        {
-            version = this.version,
-            nonce = this.nonce,
-            // the contract address needs to be checksummed
-            toAddr = AddressUtils.ToCheckSumAddress(TokenSmartContract),
-            amount = "0",
-            pubKey = publicKey,
-            gasPrice = this.gasPrice,
-            gasLimit = this.gasLimit,
-            code = this.code,
-            priority = this.priority,
-            data = this.data
-        };
-
-        if (autoNonce)
-        {
-            if (string.IsNullOrEmpty(Address))
-                Debug.LogError("Error: Failed to auto increase nonce. Please input wallet address.");
-            else
-            {
-                ZilRequest getBalanceReq = new ZilRequest(GetBalanceMethod, Address);
-                yield return StartCoroutine(PostRequest<GetBalanceResponse>(getBalanceReq, (response, error) =>
-                {
-                    if (response.result != null)
-                    {
-                        nonce = response.result.nonce;
-                        transactionParam.nonce = response.result.nonce + 1;
-                        Debug.Log("Balance of " + Address + " : " + response.result.balance);
-                    }
-                    else if (error != null)
-                    {
-                        Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
-                    }
-                }
-                ));
-            }
-        }
-
-        //Encode the protobuf object to byte array
-        byte[] message = transactionParam.Encode();
-        // sign the transaction based on the payload
-        Signature signature = Schnorr.Sign(ecKeyPair, message);
-        transactionParam.signature = signature.ToString().ToLower();
-
-        ZilRequest createTxReq = new ZilRequest(CreateTransactionMethod, new object[] { transactionParam });
-        StartCoroutine(PostRequest<CreateTransactionResponse>(createTxReq, (response, error) =>
-        {
-            var result = response.result;
-            if (response.result != null)
-            {
-                if (showDebug)
-                    Debug.Log("Info: " + result.Info + "\n" + "Tx hash: " + "0x" + result.TranID);
-                StartCoroutine(ListenForTransactionStatusUpdate(result.TranID, onTransactionProcessed));
-            }
-            else if (error != null)
-            {
-                Debug.Log("Error code: " + error.code + "\n" + "Message: " + error.message);
-            }
-        }
-        ));
-    }
-
-    private IEnumerator ListenForTransactionStatusUpdate(string transactionID, Action<GetTransactionStatusPayload> onTransactionProcessed = null)
+    private IEnumerator ListenForTransactionStatusUpdate(string transactionID)
     {
         int currentAttemptCount = 0;
         bool hasFinalState = false;
@@ -288,8 +164,6 @@ public class CreateNFTOrder : ZilliqaMonoBehaviour
             yield return GetTransactionStatus(transactionID, (txStatus) =>
             {
                 hasFinalState = txStatus.HasFinalState;
-                if (txStatus.HasFinalState)
-                    onTransactionProcessed?.Invoke(txStatus);
             });
             currentAttemptCount++;
         }

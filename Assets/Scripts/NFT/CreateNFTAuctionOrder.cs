@@ -9,7 +9,7 @@ using Zilliqa.Utils;
 using Zilliqa.Core.Crypto;
 using Zilliqa.Requests;
 
-public class CreateNFTOrder : ZilliqaMonoBehaviour
+public class CreateNFTAuctionOrder : ZilliqaMonoBehaviour
 {
     private const string CreateTransactionMethod = "CreateTransaction";
     private const string GetBalanceMethod = "GetBalance";
@@ -26,7 +26,7 @@ public class CreateNFTOrder : ZilliqaMonoBehaviour
     [SerializeField] private string data = "";
     [SerializeField] private bool priority = false;
     [SerializeField] private int tokenId = 1;
-    [SerializeField] private OrderType orderType;
+    [SerializeField] private int startingAuctionPrice = 10000;
 
     [Header("Keys Pair")]
     private string Address = "8254b2C9aCdf181d5d6796d63320fBb20D4Edd12";
@@ -44,25 +44,27 @@ public class CreateNFTOrder : ZilliqaMonoBehaviour
 
     public ECKeyPair ecKeyPair;
 
-    private int salePrice = 10000;
+    private double expirationBlockNum;
 
     private void Awake()
     {
         privateKey = TestWallets.WalletPK2;
         Address = CryptoUtil.GetAddressFromPrivateKey(privateKey);
         publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
-        
+
         ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
 
-        MarketplaceSmartContract = TestWallets.FixedPriceSmartContract0;
+        MarketplaceSmartContract = TestWallets.AuctionSmartContract0;
         TokenSmartContract = TestWallets.TokenSmartContract0;
     }
 
-    private void Start()
+    private async void Start()
     {
         //if (runAtStart)
         //    StartCoroutine(Transact());
 
+        expirationBlockNum = await CryptoUtil.HoursToBlockNumber(100f);
+        Debug.Log("Expiration " + expirationBlockNum);
         StartCoroutine(CreateSellOrder());
     }
 
@@ -80,11 +82,13 @@ public class CreateNFTOrder : ZilliqaMonoBehaviour
 
     private IEnumerator Transact()
     {
+
+
         //data needs to be a stringified json, more info on the structure can be found here:
         //https://dev.zilliqa.com/docs/apis/api-transaction-create-tx
         data = JsonConvert.SerializeObject(new ContractTransactionParams()
         {
-            _tag = "SetOrder",
+            _tag = "Start",
             args = new ContractTransitionArg[]
                             {
                                 new ContractTransitionArg()
@@ -107,21 +111,15 @@ public class CreateNFTOrder : ZilliqaMonoBehaviour
                                 },
                                 new ContractTransitionArg()
                                 {
-                                    vname = "sale_price",
+                                    vname = "start_amount",
                                     type = "Uint128",
-                                    value = "" + salePrice
-                                },
-                                 new ContractTransitionArg()
-                                {
-                                    vname = "side",
-                                    type = "Uint32",
-                                    value = "" + (int)orderType
+                                    value = "" + startingAuctionPrice
                                 },
                                 new ContractTransitionArg()
                                 {
                                     vname = "expiration_bnum",
                                     type = "BNum",
-                                    value = "5240908"
+                                    value = "" + expirationBlockNum
                                 }
                             }
 
@@ -132,7 +130,7 @@ public class CreateNFTOrder : ZilliqaMonoBehaviour
             nonce = this.nonce,
             // the contract address needs to be checksummed
             toAddr = AddressUtils.ToCheckSumAddress(MarketplaceSmartContract),
-            amount = "" + salePrice,
+            amount = "0",
             pubKey = publicKey,
             gasPrice = this.gasPrice,
             gasLimit = this.gasLimit,
