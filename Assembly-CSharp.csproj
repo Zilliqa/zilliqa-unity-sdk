@@ -171,7 +171,7 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\HashUtil.cs" />
     <Compile Include="Assets\Scripts\NFT\CancelNFTAuctionOrder.cs" />
     <Compile Include="Assets\Scripts\Contract\GetStateProof.cs" />
-    <Compile Include="Assets\Prefabs\Auth\KeyStoreLogin.cs" />
+    <Compile Include="Assets\Scripts\Auth\KeyStoreLogin.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionsForTxBlockExPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\Bech32Utils.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetNumDSBlocks.cs" />
