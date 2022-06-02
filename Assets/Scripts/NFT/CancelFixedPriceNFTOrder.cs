@@ -9,13 +9,7 @@ using Zilliqa.Utils;
 using Zilliqa.Core.Crypto;
 using Zilliqa.Requests;
 
-public enum OrderType
-{
-    SellOrder = 0,
-    BuyOrder = 1
-}
-
-public class FulfillNFTOrder : ZilliqaMonoBehaviour
+public class CancelFixedPriceNFTOrder : ZilliqaMonoBehaviour
 {
     private const string CreateTransactionMethod = "CreateTransaction";
     private const string GetBalanceMethod = "GetBalance";
@@ -25,9 +19,9 @@ public class FulfillNFTOrder : ZilliqaMonoBehaviour
     [SerializeField] private long nonce = 0;
     [SerializeField] private string TokenSmartContract = "0x638a429b1f0dc1dd206c3030295255d7dbf45501";
     [SerializeField] private string MarketplaceSmartContract = "0xa959d76cb0749d94f823a306fbba00703c534a23";
-    [SerializeField] private int salePrice = 10000;
+    [SerializeField] private string amount = "1000000000000";
     [SerializeField] private string gasPrice = "2000000000";
-    [SerializeField] private string gasLimit = "50000";
+    [SerializeField] private string gasLimit = "50";
     [SerializeField] private string code = "";
     [SerializeField] private string data = "";
     [SerializeField] private bool priority = false;
@@ -51,11 +45,11 @@ public class FulfillNFTOrder : ZilliqaMonoBehaviour
 
     public ECKeyPair ecKeyPair;
 
-
+    private int salePrice = 10000;
 
     private void Awake()
     {
-        privateKey = useNonSavedPrivateKey? privateKey : TestWallets.WalletPK0;
+        privateKey = useNonSavedPrivateKey ? privateKey : TestWallets.WalletPK1;
         Address = CryptoUtil.GetAddressFromPrivateKey(privateKey);
         publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
 
@@ -79,7 +73,7 @@ public class FulfillNFTOrder : ZilliqaMonoBehaviour
         //https://dev.zilliqa.com/docs/apis/api-transaction-create-tx
         data = JsonConvert.SerializeObject(new ContractTransactionParams()
         {
-            _tag = "FulfillOrder",
+            _tag = "CancelOrder",
             args = new ContractTransitionArg[]
                             {
                                 new ContractTransitionArg()
@@ -112,13 +106,6 @@ public class FulfillNFTOrder : ZilliqaMonoBehaviour
                                     type = "Uint32",
                                     value = "" + (int)orderType
                                 },
-                                new ContractTransitionArg()
-                                {
-                                    vname = "dest",
-                                    type = "ByStr20",
-                                    value = "0x" + Address
-                                }
-
                             }
 
         });

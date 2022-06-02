@@ -9,7 +9,7 @@ using Zilliqa.Utils;
 using Zilliqa.Core.Crypto;
 using Zilliqa.Requests;
 
-public class CreateNFTOrder : ZilliqaMonoBehaviour
+public class CreateNFTFixedPriceOrder : ZilliqaMonoBehaviour
 {
     private const string CreateTransactionMethod = "CreateTransaction";
     private const string GetBalanceMethod = "GetBalance";

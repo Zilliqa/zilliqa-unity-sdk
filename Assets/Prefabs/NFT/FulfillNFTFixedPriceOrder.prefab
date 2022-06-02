@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7320188940723096959}
   - component: {fileID: 7320188940723096958}
   m_Layer: 0
-  m_Name: FulfillNFTOrder
+  m_Name: FulfillNFTFixedPriceOrder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

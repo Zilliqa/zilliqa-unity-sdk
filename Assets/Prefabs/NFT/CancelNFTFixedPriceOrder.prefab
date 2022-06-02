@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9025437345666367700}
   - component: {fileID: 9025437345666367723}
   m_Layer: 0
-  m_Name: CancelNFTOrder
+  m_Name: CancelNFTFixedPriceOrder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

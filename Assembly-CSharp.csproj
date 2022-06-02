@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Utils\Payloads\CreateTransactionPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetsmartContractStatePayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetMinimumGasPriceResponse.cs" />
+    <Compile Include="Assets\Scripts\NFT\GetEnglishAuctionOffers.cs" />
     <Compile Include="Assets\Scripts\Utils\Wallet\Validation.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetLatestDSBlockResponse.cs" />
     <Compile Include="Assets\Scripts\Contract\GetSmartContractCode.cs" />
@@ -120,7 +121,7 @@
     <Compile Include="Assets\Scripts\Utils\Payloads\GetNFTMetadataPayload.cs" />
     <Compile Include="Assets\Scripts\Transaction\NFTMint.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTransactionResponse.cs" />
-    <Compile Include="Assets\Scripts\NFT\CreateNFTOrder.cs" />
+    <Compile Include="Assets\Scripts\NFT\CreateNFTFixedPriceOrder.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetCurrentMiniEpochResponse.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetNumTransactions.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTxBlockListingResponse.cs" />
@@ -141,7 +142,7 @@
     <Compile Include="Assets\Scripts\NFT\CreateNFTAuctionOrder.cs" />
     <Compile Include="Assets\Scripts\Account\GetBalance.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetLatestDsBlock.cs" />
-    <Compile Include="Assets\Scripts\NFT\FulfillNFTOrder.cs" />
+    <Compile Include="Assets\Scripts\NFT\FulfillNFTFixedPriceOrder.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetCurrentDSEpochPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetNFTMetadataResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Wallet\Transaction.cs" />
@@ -175,7 +176,7 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\Bech32Utils.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetNumDSBlocks.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\CreateTransactionResponse.cs" />
-    <Compile Include="Assets\Scripts\NFT\CancelNFTOrder.cs" />
+    <Compile Include="Assets\Scripts\NFT\CancelFixedPriceNFTOrder.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\CreateTransactionProto.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetMinerInfo.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetCurrentMiniEpoch.cs" />
@@ -215,7 +216,6 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
-    <Compile Include="Assets\Scripts\NFT\GetEnglishAuctionOffers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\NFTQueriesschema.txt" />
