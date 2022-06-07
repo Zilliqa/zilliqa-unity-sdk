@@ -221,6 +221,8 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
+    <Compile Include="Assets\Scripts\Utils\Responses\WalletOrders.cs" />
+    <Compile Include="Assets\Scripts\Utils\Payloads\OrderInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

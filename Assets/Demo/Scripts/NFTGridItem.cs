@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zilliqa.Core;
+using Zilliqa.Marketplace;
 using Zilliqa.Requests;
 
 public class NFTGridItem : MonoBehaviour
@@ -15,13 +16,13 @@ public class NFTGridItem : MonoBehaviour
     public Button TransactButton;
     public Button SecondaryButton;
 
-    public void Initialize(SellOrderInfo order, string buttonLabel, Action<SellOrderInfo, Action> onTransactButtonClicked = null)
+    public void Initialize(OrderInfo order, string buttonLabel, Action<OrderInfo, Action> onTransactButtonClicked = null)
     {
         Initialize(order, onTransactButtonClicked);
         TransactButton.GetComponentInChildren<TMP_Text>().text = buttonLabel;
     }
 
-    public void Initialize(SellOrderInfo order, Action<SellOrderInfo, Action> onTransactButtonClicked = null)
+    public void Initialize(OrderInfo order, Action<OrderInfo, Action> onTransactButtonClicked = null)
     {
         TokenImage.sprite = order.tokenImage;
         TokenName.text = order.tokenInfo.name;

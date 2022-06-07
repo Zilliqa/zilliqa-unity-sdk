@@ -1,13 +1,9 @@
 using Newtonsoft.Json;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
-using Org.BouncyCastle.Math;
-using Zilliqa.Core;
 using Zilliqa.Utils;
 using Zilliqa.Core.Crypto;
 using Zilliqa.Requests;
@@ -20,7 +16,6 @@ namespace Zilliqa.Core
         private static string gasPrice = "2000000000";
         private static int version = 21823489;
 
-        public static Wallet wallet;
         public static string apiUrl = "https://dev-api.zilliqa.com/";//"https://api.zilliqa.com/";
         #endregion
 
