@@ -70,10 +70,12 @@
     <Compile Include="Assets\Scripts\Utils\Wallet\PBKDF2Params.cs" />
     <Compile Include="Assets\graphQl-client\Scripts\EventCallbacks\Event.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetCurrentDSEpochResponse.cs" />
+    <Compile Include="Assets\Demo\Scripts\MarketplaceExample.cs" />
     <Compile Include="Assets\Scripts\Contract\GetSmartContracts.cs" />
     <Compile Include="Assets\Scripts\NFT\GetNFTsByWalletAddress.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetContractAddressFromTransactionIDResponse.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetCurrentDSEpoch.cs" />
+    <Compile Include="Assets\Demo\Scripts\DownloadTexture.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\NFTsByUserResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\KeyStore.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTxBlockListingPayload.cs" />
@@ -84,11 +86,14 @@
     <Compile Include="Assets\Scripts\Utils\Payloads\CreateTransactionPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetsmartContractStatePayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetMinimumGasPriceResponse.cs" />
+    <Compile Include="Assets\Scripts\NFT\GetEnglishAuctionOffers.cs" />
     <Compile Include="Assets\Scripts\Utils\Wallet\Validation.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetLatestDSBlockResponse.cs" />
     <Compile Include="Assets\Scripts\Contract\GetSmartContractCode.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTxBlockRateResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetStateProofResponse.cs" />
+    <Compile Include="Assets\Scripts\Utils\Wallet\Wallet.cs" />
+    <Compile Include="Assets\Demo\Scripts\NFTGridItem.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetDsBlock.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetTotalCoinSupplyResponse.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetSmartContractCodeResponse.cs" />
@@ -110,7 +115,7 @@
     <Compile Include="Assets\Scripts\Utils\Payloads\GetRecentTransactionsPayload.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\ZilRequest.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetNumTxnsTxEpoch.cs" />
-    <Compile Include="Assets\Scripts\Core\Zilliqa.cs" />
+    <Compile Include="Assets\Scripts\Core\ZilliqaRPC.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetTransactionsForTxBlockEx.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetTransaction.cs" />
     <Compile Include="Assets\Scripts\Utils\Payloads\GetTransactionStatusPayload.cs" />
@@ -127,6 +132,7 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\Signature.cs" />
     <Compile Include="Assets\Scripts\NFT\GetFixedPriceOffers.cs" />
     <Compile Include="Assets\Scripts\Utils\Crypto\Bech32.cs" />
+    <Compile Include="Assets\Scripts\Core\Indexer.cs" />
     <Compile Include="Assets\graphQl-client\Scripts\Core\HttpHandler.cs" />
     <Compile Include="Assets\Scripts\Utils\Responses\GetNetworkIdResponse.cs" />
     <Compile Include="Assets\Scripts\Blockchain\GetTotalCoinSupply.cs" />
@@ -215,12 +221,32 @@
     <Compile Include="Assets\Scripts\Utils\Crypto\BlockBody.cs" />
     <Compile Include="Assets\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\Scripts\Transaction\GetRecentTransactions.cs" />
-    <Compile Include="Assets\Scripts\NFT\GetEnglishAuctionOffers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\NFTQueriesschema.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\EnglishAuctionschema.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\README.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

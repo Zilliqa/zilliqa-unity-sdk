@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 using Zilliqa.Requests;
+using Zilliqa.Utils;
 
 /*
  * Documentation:
@@ -35,7 +36,7 @@ public class GetSmartContractSubState : ZilliqaMonoBehaviour
 
     IEnumerator RunMethod()
     {
-        ZilRequest GetSmartContractSubStateReq = new ZilRequest(METHOD, new object[] { "2bbbee1327ac2b9595a35f20bafe009260199a4b", variableName,new object[] { } });
+        ZilRequest GetSmartContractSubStateReq = new ZilRequest(METHOD, new object[] { AddressUtils.RemovePrefix_0x(TestWallets.FixedPriceSmartContract0), variableName,new object[] { } });
         yield return StartCoroutine(PostRequest<GetSmartContractSubStateResponse>(GetSmartContractSubStateReq, (response, error) =>
         {
             if (response.result != null)

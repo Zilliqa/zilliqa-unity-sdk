@@ -8,11 +8,11 @@ namespace Zilliqa.Requests
     [Serializable]
     public class GetNFTMetadataPayload
     {
-        public NFTById assetById;
+        public NFT assetById;
     }
 
     [Serializable]
-    public class NFTById
+    public class NFT
     {
         public string tokenId;
         public string tokenUri;

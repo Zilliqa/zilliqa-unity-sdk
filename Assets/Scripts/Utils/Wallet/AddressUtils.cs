@@ -32,5 +32,21 @@ namespace Zilliqa.Utils
             }
             return ret.ToString();
         }
+
+        public static string AddPrefix_0x(string address)
+        {
+            if (!address.Substring(0, 2).Equals("0x"))
+                return "0x" + address;
+
+            return address;
+        }
+
+        public static string RemovePrefix_0x(string address)
+        {
+            if (address.Substring(0, 2).Equals("0x"))
+                return address.Substring(2, address.Length - 2);
+
+            return address;
+        }
     }
 }

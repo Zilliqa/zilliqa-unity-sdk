@@ -55,7 +55,7 @@ public class FulfillNFTOrder : ZilliqaMonoBehaviour
 
     private void Awake()
     {
-        privateKey = useNonSavedPrivateKey? privateKey : TestWallets.WalletPK0;
+        privateKey = useNonSavedPrivateKey? privateKey : TestWallets.WalletPK2;
         Address = CryptoUtil.GetAddressFromPrivateKey(privateKey);
         publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
 
@@ -138,7 +138,15 @@ public class FulfillNFTOrder : ZilliqaMonoBehaviour
             data = this.data
         };
 
-
+        Debug.Log("ZILLIQA PREFAB\n" +
+                "ToAddr " + transactionParam.toAddr +
+                " transactionParam nounce " + transactionParam.nonce +
+                " amount" + "" + transactionParam.amount +
+                " pubKey" + transactionParam.pubKey +
+                " gasPrice" + transactionParam.gasPrice +
+                " gasLimit" + transactionParam.gasLimit +
+                " data " + transactionParam.data
+                );
         // GetBalance rpc is being called to get nonce counter if autoNonce is used
         if (autoNonce)
         {

@@ -42,12 +42,22 @@ public class NFTMint : ZilliqaMonoBehaviour
 
     public ECKeyPair ecKeyPair;
 
+    private string minterPK;
+    private string minterPubKey;
+    private string minterAddress;
+
     private void Awake()
     {
-        privateKey = useNonSavedPrivateKey ? privateKey : TestWallets.WalletPK0;
+        privateKey = useNonSavedPrivateKey ? privateKey : TestWallets.WalletPK2;
         Address = CryptoUtil.GetAddressFromPrivateKey(privateKey);
         publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
-        ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
+
+        minterPK = TestWallets.WalletPK0;
+        minterAddress = CryptoUtil.GetAddressFromPrivateKey(minterPK);
+        minterPubKey = CryptoUtil.GetPublicKeyFromPrivateKey(minterPK, true);
+        ecKeyPair = new ECKeyPair(new BigInteger(minterPubKey, 16), new BigInteger(minterPK, 16));
+
+
     }
 
     private void Start()
@@ -89,29 +99,29 @@ public class NFTMint : ZilliqaMonoBehaviour
             // the contract address needs to be checksummed
             toAddr = AddressUtils.ToCheckSumAddress(TestWallets.TokenSmartContract0),
             amount = this.amount,
-            pubKey = publicKey,
+            pubKey = minterPubKey,
             gasPrice = this.gasPrice,
             gasLimit = this.gasLimit,
             code = this.code,
             priority = this.priority,
             data = this.data
         };
-        
+
         // GetBalance rpc is being called to get nonce counter if autoNonce is used
         if (autoNonce)
         {
-            if (string.IsNullOrEmpty(Address))
+            if (string.IsNullOrEmpty(minterAddress))
                 Debug.LogError("Error: Failed to auto increase nonce. Please input wallet address.");
             else
             {
-                ZilRequest getBalanceReq = new ZilRequest(GetBalanceMethod, Address);
+                ZilRequest getBalanceReq = new ZilRequest(GetBalanceMethod, minterAddress);
                 yield return StartCoroutine(PostRequest<GetBalanceResponse>(getBalanceReq, (response, error) =>
                     {
                         if (response.result != null)
                         {
                             nonce = response.result.nonce;
                             transactionParam.nonce = response.result.nonce + 1;
-                            Debug.Log("Balance of " + Address + " : " + response.result.balance);
+                            Debug.Log("Balance of " + minterAddress + " : " + response.result.balance);
                         }
                         else if (error != null)
                         {
@@ -135,7 +145,7 @@ public class NFTMint : ZilliqaMonoBehaviour
                 {
                     if (showDebug)
                         Debug.Log("Info: " + result.Info + "\n" + "Tx hash: " + "0x" + result.TranID);
-                    StartCoroutine(ListenForTransactionStatusUpdate(result.TranID));
+                    StartCoroutine(ListenForTransactionStatusUpdate(result.TranID, () => { StartCoroutine(Transact()); }));
                 }
                 else if (error != null)
                 {
@@ -145,7 +155,7 @@ public class NFTMint : ZilliqaMonoBehaviour
         ));
     }
 
-    private IEnumerator ListenForTransactionStatusUpdate(string transactionID)
+    private IEnumerator ListenForTransactionStatusUpdate(string transactionID, Action onFInalState = null)
     {
         int currentAttemptCount = 0;
         bool hasFinalState = false;
@@ -155,6 +165,8 @@ public class NFTMint : ZilliqaMonoBehaviour
             yield return GetTransactionStatus(transactionID, (txStatus) =>
             {
                 hasFinalState = txStatus.HasFinalState;
+                if (hasFinalState)
+                    onFInalState?.Invoke();
             });
             currentAttemptCount++;
         }

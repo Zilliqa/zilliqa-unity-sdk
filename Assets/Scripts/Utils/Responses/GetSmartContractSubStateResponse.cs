@@ -6,6 +6,6 @@ namespace Zilliqa.Requests
     public class GetSmartContractSubStateResponse : ZilResponse
     {
         //[JsonConverter(typeof(GetSmartContractSubStateConverter))]
-        public JObject result;
+        public WalletSellOrders result;
     }
 }
