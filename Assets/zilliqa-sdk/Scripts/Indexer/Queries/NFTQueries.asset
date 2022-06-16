@@ -1,0 +1,2491 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ccf793b7ca1cc645b9cd36d753b8e3c, type: 3}
+  m_Name: NFTQueries
+  m_EditorClassIdentifier: 
+  url: https://stg-indexer-api.rialto.studio/zilliqa
+  queries:
+  - name: GetRecentlyMintedNFTs
+    type: 0
+    query: "query RecentlyMintedNFTs{\n    assets{\n        cursor\n        assetsList{\n           
+      contractAddress\n            contractAddress\n            tokenUri\n       
+      }\n    }\n}"
+    queryString: assets
+    returnType: Assets
+    queryOptions:
+    - events
+    - sources
+    - sourceById
+    - sourceEvents
+    - assets
+    - assetById
+    - assetEvents
+    - assetSourceEvents
+    - contractByAddress
+    - user
+    fields:
+    - index: 0
+      name: cursor
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: cursor
+        type: String
+      - name: assetsList
+        type: Asset
+      hasChanged: 0
+    - index: 1
+      name: assetsList
+      type: Asset
+      parentIndexes: 
+      hasSubField: 1
+      possibleFields:
+      - name: cursor
+        type: String
+      - name: assetsList
+        type: Asset
+      hasChanged: 0
+    - index: 0
+      name: contractAddress
+      type: String
+      parentIndexes: 01000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 0
+      name: contractAddress
+      type: String
+      parentIndexes: 01000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 2
+      name: tokenUri
+      type: String
+      parentIndexes: 01000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    isComplete: 0
+  - name: AssetById
+    type: 0
+    query: "query AssetById{\n    assetById(  input :{ contractAddress :\"0xe52cb846a86ffe28b3c40e99f3c842e6ad55b594\",
+      tokenId :\"1\"} ){\n        contractAddress\n        tokenId\n        tokenUri\n   
+      }\n}"
+    queryString: assetById
+    returnType: Asset
+    queryOptions:
+    - events
+    - sources
+    - sourceById
+    - sourceEvents
+    - assets
+    - assetById
+    - assetEvents
+    - assetSourceEvents
+    - contractByAddress
+    - user
+    fields:
+    - index: 0
+      name: contractAddress
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 1
+      name: tokenId
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 2
+      name: tokenUri
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    isComplete: 1
+  - name: GetNFTsByWalletAddress
+    type: 0
+    query: "query GetNFTsByWalletAddress{\n    user(  input :{ address :\"0x3a869435fd3b34d313b0c5ba5cd478c8bd0b90ac\"}
+      ){\n        address\n        ownedAssets{\n            assetsList{\n               
+      contractAddress\n                spenderAddress\n                operatorAddress\n               
+      tokenId\n                tokenUri\n                minterAddress\n           
+      }\n        }\n        mintedAssets{\n            assetsList{\n               
+      contractAddress\n                tokenId\n                tokenUri\n               
+      name\n                resource\n                description\n               
+      ownerAddress\n                spenderAddress\n                operatorAddress\n           
+      }\n        }\n    }\n}"
+    queryString: user
+    returnType: User
+    queryOptions:
+    - events
+    - sources
+    - sourceById
+    - sourceEvents
+    - assets
+    - assetById
+    - assetEvents
+    - assetSourceEvents
+    - contractByAddress
+    - user
+    fields:
+    - index: 0
+      name: address
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: address
+        type: String
+      - name: ownedAssets
+        type: Assets
+      - name: mintedAssets
+        type: Assets
+      - name: ownedAssetsBySource
+        type: Assets
+      - name: mintedAssetsBySource
+        type: Assets
+      hasChanged: 0
+    - index: 1
+      name: ownedAssets
+      type: Assets
+      parentIndexes: 
+      hasSubField: 1
+      possibleFields:
+      - name: address
+        type: String
+      - name: ownedAssets
+        type: Assets
+      - name: mintedAssets
+        type: Assets
+      - name: ownedAssetsBySource
+        type: Assets
+      - name: mintedAssetsBySource
+        type: Assets
+      hasChanged: 0
+    - index: 1
+      name: assetsList
+      type: Asset
+      parentIndexes: 01000000
+      hasSubField: 1
+      possibleFields:
+      - name: cursor
+        type: String
+      - name: assetsList
+        type: Asset
+      hasChanged: 0
+    - index: 0
+      name: contractAddress
+      type: String
+      parentIndexes: 0100000002000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 5
+      name: spenderAddress
+      type: String
+      parentIndexes: 0100000002000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 6
+      name: operatorAddress
+      type: String
+      parentIndexes: 0100000002000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 1
+      name: tokenId
+      type: String
+      parentIndexes: 0100000002000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 2
+      name: tokenUri
+      type: String
+      parentIndexes: 0100000002000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 3
+      name: minterAddress
+      type: String
+      parentIndexes: 0100000002000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 2
+      name: mintedAssets
+      type: Assets
+      parentIndexes: 
+      hasSubField: 1
+      possibleFields:
+      - name: address
+        type: String
+      - name: ownedAssets
+        type: Assets
+      - name: mintedAssets
+        type: Assets
+      - name: ownedAssetsBySource
+        type: Assets
+      - name: mintedAssetsBySource
+        type: Assets
+      hasChanged: 0
+    - index: 1
+      name: assetsList
+      type: Asset
+      parentIndexes: 09000000
+      hasSubField: 1
+      possibleFields:
+      - name: cursor
+        type: String
+      - name: assetsList
+        type: Asset
+      hasChanged: 0
+    - index: 0
+      name: contractAddress
+      type: String
+      parentIndexes: 090000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 1
+      name: tokenId
+      type: String
+      parentIndexes: 090000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 2
+      name: tokenUri
+      type: String
+      parentIndexes: 090000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 7
+      name: name
+      type: String
+      parentIndexes: 090000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 9
+      name: resource
+      type: String
+      parentIndexes: 090000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 8
+      name: description
+      type: String
+      parentIndexes: 090000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 4
+      name: ownerAddress
+      type: String
+      parentIndexes: 090000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 5
+      name: spenderAddress
+      type: String
+      parentIndexes: 090000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 6
+      name: operatorAddress
+      type: String
+      parentIndexes: 090000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    isComplete: 1
+  - name: GetNFTMetadata
+    type: 0
+    query: "query GetNFTMetadata{\n    assetById(  input :{ contractAddress :\"0xe52cb846a86ffe28b3c40e99f3c842e6ad55b594\",
+      tokenId :\"47\"} ){\n        tokenId\n        tokenUri\n        name\n       
+      description\n        externalUrl\n        ownerAddress\n        minterAddress\n       
+      contractAddress\n        resource\n        attributes{\n            traitType\n           
+      value\n        }\n        resourceMimetype\n    }\n}"
+    queryString: assetById
+    returnType: Asset
+    queryOptions:
+    - events
+    - sources
+    - sourceById
+    - sourceEvents
+    - assets
+    - assetById
+    - assetEvents
+    - assetSourceEvents
+    - contractByAddress
+    - user
+    fields:
+    - index: 1
+      name: tokenId
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 2
+      name: tokenUri
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 7
+      name: name
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 8
+      name: description
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 11
+      name: externalUrl
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 4
+      name: ownerAddress
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 3
+      name: minterAddress
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 0
+      name: contractAddress
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 9
+      name: resource
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 13
+      name: attributes
+      type: AssetAttribute
+      parentIndexes: 
+      hasSubField: 1
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 0
+      name: traitType
+      type: String
+      parentIndexes: 09000000
+      hasSubField: 0
+      possibleFields:
+      - name: traitType
+        type: String
+      - name: value
+        type: String
+      hasChanged: 0
+    - index: 1
+      name: value
+      type: String
+      parentIndexes: 09000000
+      hasSubField: 0
+      possibleFields:
+      - name: traitType
+        type: String
+      - name: value
+        type: String
+      hasChanged: 0
+    - index: 10
+      name: resourceMimetype
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    isComplete: 1
+  - name: GetFixedPriceOffers
+    type: 0
+    query: "query GetFixedPriceOffers{\n    assetById(  input :{ contractAddress
+      :\"0x638a429b1f0dc1dd206c3030295255d7dbf45501\", tokenId :\"9\"} ){\n       
+      listingData{\n            sourceId\n            data{\n                ZILLIQA_FIXED_PRICE{\n                   
+      othersOffers{\n                        maker\n                        unit\n                       
+      amount\n                        currency\n                        expirationInBlockNumber\n       
+      }\n                    ownerOffers{\n                        maker\n                       
+      unit\n                        amount\n                        currency\n                       
+      expirationInBlockNumber\n        }\n                    marketplaceContractAddress\n               
+      }\n            }\n        }\n    }\n}"
+    queryString: assetById
+    returnType: Asset
+    queryOptions:
+    - events
+    - sources
+    - sourceById
+    - sourceEvents
+    - assets
+    - assetById
+    - assetEvents
+    - assetSourceEvents
+    - contractByAddress
+    - user
+    fields:
+    - index: 15
+      name: listingData
+      type: ListingData
+      parentIndexes: 
+      hasSubField: 1
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 0
+      name: sourceId
+      type: String
+      parentIndexes: 00000000
+      hasSubField: 0
+      possibleFields:
+      - name: sourceId
+        type: String
+      - name: data
+        type: SourceListingData
+      hasChanged: 0
+    - index: 1
+      name: data
+      type: SourceListingData
+      parentIndexes: 00000000
+      hasSubField: 1
+      possibleFields:
+      - name: sourceId
+        type: String
+      - name: data
+        type: SourceListingData
+      hasChanged: 0
+    - index: 0
+      name: ZILLIQA_FIXED_PRICE
+      type: ZilliqaFixedPriceListingV1
+      parentIndexes: 0000000002000000
+      hasSubField: 1
+      possibleFields:
+      - name: ZILLIQA_FIXED_PRICE
+        type: ZilliqaFixedPriceListingV1
+      - name: ZILLIQA_ENGLISH_AUCTION
+        type: ZilliqaEnglishAuctionV1
+      - name: fulfilled
+        type: FulfilledOrder
+      hasChanged: 0
+    - index: 1
+      name: othersOffers
+      type: ZilliqaFixedPriceOrderV1
+      parentIndexes: 000000000200000003000000
+      hasSubField: 1
+      possibleFields:
+      - name: ownerOffers
+        type: ZilliqaFixedPriceOrderV1
+      - name: othersOffers
+        type: ZilliqaFixedPriceOrderV1
+      - name: marketplaceContractAddress
+        type: String
+      hasChanged: 0
+    - index: 0
+      name: maker
+      type: String
+      parentIndexes: 00000000020000000300000004000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 1
+      name: unit
+      type: String
+      parentIndexes: 00000000020000000300000004000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 2
+      name: amount
+      type: Float
+      parentIndexes: 00000000020000000300000004000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 3
+      name: currency
+      type: String
+      parentIndexes: 00000000020000000300000004000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 4
+      name: expirationInBlockNumber
+      type: String
+      parentIndexes: 00000000020000000300000004000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 0
+      name: ownerOffers
+      type: ZilliqaFixedPriceOrderV1
+      parentIndexes: 000000000200000003000000
+      hasSubField: 1
+      possibleFields:
+      - name: ownerOffers
+        type: ZilliqaFixedPriceOrderV1
+      - name: othersOffers
+        type: ZilliqaFixedPriceOrderV1
+      - name: marketplaceContractAddress
+        type: String
+      hasChanged: 0
+    - index: 0
+      name: maker
+      type: String
+      parentIndexes: 0000000002000000030000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 1
+      name: unit
+      type: String
+      parentIndexes: 0000000002000000030000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 2
+      name: amount
+      type: Float
+      parentIndexes: 0000000002000000030000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 3
+      name: currency
+      type: String
+      parentIndexes: 0000000002000000030000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 4
+      name: expirationInBlockNumber
+      type: String
+      parentIndexes: 0000000002000000030000000a000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      hasChanged: 0
+    - index: 2
+      name: marketplaceContractAddress
+      type: String
+      parentIndexes: 000000000200000003000000
+      hasSubField: 0
+      possibleFields:
+      - name: ownerOffers
+        type: ZilliqaFixedPriceOrderV1
+      - name: othersOffers
+        type: ZilliqaFixedPriceOrderV1
+      - name: marketplaceContractAddress
+        type: String
+      hasChanged: 0
+    isComplete: 1
+  - name: GetAuctionOffersByNFTId
+    type: 0
+    query: "query GetAuctionOffersByNFTId{\n    assetById(  input :{ contractAddress
+      :\"0x638a429b1f0dc1dd206c3030295255d7dbf45501\", tokenId :\"9\"} ){\n       
+      tokenId\n        tokenUri\n        name\n        description\n        externalUrl\n       
+      ownerAddress\n        minterAddress\n        contractAddress\n        attributes{\n           
+      traitType\n            value\n        }\n        listingData{\n           
+      sourceId\n            data{\n                ZILLIQA_ENGLISH_AUCTION{\n                   
+      startingBid{\n                        unit\n                        amount\n                       
+      currency\n        }\n                    winnerBid{\n                       
+      maker\n                        unit\n                        amount\n       
+      }\n                    bids{\n                        maker\n                       
+      amount\n                        unit\n        }\n                    marketplaceContractAddress\n                   
+      maker\n                }\n            }\n        }\n    }\n}"
+    queryString: assetById
+    returnType: Asset
+    queryOptions:
+    - events
+    - sources
+    - sourceById
+    - sourceEvents
+    - assets
+    - assetById
+    - assetEvents
+    - assetSourceEvents
+    - contractByAddress
+    - user
+    fields:
+    - index: 1
+      name: tokenId
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 2
+      name: tokenUri
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 7
+      name: name
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 8
+      name: description
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 11
+      name: externalUrl
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 4
+      name: ownerAddress
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 3
+      name: minterAddress
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 0
+      name: contractAddress
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 13
+      name: attributes
+      type: AssetAttribute
+      parentIndexes: 
+      hasSubField: 1
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 0
+      name: traitType
+      type: String
+      parentIndexes: 08000000
+      hasSubField: 0
+      possibleFields:
+      - name: traitType
+        type: String
+      - name: value
+        type: String
+      hasChanged: 0
+    - index: 1
+      name: value
+      type: String
+      parentIndexes: 08000000
+      hasSubField: 0
+      possibleFields:
+      - name: traitType
+        type: String
+      - name: value
+        type: String
+      hasChanged: 0
+    - index: 15
+      name: listingData
+      type: ListingData
+      parentIndexes: 
+      hasSubField: 1
+      possibleFields:
+      - name: contractAddress
+        type: String
+      - name: tokenId
+        type: String
+      - name: tokenUri
+        type: String
+      - name: minterAddress
+        type: String
+      - name: ownerAddress
+        type: String
+      - name: spenderAddress
+        type: String
+      - name: operatorAddress
+        type: String
+      - name: name
+        type: String
+      - name: description
+        type: String
+      - name: resource
+        type: String
+      - name: resourceMimetype
+        type: String
+      - name: externalUrl
+        type: String
+      - name: externalDescription
+        type: String
+      - name: attributes
+        type: AssetAttribute
+      - name: contractPaused
+        type: Boolean
+      - name: listingData
+        type: ListingData
+      hasChanged: 0
+    - index: 0
+      name: sourceId
+      type: String
+      parentIndexes: 0b000000
+      hasSubField: 0
+      possibleFields:
+      - name: sourceId
+        type: String
+      - name: data
+        type: SourceListingData
+      hasChanged: 0
+    - index: 1
+      name: data
+      type: SourceListingData
+      parentIndexes: 0b000000
+      hasSubField: 1
+      possibleFields:
+      - name: sourceId
+        type: String
+      - name: data
+        type: SourceListingData
+      hasChanged: 0
+    - index: 1
+      name: ZILLIQA_ENGLISH_AUCTION
+      type: ZilliqaEnglishAuctionV1
+      parentIndexes: 0b0000000d000000
+      hasSubField: 1
+      possibleFields:
+      - name: ZILLIQA_FIXED_PRICE
+        type: ZilliqaFixedPriceListingV1
+      - name: ZILLIQA_ENGLISH_AUCTION
+        type: ZilliqaEnglishAuctionV1
+      - name: fulfilled
+        type: FulfilledOrder
+      hasChanged: 0
+    - index: 0
+      name: startingBid
+      type: ZilliqaEnglishAuctionStartingBidV1
+      parentIndexes: 0b0000000d0000000e000000
+      hasSubField: 1
+      possibleFields:
+      - name: startingBid
+        type: ZilliqaEnglishAuctionStartingBidV1
+      - name: winnerBid
+        type: ZilliqaEnglishAuctionBidV1
+      - name: bids
+        type: ZilliqaEnglishAuctionBidV1
+      - name: state
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      - name: maker
+        type: String
+      - name: marketplaceContractAddress
+        type: String
+      hasChanged: 0
+    - index: 0
+      name: unit
+      type: String
+      parentIndexes: 0b0000000d0000000e0000000f000000
+      hasSubField: 0
+      possibleFields:
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      hasChanged: 0
+    - index: 1
+      name: amount
+      type: Float
+      parentIndexes: 0b0000000d0000000e0000000f000000
+      hasSubField: 0
+      possibleFields:
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      hasChanged: 0
+    - index: 2
+      name: currency
+      type: String
+      parentIndexes: 0b0000000d0000000e0000000f000000
+      hasSubField: 0
+      possibleFields:
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: currency
+        type: String
+      hasChanged: 0
+    - index: 1
+      name: winnerBid
+      type: ZilliqaEnglishAuctionBidV1
+      parentIndexes: 0b0000000d0000000e000000
+      hasSubField: 1
+      possibleFields:
+      - name: startingBid
+        type: ZilliqaEnglishAuctionStartingBidV1
+      - name: winnerBid
+        type: ZilliqaEnglishAuctionBidV1
+      - name: bids
+        type: ZilliqaEnglishAuctionBidV1
+      - name: state
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      - name: maker
+        type: String
+      - name: marketplaceContractAddress
+        type: String
+      hasChanged: 0
+    - index: 0
+      name: maker
+      type: String
+      parentIndexes: 0b0000000d0000000e00000013000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: dest
+        type: String
+      hasChanged: 0
+    - index: 1
+      name: unit
+      type: String
+      parentIndexes: 0b0000000d0000000e00000013000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: dest
+        type: String
+      hasChanged: 0
+    - index: 2
+      name: amount
+      type: Float
+      parentIndexes: 0b0000000d0000000e00000013000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: dest
+        type: String
+      hasChanged: 0
+    - index: 2
+      name: bids
+      type: ZilliqaEnglishAuctionBidV1
+      parentIndexes: 0b0000000d0000000e000000
+      hasSubField: 1
+      possibleFields:
+      - name: startingBid
+        type: ZilliqaEnglishAuctionStartingBidV1
+      - name: winnerBid
+        type: ZilliqaEnglishAuctionBidV1
+      - name: bids
+        type: ZilliqaEnglishAuctionBidV1
+      - name: state
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      - name: maker
+        type: String
+      - name: marketplaceContractAddress
+        type: String
+      hasChanged: 0
+    - index: 0
+      name: maker
+      type: String
+      parentIndexes: 0b0000000d0000000e00000017000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: dest
+        type: String
+      hasChanged: 0
+    - index: 2
+      name: amount
+      type: Float
+      parentIndexes: 0b0000000d0000000e00000017000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: dest
+        type: String
+      hasChanged: 0
+    - index: 1
+      name: unit
+      type: String
+      parentIndexes: 0b0000000d0000000e00000017000000
+      hasSubField: 0
+      possibleFields:
+      - name: maker
+        type: String
+      - name: unit
+        type: String
+      - name: amount
+        type: Float
+      - name: dest
+        type: String
+      hasChanged: 0
+    - index: 6
+      name: marketplaceContractAddress
+      type: String
+      parentIndexes: 0b0000000d0000000e000000
+      hasSubField: 0
+      possibleFields:
+      - name: startingBid
+        type: ZilliqaEnglishAuctionStartingBidV1
+      - name: winnerBid
+        type: ZilliqaEnglishAuctionBidV1
+      - name: bids
+        type: ZilliqaEnglishAuctionBidV1
+      - name: state
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      - name: maker
+        type: String
+      - name: marketplaceContractAddress
+        type: String
+      hasChanged: 0
+    - index: 5
+      name: maker
+      type: String
+      parentIndexes: 0b0000000d0000000e000000
+      hasSubField: 0
+      possibleFields:
+      - name: startingBid
+        type: ZilliqaEnglishAuctionStartingBidV1
+      - name: winnerBid
+        type: ZilliqaEnglishAuctionBidV1
+      - name: bids
+        type: ZilliqaEnglishAuctionBidV1
+      - name: state
+        type: String
+      - name: expirationInBlockNumber
+        type: String
+      - name: maker
+        type: String
+      - name: marketplaceContractAddress
+        type: String
+      hasChanged: 0
+    isComplete: 1
+  mutations: []
+  subscriptions: []
+  loading: 0
