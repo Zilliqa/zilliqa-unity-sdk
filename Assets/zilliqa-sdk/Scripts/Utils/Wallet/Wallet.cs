@@ -34,9 +34,6 @@ namespace Zilliqa.Core
             ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
         }
 
-      
-
-
         public bool Is(string otherAddress)
         {
             var addr = AddressUtils.AddPrefix_0x(Address.ToLower());
@@ -51,28 +48,5 @@ namespace Zilliqa.Core
         }
 
 
-    }
-
-    public class WalletKey
-    {
-        public string secretCipher;
-        public string pkCipher;
-        public KDFParams scrypt;
-        public string secretMac;
-        public string pkMac;
-        public string iv;
-        public string ivPk;
-
-        public byte[] secretCipherBytes => ByteUtil.HexStringToByteArray(secretCipher);
-        public byte[] pkCipherBytes => ByteUtil.HexStringToByteArray(pkCipher);
-        public byte[] secretMacBytes => ByteUtil.HexStringToByteArray(secretMac);
-        public byte[] pkMacBytes => ByteUtil.HexStringToByteArray(pkMac);
-        public byte[] ivBytes => ByteUtil.HexStringToByteArray(iv);
-        public byte[] ivPkBytes => ByteUtil.HexStringToByteArray(ivPk);
-
-        public WalletKey(KDFParams _params)
-        {
-            scrypt = _params;
-        }
     }
 }
