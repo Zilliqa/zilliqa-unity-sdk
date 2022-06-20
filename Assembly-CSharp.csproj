@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -26,7 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,7 +35,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -53,12 +53,16 @@
     <UnityVersion>2021.3.1f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetSmartContractSubStateResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\TransactionBlock.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\ZilCipher.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Contract\GetContractAddressFromTransactionID.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\Pbkdf2.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\JsonConverters\GetSmartContractSubStateConverter.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCAccount.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetLatestTxBlock.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetTxnBodiesForTxBlockExPayload.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetSmartContractsPayload.cs" />
@@ -77,6 +81,8 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\NFTsByUserResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\KeyStore.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetTxBlockListingPayload.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CreateNFTFixedPriceOrder.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZRC6.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetTxBlockResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Wallet\AdminsArgs.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\Schnorr.cs" />
@@ -90,6 +96,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Contract\GetSmartContractCode.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetTxBlockRateResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetStateProofResponse.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Wallet\Wallet.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetDsBlock.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetTotalCoinSupplyResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetSmartContractCodeResponse.cs" />
@@ -112,6 +119,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Generic\ZilRequest.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetNumTxnsTxEpoch.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCBlockchain.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CancelFixedPriceNFTOrder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetTransactionsForTxBlockEx.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetTransaction.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetTransactionStatusPayload.cs" />
@@ -120,6 +128,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetTxnBodiesForTxBlockResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetNFTMetadataPayload.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\NFTMint.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Auth\KeyStoreLogin.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetTransactionResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetCurrentMiniEpochResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetNumTransactions.cs" />
@@ -127,6 +136,8 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\Signature.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\GetFixedPriceOffers.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\Bech32.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCContract.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Indexer.cs" />
     <Compile Include="Assets\zilliqa-sdk\graphQl-client\Scripts\Core\HttpHandler.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetNetworkIdResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetTotalCoinSupply.cs" />
@@ -160,6 +171,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Wallet\Admins.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetDSDifficultyResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetDSBlockRateResponse.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\FulfillNFTFixedPriceOrder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetDSBlockListingResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Contract\GetSmartContractSubState.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\CipherParams.cs" />
@@ -169,6 +181,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\HashUtil.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CancelNFTAuctionOrder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Contract\GetStateProof.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCTransaction.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetTransactionsForTxBlockExPayload.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\Bech32Utils.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetNumDSBlocks.cs" />
@@ -190,6 +203,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Wallet\PBKDF2Wrapper.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetNumTxBlocksResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetTxnBodiesForTxBlockEx.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\WalletOrders.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetLatestDSBlockPayload.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\DSBlockListing.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetRecentTransactionsResponse.cs" />
@@ -210,20 +224,9 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Wallet\AddressUtils.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetNumDSBlocksResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\BlockBody.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\OrderInfo.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetRecentTransactions.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\FulfillNFTFixedPriceOrder.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\WalletOrders.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCAccount.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCContract.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CreateNFTFixedPriceOrder.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CancelFixedPriceNFTOrder.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\OrderInfo.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCTransaction.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Indexer.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZRC6.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Wallet\Wallet.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Auth\KeyStoreLogin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\NFTQueriesschema.txt" />
@@ -894,11 +897,17 @@
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
@@ -908,14 +917,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{C68A8DAE-7507-5A02-BCEB-C7480D97D97D}</Project>
-      <Name>UnityEditor.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{4736CC67-9E26-08B2-0B7C-E5CE7F6DA291}</Project>
-      <Name>UnityEngine.UI</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
