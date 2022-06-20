@@ -59,6 +59,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Contract\GetContractAddressFromTransactionID.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\Pbkdf2.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\JsonConverters\GetSmartContractSubStateConverter.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCAccount.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetLatestTxBlock.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetTxnBodiesForTxBlockExPayload.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetSmartContractsPayload.cs" />
@@ -112,7 +113,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetRecentTransactionsPayload.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Generic\ZilRequest.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetNumTxnsTxEpoch.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPC.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCBlockchain.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetTransactionsForTxBlockEx.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetTransaction.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetTransactionStatusPayload.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\Signature.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\GetFixedPriceOffers.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\Bech32.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCContract.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Indexer.cs" />
     <Compile Include="Assets\zilliqa-sdk\graphQl-client\Scripts\Core\HttpHandler.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetNetworkIdResponse.cs" />
@@ -174,6 +176,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CancelNFTAuctionOrder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Contract\GetStateProof.cs" />
     <Compile Include="Assets\zilliqa-sdk\Prefabs\Auth\KeyStoreLogin.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCTransaction.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetTransactionsForTxBlockExPayload.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\Bech32Utils.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetNumDSBlocks.cs" />
@@ -220,6 +223,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\OrderInfo.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetRecentTransactions.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZRC6.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\NFTQueriesschema.txt" />

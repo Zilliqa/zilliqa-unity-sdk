@@ -30,7 +30,7 @@ public class GetNumDSBlocks : ZilliqaMonoBehaviour
 
     IEnumerator RunMethod()
     {
-        ZilRequest getTxBlockListingReq = new ZilRequest(METHOD, new object[] { 1 });
+        ZilRequest getTxBlockListingReq = new ZilRequest(METHOD, new object[] { "" });
         yield return StartCoroutine(PostRequest<GetNumDSBlocksResponse>(getTxBlockListingReq, (response, error) =>
         {
             if (response.result != null)

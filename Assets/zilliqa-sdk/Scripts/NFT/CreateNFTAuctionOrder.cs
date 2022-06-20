@@ -63,7 +63,7 @@ public class CreateNFTAuctionOrder : ZilliqaMonoBehaviour
         //if (runAtStart)
         //    StartCoroutine(Transact());
 
-        expirationBlockNum = await CryptoUtil.HoursToBlockNumber(100f);
+        expirationBlockNum = await ZilliqaRPC.HoursToBlockNumber(100f);
         Debug.Log("Expiration " + expirationBlockNum);
         StartCoroutine(CreateSellOrder());
     }

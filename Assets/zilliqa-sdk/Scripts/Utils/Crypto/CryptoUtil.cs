@@ -121,22 +121,6 @@ namespace Zilliqa.Utils
         }
         #endregion
 
-        #region Misc Utils
-
-        public static async Task<double> HoursToBlockNumber(float hours)
-        {
-            float DEFAULT_BLOCK_TX_RATE = .01f;
-            
-            var LatestBlockResponse = await ZilliqaRPC.GetLatestTxBlock();
-            var txBlockRateReponse = await ZilliqaRPC.GetTxBlockRate();
-
-            int latestBlockNum = int.Parse(LatestBlockResponse.result.header.BlockNum);
-            float txBlockRate = txBlockRateReponse.result;
-
-            double result = latestBlockNum + Math.Round(3600 * hours * txBlockRate);
-
-            return result;
-        }
-        #endregion
+        
     }
 }

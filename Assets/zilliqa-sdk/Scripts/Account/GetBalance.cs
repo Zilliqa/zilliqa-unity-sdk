@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using Zilliqa.Requests;
+using Zilliqa.Core;
+using Zilliqa.Utils;
 
 /*
  * Documentation:
@@ -32,11 +34,14 @@ public class GetBalance : ZilliqaMonoBehaviour
 
     void Start()
     {
-        if (runAtStart)
-            StartCoroutine(RunMethod());
+        Wallet w = new Wallet(TestWallets.WalletPK0);
+        _ = ZRC6.TransferFrom(w, CryptoUtil.GetAddressFromPrivateKey(TestWallets.WalletPK1), "6", TestWallets.TokenSmartContract0, "80000", (txStatus) => { Debug.Log(txStatus.ToString()); });
 
-        if (runForSeveralTimes)
-            StartCoroutine(RunMethodCoroutine());
+        //if (runAtStart)
+        //    StartCoroutine(RunMethod());
+
+        //if (runForSeveralTimes)
+        //    StartCoroutine(RunMethodCoroutine());
     }
 
     IEnumerator RunMethod()
