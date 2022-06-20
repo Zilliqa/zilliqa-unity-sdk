@@ -212,20 +212,16 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\BlockBody.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetRecentTransactions.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\FulfillNFTOrder.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Prefabs\Auth\KeyStoreLogin.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\FulfillNFTFixedPriceOrder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\WalletOrders.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCAccount.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCContract.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CreateNFTOrder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CreateNFTFixedPriceOrder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CancelFixedPriceNFTOrder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\OrderInfo.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCTransaction.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Indexer.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZRC6.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CancelNFTOrder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Wallet\Wallet.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Auth\KeyStoreLogin.cs" />
   </ItemGroup>
