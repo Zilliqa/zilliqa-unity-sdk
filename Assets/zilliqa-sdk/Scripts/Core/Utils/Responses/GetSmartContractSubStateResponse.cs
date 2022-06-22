@@ -1,12 +1,13 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Zilliqa.Marketplace;
+using System.Collections.Generic;
+
 
 namespace Zilliqa.Requests
 {
-    public class GetSmartContractSubStateResponse : ZilResponse
+    public class GetSmartContractSubStateResponse<T> : ZilResponse
     {
         //[JsonConverter(typeof(GetSmartContractSubStateConverter))]
-        public WalletOrders result;
+        public Dictionary<string, T> result;
     }
 }

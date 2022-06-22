@@ -36,7 +36,7 @@ public class GetSmartContractSubState : ZilliqaMonoBehaviour
     IEnumerator RunMethod()
     {
         ZilRequest GetSmartContractSubStateReq = new ZilRequest(METHOD, new object[] { "2bbbee1327ac2b9595a35f20bafe009260199a4b", variableName, new object[] { } });
-        yield return StartCoroutine(PostRequest<GetSmartContractSubStateResponse>(GetSmartContractSubStateReq, (response, error) =>
+        yield return StartCoroutine(PostRequest<GetSmartContractSubStateResponse<string>>(GetSmartContractSubStateReq, (response, error) =>
         {
             if (response.result != null)
             {

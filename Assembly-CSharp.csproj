@@ -181,6 +181,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Crypto\Bech32Utils.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetNumDSBlocks.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\CreateTransactionResponse.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Wallet\SecureWallet.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Payloads\CreateTransactionProto.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetMinerInfo.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetCurrentMiniEpoch.cs" />
@@ -198,7 +199,6 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Wallet\PBKDF2Wrapper.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\GetNumTxBlocksResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetTxnBodiesForTxBlockEx.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\WalletOrders.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Payloads\GetLatestDSBlockPayload.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\DSBlockListing.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\GetRecentTransactionsResponse.cs" />
@@ -218,7 +218,6 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Wallet\AddressUtils.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\GetNumDSBlocksResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Crypto\BlockBody.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Payloads\OrderInfo.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetRecentTransactions.cs" />
   </ItemGroup>

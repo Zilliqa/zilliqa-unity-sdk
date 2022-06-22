@@ -20,10 +20,10 @@ namespace Zilliqa.Core
         /// <param name="variableName"></param>
         /// <param name="onComplete"></param>
         /// <returns></returns>
-        public static async Task<GetSmartContractSubStateResponse> GetSmartContractSubState(
+        public static async Task<GetSmartContractSubStateResponse<T>> GetSmartContractSubState<T>(
             string contractAddress,
             string variableName,
-            Action<GetSmartContractSubStateResponse, ZilResponse.Error> onComplete)
+            Action<GetSmartContractSubStateResponse<T>, ZilResponse.Error> onComplete)
         {
             ZilRequest req = new ZilRequest("GetSmartContractSubState", new object[] { contractAddress, variableName, new object[] { } });
             var result = await PostRequest(req, onComplete);
