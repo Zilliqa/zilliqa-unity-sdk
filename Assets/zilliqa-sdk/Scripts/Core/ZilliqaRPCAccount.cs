@@ -8,6 +8,17 @@ namespace Zilliqa.Core
 {
     public partial class ZilliqaRPC
     {
+        /// <summary>
+        /// <para>
+        /// Returns the current balance of an account, measured in the smallest accounting unit Qa (or 10^-12 Zil). This is represented as a String.
+        /// </para>
+        /// <para>
+        /// Returns the current nonce of an account. This is represented as a Number.
+        /// </para>
+        /// </summary>
+        /// <param name="sender">the caller's address</param>
+        /// <param name="onResponse"></param>
+        /// <returns></returns>
         public static async Task<GetBalanceResponse> GetBalance(Wallet sender, Action<GetBalanceResponse> onResponse)
         {
             GetBalanceResponse res = null;

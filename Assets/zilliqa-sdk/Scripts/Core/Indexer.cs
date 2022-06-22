@@ -11,10 +11,27 @@ using System.Threading.Tasks;
 using Zilliqa.Core;
 using Zilliqa.Utils;
 
+/// <summary>
+/// This class handles off-chain GraphQl calls to the Zilliqa Indexer.
+/// <para>
+/// Please note that updates happening on-chain will be predent in the Indexer with a delay around 30 seconds to 1 minute.
+/// </para>
+/// </summary>
 public class Indexer
 {
-    
+    /// <summary>
+    /// This token is only used for the Indexer staging environment.
+    /// </summary>
     private static string indexerToken = "yQqD5eiBkK4mvkrXrNdvAUi2pJ03DTpdCe6a0gvUMyUW9KELHBJdGULvVi2WeaVc";
+
+    /// <summary>
+    /// Returns the metadata of a given token in a given smart contract.
+    /// </summary>
+    /// <param name="contractAddress"></param>
+    /// <param name="tokenId"></param>
+    /// <param name="api"></param>
+    /// <param name="onComplete"></param>
+    /// <returns></returns>
     public static async Task<GetNFTMetadataResponse> GetMetadata(string contractAddress, string tokenId, GraphApi api, Action<GetNFTMetadataResponse> onComplete = null)
     {
         api.SetAuthToken(indexerToken);
@@ -33,6 +50,13 @@ public class Indexer
         return response;
     }
 
+    /// <summary>
+    /// Returns all NFTs for a given wallet.
+    /// </summary>
+    /// <param name="wallet"></param>
+    /// <param name="api"></param>
+    /// <param name="onComplete"></param>
+    /// <returns></returns>
     public static async Task<NFTsByUserResponse> GetWalletNFTs(Wallet wallet, GraphApi api, Action<NFTsByUserResponse> onComplete = null)
     {
         api.SetAuthToken(indexerToken);

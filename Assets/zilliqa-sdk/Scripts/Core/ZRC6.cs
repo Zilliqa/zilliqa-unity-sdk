@@ -6,6 +6,12 @@ using Zilliqa.Requests;
 
 namespace Zilliqa.Core
 {
+    /// <summary>
+    /// This class handles RPC calls to ZRC-6 smart contracts.
+    /// <remarks>
+    /// Note that not all ZRC-6 RPC calls are currently present in this class.
+    /// </remarks>
+    /// </summary>
     public class ZRC6 : ZilliqaRPC
     {
         #region TokenSmartContract
@@ -17,6 +23,7 @@ namespace Zilliqa.Core
            string gasLimit,
            Action<GetTransactionStatusPayload> onProcessed = null)
         {
+            //We build the parameters for the smart contract transition
             string data = JsonConvert.SerializeObject(new ContractTransactionParams()
             {
                 _tag = "SetSpender",
@@ -38,6 +45,7 @@ namespace Zilliqa.Core
 
             });
 
+            //We build the parameters for CreateTransaction
             Transaction transactionParam = new Transaction()
             {
                 version = version,
@@ -53,6 +61,7 @@ namespace Zilliqa.Core
                 data = data
             };
 
+            //We call GetBalance to get the current nonce for the caller
             _ = await GetBalance(sender, (response) => { transactionParam.nonce = response.result.nonce + 1; });
 
             _ = await CreateTransaction(sender, transactionParam, onProcessed: (response) =>
@@ -69,6 +78,7 @@ namespace Zilliqa.Core
            string gasLimit,
            Action<GetTransactionStatusPayload> onProcessed = null)
         {
+            //We build the parameters for the smart contract transition
             string data = JsonConvert.SerializeObject(new ContractTransactionParams()
             {
                 _tag = "Mint",
@@ -90,6 +100,7 @@ namespace Zilliqa.Core
 
             });
 
+            //We build the parameters for CreateTransaction
             Transaction transactionParam = new Transaction()
             {
                 version = version,
@@ -105,6 +116,7 @@ namespace Zilliqa.Core
                 data = data
             };
 
+            //We call GetBalance to get the current nonce for the caller
             _ = await GetBalance(sender, (response) => { transactionParam.nonce = response.result.nonce + 1; });
 
             _ = await CreateTransaction(sender, transactionParam, onProcessed: (response) =>
@@ -122,6 +134,7 @@ namespace Zilliqa.Core
            string gasLimit,
            Action<GetTransactionStatusPayload> onProcessed = null)
         {
+            //We build the parameters for the smart contract transition
             string data = JsonConvert.SerializeObject(new ContractTransactionParams()
             {
                 _tag = "TransferFrom",
@@ -143,6 +156,7 @@ namespace Zilliqa.Core
 
             });
 
+            //We build the parameters for CreateTransaction
             Transaction transactionParam = new Transaction()
             {
                 version = version,
@@ -158,6 +172,7 @@ namespace Zilliqa.Core
                 data = data
             };
 
+            //We call GetBalance to get the current nonce for the caller
             _ = await GetBalance(sender, (response) => { transactionParam.nonce = response.result.nonce + 1; });
 
             _ = await CreateTransaction(sender, transactionParam, onProcessed: (response) =>
@@ -172,6 +187,14 @@ namespace Zilliqa.Core
             string gasLimit,
             Action<GetTransactionStatusPayload> onProcessed = null)
         {
+            //We build the parameters for the smart contract transition
+            string data = JsonConvert.SerializeObject(new ContractTransactionParams()
+            {
+                _tag = "Pause",
+                args = new ContractTransitionArg[0]
+            });
+
+            //We build the parameters for CreateTransaction
             Transaction transactionParam = new Transaction()
             {
                 version = version,
@@ -184,9 +207,10 @@ namespace Zilliqa.Core
                 gasLimit = gasLimit,
                 code = "",
                 priority = false,
-                data = ""
+                data = data
             };
 
+            //We call GetBalance to get the current nonce for the caller
             _ = await GetBalance(sender, (response) => { transactionParam.nonce = response.result.nonce + 1; });
 
             _ = await CreateTransaction(sender, transactionParam, onProcessed: (response) =>
