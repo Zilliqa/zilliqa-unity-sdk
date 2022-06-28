@@ -171,23 +171,17 @@ namespace Zilliqa.Core
             return result;
         }
 
-
-
-        public static async Task<GetTxBlockRateResponse> GetTxBlockRate()
+        public static async Task<GetTxBlockRateResponse> GetTxBlockRate(Action<GetTxBlockRateResponse, ZilResponse.Error> onComplete = null)
         {
             ZilRequest getTxBlockReq = new ZilRequest("GetTxBlockRate", new object[] { "" });
             //Response is identical to GetTxBlock
-            var result = await PostRequest<GetTxBlockRateResponse>(getTxBlockReq);
+            var result = await PostRequest(getTxBlockReq, onComplete);
 
             return result;
         }
 
-
-
-
-
         protected static async Task<T> PostRequest<T>(ZilRequest request, Action<T, ZilResponse.Error> onComplete = null)
-       where T : ZilResponse
+               where T : ZilResponse
         {
             string json = request.ToJson();
             Debug.Log(json);
