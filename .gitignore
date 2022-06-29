@@ -17,3 +17,5 @@ Zilliqa-Unity-SDK.sln
 *.csproj
 *.sln
 TextMesh Pro/
+Assembly-CSharp.csproj
+Zilliqa-Unity-SDK.sln
