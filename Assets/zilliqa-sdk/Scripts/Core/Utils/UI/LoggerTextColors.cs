@@ -9,6 +9,12 @@ public class LoggerTextColors
     public static Color GetColor(Color lowColor, Color highColor, float lowValue, float highValue, float value)
     {
         var hlDiff = highValue - lowValue;
+
+        if (hlDiff == 0)
+            return highColor;
+
+
+
         var hvDiff = highValue - value;
         var ratio = 1 - (hvDiff / hlDiff);
 
@@ -17,14 +23,24 @@ public class LoggerTextColors
 
     public static Color GetColor(float value, float lowValue, float highValue, string lowColorHex = defaultLowHex, string highColorHex = defaultHighHex, bool higherIsBetter = true)
     {
+        Color lowColor, highColor;
+
         var hlDiff = highValue - lowValue;
+
+        if (hlDiff == 0)
+        {
+            ColorUtility.TryParseHtmlString(highColorHex, out highColor);
+            return highColor;
+        }
+
         var hvDiff = highValue - value;
+
         var ratio = higherIsBetter ? hvDiff / hlDiff : 1 - (hvDiff / hlDiff);
 
-        Color lowColor, highColor;
+       
         if (!ColorUtility.TryParseHtmlString(lowColorHex, out lowColor) ||
             !ColorUtility.TryParseHtmlString(highColorHex, out highColor))
-            return new Color();
+            return Color.white;
 
         return Color.Lerp(lowColor, highColor, ratio);
     }
@@ -37,7 +53,12 @@ public class LoggerTextColors
     public static string GetRichText(float value, float lowValue, float highValue, Color lowColor, Color highColor, bool higherIsBetter)
     {
         var hlDiff = highValue - lowValue;
+
+        if (hlDiff == 0)
+            return "<color=#" + highColor + ">" + value + "</color>";
+
         var hvDiff = highValue - value;
+
         var ratio = higherIsBetter ? hvDiff / hlDiff : 1 - (hvDiff / hlDiff);
 
         var color = ColorUtility.ToHtmlStringRGBA(Color.Lerp(lowColor, highColor, ratio));
@@ -48,11 +69,22 @@ public class LoggerTextColors
 
     public static string GetRichText(float value, float lowValue, float highValue, string lowColorHex = defaultLowHex, string highColorHex = defaultHighHex, bool higherIsBetter = true)
     {
+        Color lowColor, highColor;
+
         var hlDiff = highValue - lowValue;
+
+        if (hlDiff == 0)
+        {
+            ColorUtility.TryParseHtmlString(highColorHex, out highColor);
+            return "<color=#" + highColor + ">" + value + "</color>";
+        }
+        
+
         var hvDiff = highValue - value;
+
         var ratio = higherIsBetter ? hvDiff / hlDiff : 1 - (hvDiff / hlDiff);
 
-        Color lowColor, highColor;
+       
         if (!ColorUtility.TryParseHtmlString(lowColorHex, out lowColor) ||
             !ColorUtility.TryParseHtmlString(highColorHex, out highColor))
             return "" + value;
