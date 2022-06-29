@@ -43,7 +43,6 @@ public class BenchmarkDataRecorder : MonoBehaviour
     private void BenchComplete(BenchmarkInfo info)
     {
         info.finishTime = Time.realtimeSinceStartup;
-        Debug.Log("Elapsed time for " + info.FunctionName + " is " + info.ExecutionTime);
 
         AddToBenchmarkGroup(benchmarkHistory, info);
 

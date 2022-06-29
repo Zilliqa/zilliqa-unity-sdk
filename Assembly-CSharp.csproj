@@ -78,6 +78,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\NFTsByUserResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\KeyStore.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetTxBlockListingPayload.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZRC6.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetTxBlockResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Wallet\AdminsArgs.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\Schnorr.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetDSBlockRate.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetSmartContractSubStatePayload.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetRecentTransactionsPayload.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Benchmarking\UI\DynamicTextContainer.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Generic\ZilRequest.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetNumTxnsTxEpoch.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCBlockchain.cs" />
@@ -165,6 +167,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Generic\StaticVariables.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Wallet\Admins.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetDSDifficultyResponse.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Benchmarking\TabPanelController.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetDSBlockRateResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetDSBlockListingResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Contract\GetSmartContractSubState.cs" />
@@ -177,6 +180,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Contract\GetStateProof.cs" />
     <Compile Include="Assets\zilliqa-sdk\Prefabs\Auth\KeyStoreLogin.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCTransaction.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Benchmarking\BenchmarkDataRecorder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetTransactionsForTxBlockExPayload.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\Bech32Utils.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetNumDSBlocks.cs" />
@@ -187,6 +191,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetCurrentMiniEpoch.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\TxBlockRate.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\KDFParams.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Benchmarking\RPCPrefabController.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\ByteUtil.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\GetBlockchainInfoPayload.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\TxBlockListing.cs" />
@@ -221,14 +226,36 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Responses\GetNumDSBlocksResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Crypto\BlockBody.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Payloads\OrderInfo.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Benchmarking\RPCBenchmarkingManager.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetRecentTransactions.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZRC6.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Utils\UI\LoggerTextColors.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\NFTQueriesschema.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\EnglishAuctionschema.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\README.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
