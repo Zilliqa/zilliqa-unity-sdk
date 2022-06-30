@@ -100,6 +100,7 @@ public class BenchmarkDataRecorder : MonoBehaviour
 
     public IEnumerator RecordBatch()
     {
+        LoggerTextArea.text = "";
         var benchmarkBatchInfo = new BenchmarkBatchInfo();
         foreach (var item in benchmarkBatch)
         {

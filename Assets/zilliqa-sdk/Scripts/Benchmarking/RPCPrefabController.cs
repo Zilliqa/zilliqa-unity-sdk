@@ -166,6 +166,7 @@ public class BenchmarkGroupInfo : BaseBenchmarkInfo
         sb.AppendLine("Details");
         sb.AppendLine("----------------");
 
+        benchmarks = benchmarks.OrderBy(i => i.ExecutionTime).ToList();
         for (int i = 0; i < benchmarks.Count; i++)
         {
             var colorHex = LoggerTextColors.GetColorHex(benchmarks[i].ExecutionTime, max, min, higherIsBetter: false);
@@ -222,6 +223,8 @@ public class BenchmarkBatchInfo : BaseBenchmarkInfo
         sb.AppendLine("");
         sb.AppendLine("Details");
         sb.AppendLine("----------------");
+
+        benchmarkGroups = benchmarkGroups.OrderBy(i => i.Value.MinExecutionTime).ToDictionary(k => k.Key, v => v.Value);
         foreach (var item in benchmarkGroups.Keys)
         {
             var colorHex = LoggerTextColors.GetColorHex(benchmarkGroups[item].MinExecutionTime, slowest.MinExecutionTime, fastest.MinExecutionTime, higherIsBetter: false);
