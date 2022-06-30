@@ -33,7 +33,7 @@ public class RPCPrefabController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Init(string buttonLabel, Action<Action<BenchmarkInfo>> onButtonClick)
@@ -77,11 +77,17 @@ public class RPCPrefabController : MonoBehaviour
     }
 }
 
-public class BenchmarkInfo
+public abstract class BaseBenchmarkInfo : ILoggable
+{
+    public string FunctionName;
+
+    public abstract StringBuilder GetLogs(bool richText = false);
+}
+
+public class BenchmarkInfo : BaseBenchmarkInfo
 {
     public float startTime;
     public float finishTime;
-    public string FunctionName;
     public float ExecutionTime => finishTime - startTime;
 
     public BenchmarkInfo()
@@ -100,12 +106,20 @@ public class BenchmarkInfo
         finishTime = _finishTime;
     }
 
+    public override StringBuilder GetLogs(bool richText = false)
+    {
+        return new StringBuilder();
+    }
 }
 
-public class BenchmarkGroupInfo
+public interface ILoggable
+{
+    public StringBuilder GetLogs(bool richText = false);
+}
+
+public class BenchmarkGroupInfo : BaseBenchmarkInfo
 {
     public List<BenchmarkInfo> benchmarks;
-    public string FunctionName;
 
     public float AverageExecutionTime => benchmarks.Select(info => info.ExecutionTime).Average();
     public float MaxExecutionTime => benchmarks.Select(info => info.ExecutionTime).Max();
@@ -127,12 +141,26 @@ public class BenchmarkGroupInfo
         "GROUP_SHORTEST_EXEC_TIME",
         new BenchmarkInfo("SHORTEST_EXEC_TIME", 0, 0));
 
-    public StringBuilder GetDetailedLogs()
+    public override StringBuilder GetLogs(bool richText = false)
     {
-        var sb = GetLogs();
-
+        var average = AverageExecutionTime;
         var min = MinExecutionTime;
         var max = MaxExecutionTime;
+
+        var avColorHex = LoggerTextColors.GetColorHex(average, MaxExecutionTime, MinExecutionTime, higherIsBetter: false);
+        var minColorHex = LoggerTextColors.GetColorHex(min, MaxExecutionTime, MinExecutionTime, higherIsBetter: false);
+        var maxColorHex = LoggerTextColors.GetColorHex(max, MaxExecutionTime, MinExecutionTime, higherIsBetter: false);
+
+        var avStr = "Average time " + average + "s";
+        var minStr = "Min time " + min + "s";
+        var maxStr = "Max time " + max + "s";
+
+        var sb = new StringBuilder();
+        sb.AppendLine("Stats for " + FunctionName + " over " + benchmarks.Count + " calls");
+        sb.AppendLine("----------------");
+        sb.AppendLine(richText ? LoggerTextColors.SetColor(avStr, avColorHex) : avStr);
+        sb.AppendLine(richText ? LoggerTextColors.SetColor(minStr, minColorHex) : minStr);
+        sb.AppendLine(richText ? LoggerTextColors.SetColor(maxStr, maxColorHex) : maxStr);
 
         sb.AppendLine("");
         sb.AppendLine("Details");
@@ -141,36 +169,20 @@ public class BenchmarkGroupInfo
         for (int i = 0; i < benchmarks.Count; i++)
         {
             var colorHex = LoggerTextColors.GetColorHex(benchmarks[i].ExecutionTime, max, min, higherIsBetter: false);
+
             var coloredFunctionName = "#" + (i + 1);
 
-            if (benchmarks[i].ExecutionTime == min ||
-                benchmarks[i].ExecutionTime == max)
+            if (richText &&
+                (benchmarks[i].ExecutionTime == min || benchmarks[i].ExecutionTime == max))
             {
                 coloredFunctionName = LoggerTextColors.SetColor(coloredFunctionName, colorHex);
             }
 
-            sb.AppendLine(coloredFunctionName + 
-                LoggerTextColors.SetColor(" => " + benchmarks[i].ExecutionTime + "s", colorHex));
+            var timeStr = " => " + benchmarks[i].ExecutionTime + "s";
+
+            sb.AppendLine(coloredFunctionName +
+                (richText ? LoggerTextColors.SetColor(timeStr, colorHex) : timeStr));
         }
-        return sb;
-    }
-
-    public StringBuilder GetLogs()
-    {
-        var average = AverageExecutionTime;
-        var min = MinExecutionTime;
-        var max = MaxExecutionTime;
-
-        var avColorHex = LoggerTextColors.GetColorHex(average, MaxExecutionTime, MinExecutionTime, higherIsBetter: false);
-        var minColorHex = LoggerTextColors.GetColorHex(min , MaxExecutionTime, MinExecutionTime, higherIsBetter: false);
-        var maxColorHex = LoggerTextColors.GetColorHex(max , MaxExecutionTime, MinExecutionTime, higherIsBetter: false);
-
-        var sb = new StringBuilder();
-        sb.AppendLine("Stats for " + FunctionName + " over " + benchmarks.Count + " tries");
-        sb.AppendLine("----------------");
-        sb.AppendLine(LoggerTextColors.SetColor("Average time " + average + "s", avColorHex));
-        sb.AppendLine(LoggerTextColors.SetColor("Min time " + min + "s", minColorHex));
-        sb.AppendLine(LoggerTextColors.SetColor("Max time " + max + "s", maxColorHex));
 
         return sb;
     }
@@ -181,7 +193,7 @@ public class BenchmarkGroupInfo
 
 }
 
-public class BenchmarkBatchInfo
+public class BenchmarkBatchInfo : BaseBenchmarkInfo
 {
     public Dictionary<string, BenchmarkGroupInfo> benchmarkGroups;
 
@@ -197,9 +209,10 @@ public class BenchmarkBatchInfo
     public BenchmarkBatchInfo()
     {
         benchmarkGroups = new Dictionary<string, BenchmarkGroupInfo>();
+        FunctionName = "BatchRecord";
     }
 
-    public StringBuilder GetLogs()
+    public override StringBuilder GetLogs(bool richText = false)
     {
         var fastest = FastestRPC;
         var slowest = SlowestRPC;
@@ -214,14 +227,16 @@ public class BenchmarkBatchInfo
             var colorHex = LoggerTextColors.GetColorHex(benchmarkGroups[item].MinExecutionTime, slowest.MinExecutionTime, fastest.MinExecutionTime, higherIsBetter: false);
 
             var coloredFunctionName = benchmarkGroups[item].FunctionName;
-            if (benchmarkGroups[item].FunctionName == fastest.FunctionName ||
-                benchmarkGroups[item].FunctionName == slowest.FunctionName)
+
+            if (richText &&
+                (benchmarkGroups[item].FunctionName == fastest.FunctionName || benchmarkGroups[item].FunctionName == slowest.FunctionName))
             {
                 coloredFunctionName = LoggerTextColors.SetColor(coloredFunctionName, colorHex);
             }
+            var timeStr = " => " + benchmarkGroups[item].MinExecutionTime + "s";
 
-            sb.AppendLine(coloredFunctionName + " => " + 
-                LoggerTextColors.SetColor("" + benchmarkGroups[item].MinExecutionTime, colorHex));
+            sb.AppendLine(coloredFunctionName +
+                (richText ? LoggerTextColors.SetColor(timeStr, colorHex) : timeStr));
         }
 
         return sb;

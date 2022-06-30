@@ -77,6 +77,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\NFTsByUserResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Crypto\KeyStore.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Payloads\GetTxBlockListingPayload.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CreateNFTFixedPriceOrder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZRC6.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\GetTxBlockResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Wallet\AdminsArgs.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Generic\ZilRequest.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetNumTxnsTxEpoch.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\ZilliqaRPCBlockchain.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CancelFixedPriceNFTOrder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetTransactionsForTxBlockEx.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetTransaction.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Payloads\GetTransactionStatusPayload.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\GetTxnBodiesForTxBlockResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Payloads\GetNFTMetadataPayload.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\NFTMint.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Auth\KeyStoreLogin.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\GetTransactionResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\GetCurrentMiniEpochResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetNumTransactions.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\GetDSBlockResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Crypto\MicroBlock.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetTransactionStatus.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\UI\LoggerTextColors.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Crypto\ScryptWrapper.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\GetSmartContractInitResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CreateNFTAuctionOrder.cs" />
@@ -165,6 +169,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\GetDSDifficultyResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Benchmarking\TabPanelController.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\GetDSBlockRateResponse.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\FulfillNFTFixedPriceOrder.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\GetDSBlockListingResponse.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Contract\GetSmartContractSubState.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Crypto\CipherParams.cs" />
@@ -180,6 +185,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Crypto\Bech32Utils.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetNumDSBlocks.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Responses\CreateTransactionResponse.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Wallet\SecureWallet.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Payloads\CreateTransactionProto.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetMinerInfo.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Blockchain\GetCurrentMiniEpoch.cs" />
@@ -220,12 +226,8 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Benchmarking\RPCBenchmarkingManager.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Generic\TxHeader.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetRecentTransactions.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\UI\LoggerTextColors.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CreateNFTFixedPriceOrder.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\FulfillNFTFixedPriceOrder.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\NFT\CancelFixedPriceNFTOrder.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Core\Utils\Wallet\SecureWallet.cs" />
-    <Compile Include="Assets\zilliqa-sdk\Scripts\Auth\KeyStoreLogin.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Benchmarking\FileExporter.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Benchmarking\LogsExporter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

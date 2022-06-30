@@ -4,11 +4,18 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(RPCBenchmarkingManager))]
 public class BenchmarkDataRecorder : MonoBehaviour
 {
+    public delegate void DisplayLogsEvent(ILoggable logs);
+
     public static BenchmarkDataRecorder Instance;
     public TMP_Text LoggerTextArea;
+
+    public DisplayLogsEvent OnDisplayLogs;
+
     private Dictionary<string, BenchmarkGroupInfo> benchmarkHistory;
     private List<RPCPrefabController> benchmarkBatch;
 
@@ -27,12 +34,7 @@ public class BenchmarkDataRecorder : MonoBehaviour
         RPCBenchmarkingManager.Instance.OnBenchmarkingStarted += BenchStart;
         RPCBenchmarkingManager.Instance.OnBenchmarkingComplete += BenchComplete;
         RPCBenchmarkingManager.Instance.OnBatchBenchmarking += () => StartCoroutine(RecordBatch());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        FileExporter.OnFileSaved += DisplayFileSaveFeedback;
     }
 
     private void BenchStart(BenchmarkInfo info)
@@ -49,12 +51,13 @@ public class BenchmarkDataRecorder : MonoBehaviour
         DisplayLogs(benchmarkHistory[info.FunctionName]);
     }
 
-
-
     public void DisplayLogs(BenchmarkGroupInfo groupInfo)
     {
         var blankStr = "There is no recorded data for this RPC, Please click on the button with the RPC name to start recording";
-        LoggerTextArea.text = groupInfo == null ? blankStr : groupInfo.GetDetailedLogs().ToString();
+
+        LoggerTextArea.text = groupInfo == null ? blankStr : groupInfo.GetLogs(true).ToString();
+
+        OnDisplayLogs?.Invoke(groupInfo);
     }
 
     public void DisplayLogs(string groupInfoName)
@@ -69,8 +72,10 @@ public class BenchmarkDataRecorder : MonoBehaviour
     public void DisplayBatchLogs(BenchmarkBatchInfo batchInfo)
     {
         var blankStr = "There is no recorded data for this RPC, Please click on the button with the RPC name to start recording";
-        LoggerTextArea.text = batchInfo == null ? blankStr : batchInfo.GetLogs().ToString();
 
+        LoggerTextArea.text = batchInfo == null ? blankStr : batchInfo.GetLogs(true).ToString();
+
+        OnDisplayLogs?.Invoke(batchInfo);
     }
 
     private void AddToBenchmarkGroup(Dictionary<string, BenchmarkGroupInfo> groupsInfo, BenchmarkInfo info)
@@ -85,14 +90,7 @@ public class BenchmarkDataRecorder : MonoBehaviour
     public void AddGroupToBatch(RPCPrefabController rpcTask)
     {
         if (!benchmarkBatch.Contains(rpcTask))
-        {
             benchmarkBatch.Add(rpcTask);
-            Debug.Log("Adding " + rpcTask.rpcName);
-        }
-        else
-        {
-            Debug.Log("NOT Adding " + rpcTask.rpcName);
-        }
     }
 
     public void RemoveGroupFromBatch(RPCPrefabController rpcTask)
@@ -118,5 +116,16 @@ public class BenchmarkDataRecorder : MonoBehaviour
         }
 
         DisplayBatchLogs(benchmarkBatchInfo);
+    }
+
+    public void DisplayFileSaveFeedback(string path)
+    {
+        var savePath = LoggerTextColors.SetColor("Logs saved successfully at: " + path, "#49C0BE");
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine(savePath);
+        sb.AppendLine(" ");
+        sb.AppendLine(LoggerTextArea.text);
+
+        LoggerTextArea.text = sb.ToString();
     }
 }
