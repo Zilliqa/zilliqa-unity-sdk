@@ -228,6 +228,7 @@
     <Compile Include="Assets\zilliqa-sdk\Scripts\Transaction\GetRecentTransactions.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Benchmarking\FileExporter.cs" />
     <Compile Include="Assets\zilliqa-sdk\Scripts\Benchmarking\LogsExporter.cs" />
+    <Compile Include="Assets\zilliqa-sdk\Scripts\Benchmarking\UI\Tooltip.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
