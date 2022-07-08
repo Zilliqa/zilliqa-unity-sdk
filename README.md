@@ -1,7 +1,7 @@
 # zilliqa-unity-sdk
 Zilliqa's Unity3D SDK
 
-v3.1 / 2022.06.30</br>
+v3.1.1 / 2022.07.08</br>
 contact:</br>
  Valentin Cobelea - valentin@zilliqa.com</br>
  Brahim Jomni - brahim@zilliqa.com
