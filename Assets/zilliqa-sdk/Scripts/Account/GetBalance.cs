@@ -34,14 +34,11 @@ public class GetBalance : ZilliqaMonoBehaviour
 
     void Start()
     {
-        Wallet w = new Wallet(TestWallets.WalletPK0);
-        _ = ZRC6.TransferFrom(w, CryptoUtil.GetAddressFromPrivateKey(TestWallets.WalletPK1), "6", TestWallets.TokenSmartContract0, "80000", (txStatus) => { Debug.Log(txStatus.ToString()); });
+        if (runAtStart)
+            StartCoroutine(RunMethod());
 
-        //if (runAtStart)
-        //    StartCoroutine(RunMethod());
-
-        //if (runForSeveralTimes)
-        //    StartCoroutine(RunMethodCoroutine());
+        if (runForSeveralTimes)
+            StartCoroutine(RunMethodCoroutine());
     }
 
     IEnumerator RunMethod()

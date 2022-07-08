@@ -44,7 +44,7 @@ public class NFTMint : ZilliqaMonoBehaviour
 
     private void Awake()
     {
-        privateKey = useNonSavedPrivateKey ? privateKey : TestWallets.WalletPK0;
+        privateKey = useNonSavedPrivateKey ? privateKey : TestWallets.WalletPK2;
         Address = CryptoUtil.GetAddressFromPrivateKey(privateKey);
         publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
         ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));

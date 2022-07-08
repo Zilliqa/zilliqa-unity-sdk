@@ -7,6 +7,7 @@ using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
 using Org.BouncyCastle.Math.EC.Multiplier;
 using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Utilities;
 using System;
 using System.Linq;
 
@@ -24,7 +25,7 @@ namespace Zilliqa.Core.Crypto
         public BigInteger privateKey;
         public BigInteger publicKey;
 
-        public ECKeyPair(BigInteger publicKey , BigInteger privateKey)
+        public ECKeyPair(BigInteger publicKey, BigInteger privateKey)
         {
             this.privateKey = privateKey;
             this.publicKey = publicKey;
@@ -52,14 +53,27 @@ namespace Zilliqa.Core.Crypto
         }
         public static ECKeyPair GenerateKeyPair()
         {
-            var gen = new ECKeyPairGenerator("EC");
-            var keyGenParam = new KeyGenerationParameters(secureRandom, 256);
-            gen.Init(keyGenParam);
-            var keyPair = gen.GenerateKeyPair();
-            var d = ((ECPrivateKeyParameters)keyPair.Private).D;
-            var q = ((ECPublicKeyParameters)keyPair.Public).Q;
+            byte[] pkArray = new byte[0];
+            BigInteger D = new BigInteger("0");
+            ECPoint Q = null;
+            int iterationCount = 0;
+            while (pkArray.Length != 32)
+            {
+                iterationCount++;
 
-            return new ECKeyPair(d, new BigInteger(1, q.GetEncoded(true)));
+                var gen = new ECKeyPairGenerator();
+                var keyGenParam = new KeyGenerationParameters(new SecureRandom(), 256);
+                gen.Init(keyGenParam);
+                var keyPair = gen.GenerateKeyPair();
+                D = ((ECPrivateKeyParameters)keyPair.Private).D;
+                Q = ((ECPublicKeyParameters)keyPair.Public).Q;
+
+                pkArray = BigIntegers.AsUnsignedByteArray(D);
+
+            }
+
+
+            return new ECKeyPair(D, new BigInteger(1, Q.GetEncoded(true)));
         }
 
         public static ECKeyPair Create(byte[] privateKey)

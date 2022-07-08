@@ -9,23 +9,38 @@ namespace Zilliqa.Requests
     [Serializable]
     public class GetNFTMetadataPayload
     {
-        public NFT assetById;
+        public NFTMetadata assetById;
     }
 
     [Serializable]
-    public class NFT
+    public class NFTMetadata : NFTAsset
     {
-        public string tokenId;
-        public string tokenUri;
-        public string name;
         public string description;
         public string externalUrl;
         public string ownerAddress;
-        public string minterAddress;
-        public string contractAddress;
-        public string resource;
         public string resourceMimetype;
         public NFTAttributes[] attributes;
+        public Sprite image;
+
+        public NFTMetadata()
+        {
+            description = "Unavailable";
+            externalUrl = "Unavailable";
+            ownerAddress = "Unavailable";
+            resourceMimetype = "Unavailable";
+            attributes = new NFTAttributes[0];
+            image = null;
+        }
+
+        public NFTMetadata(Sprite placeholderImage)
+        {
+            description = "Unavailable";
+            externalUrl = "Unavailable";
+            ownerAddress = "Unavailable";
+            resourceMimetype = "Unavailable";
+            attributes = new NFTAttributes[0];
+            image = placeholderImage;
+        }
     }
 
     [Serializable]
@@ -48,7 +63,7 @@ namespace Zilliqa.Requests
 
 
     [Serializable]
-    public class FixedPricedNFT : NFT
+    public class FixedPricedNFT : NFTMetadata
     {
         public FixedPriceListingDataWrapper[] listingData;
     }
@@ -85,7 +100,7 @@ namespace Zilliqa.Requests
     }
 
     [Serializable]
-    public class AuctionedNFT : NFT
+    public class AuctionedNFT : NFTMetadata
     {
         public AuctionListingDataWrapper[] listingData;
     }

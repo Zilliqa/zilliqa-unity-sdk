@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 using Newtonsoft.Json;
 using System;
 using Zilliqa.Requests;
+using TMPro;
 
 public class GetNFTsByWalletAddress : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class GetNFTsByWalletAddress : MonoBehaviour
     public GraphApi indexer;
     private string indexerToken = "yQqD5eiBkK4mvkrXrNdvAUi2pJ03DTpdCe6a0gvUMyUW9KELHBJdGULvVi2WeaVc";
 
-   
+    public TMP_Text textArea;
     public async void DoQuery()
     {
         indexer.SetAuthToken(indexerToken);
@@ -26,6 +27,7 @@ public class GetNFTsByWalletAddress : MonoBehaviour
         var response = JsonConvert.DeserializeObject<NFTsByUserResponse>(re.downloadHandler.text);
 
         Debug.Log("GetNFTsByUser Object\n" + JsonConvert.SerializeObject(response));
+        textArea.text = JsonConvert.SerializeObject(response);
     }
 
     private void Start()

@@ -370,7 +370,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 28.623077, z: 8e-43, w: 25.526367}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -2949,6 +2949,10 @@ PrefabInstance:
       propertyPath: m_IsOn
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5617134240114504473, guid: 2a77d6cd119278245b5a1788151628ce, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a77d6cd119278245b5a1788151628ce, type: 3}
 --- !u!224 &860092377 stripped
@@ -3846,7 +3850,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 278302751276229700, guid: dd84efacff6d5f64f890944f8b3f60df, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 414.67783
+      value: 454.175
       objectReference: {fileID: 0}
     - target: {fileID: 511452419415260999, guid: dd84efacff6d5f64f890944f8b3f60df, type: 3}
       propertyPath: m_Name
@@ -4303,7 +4307,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 278302751276229700, guid: dd84efacff6d5f64f890944f8b3f60df, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 414.67783
+      value: 454.175
       objectReference: {fileID: 0}
     - target: {fileID: 511452419415260999, guid: dd84efacff6d5f64f890944f8b3f60df, type: 3}
       propertyPath: m_Name
@@ -4667,6 +4671,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5617134240114504473, guid: 2a77d6cd119278245b5a1788151628ce, type: 3}
       propertyPath: m_IsOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5617134240114504473, guid: 2a77d6cd119278245b5a1788151628ce, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5724,7 +5732,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 24.025002, y: -28.35}
+  m_AnchoredPosition: {x: 24.025, y: -28.35}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1950611381
@@ -6157,7 +6165,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 278302751276229700, guid: dd84efacff6d5f64f890944f8b3f60df, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 414.67783
+      value: 454.175
       objectReference: {fileID: 0}
     - target: {fileID: 511452419415260999, guid: dd84efacff6d5f64f890944f8b3f60df, type: 3}
       propertyPath: m_Name

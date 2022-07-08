@@ -36,7 +36,7 @@ public class Indexer
     {
         api.SetAuthToken(indexerToken);
 
-        api.Introspect();
+        
         Query query = api.GetQueryByName("GetNFTMetadata", Query.Type.Query);
         query.SetArgs(new { input = new { contractAddress, tokenId } });
 
@@ -61,7 +61,7 @@ public class Indexer
     {
         api.SetAuthToken(indexerToken);
 
-        api.Introspect();
+        
         Query query = api.GetQueryByName("GetNFTsByWalletAddress", Query.Type.Query);
         query.SetArgs(new { input = new { address = AddressUtils.AddPrefix_0x(wallet.Address).ToLower() } });
 

@@ -112,45 +112,45 @@ namespace Zilliqa.Core.Crypto
         }
 
 
-/*
-        public static Signature TrySign(ECKeyPair kp, byte[] msg, BigInteger k)
-        {
-            BigInteger n = secp256k1.N;
-            BigInteger privateKey = kp.privateKey;
-            var pubB = kp.publicKey.ToByteArray();
+        /*
+                public static Signature TrySign(ECKeyPair kp, byte[] msg, BigInteger k)
+                {
+                    BigInteger n = secp256k1.N;
+                    BigInteger privateKey = kp.privateKey;
+                    var pubB = kp.publicKey.ToByteArray();
 
-            ECPoint publicKey = secp256k1.Curve.DecodePoint(pubB);
+                    ECPoint publicKey = secp256k1.Curve.DecodePoint(pubB);
 
-            if (privateKey == (BigInteger.Zero))
-            {
-                throw new Exception("Private key must be >= 0");
-            }
+                    if (privateKey == (BigInteger.Zero))
+                    {
+                        throw new Exception("Private key must be >= 0");
+                    }
 
-            if (privateKey.CompareTo(n) >= 0)
-            {
-                throw new Exception("Private key cannot be greater than curve order");
-            }
+                    if (privateKey.CompareTo(n) >= 0)
+                    {
+                        throw new Exception("Private key cannot be greater than curve order");
+                    }
 
-            ECPoint Q = secp256k1.G.Multiply(k);
+                    ECPoint Q = secp256k1.G.Multiply(k);
 
-            BigInteger r = Hash(Q, publicKey, msg).Mod(secp256k1.N);
+                    BigInteger r = Hash(Q, publicKey, msg).Mod(secp256k1.N);
 
-            if (r == (BigInteger.Zero))
-            {
-                return null;
-            }
+                    if (r == (BigInteger.Zero))
+                    {
+                        return null;
+                    }
 
-            BigInteger s = r.Multiply(privateKey).Mod(n);
+                    BigInteger s = r.Multiply(privateKey).Mod(n);
 
-            s = k.Subtract(s).Mod(n);
+                    s = k.Subtract(s).Mod(n);
 
-            if (s == (BigInteger.Zero))
-            {
-                return null;
-            }
+                    if (s == (BigInteger.Zero))
+                    {
+                        return null;
+                    }
 
-            return new Signature() { R = r, S = s };
-        }*/
+                    return new Signature() { R = r, S = s };
+                }*/
         public static string GetPublicKey(string privKey)
         {
 
@@ -163,14 +163,25 @@ namespace Zilliqa.Core.Crypto
         }
         public static ECKeyPair GenerateKeyPair()
         {
-            var gen = new ECKeyPairGenerator("EC");
-            var keyGenParam = new KeyGenerationParameters(secureRandom, 256);
-            gen.Init(keyGenParam);
-            var keyPair = gen.GenerateKeyPair();
-            var d = ((ECPrivateKeyParameters)keyPair.Private).D;
-            var q = ((ECPublicKeyParameters)keyPair.Public).Q;
+            byte[] pkArray = new byte[0];
+            BigInteger D = new BigInteger("0");
+            ECPoint Q = null;
+            int iterationCount = 0;
+            while (pkArray.Length != 32)
+            {
+                iterationCount++;
 
-            return new ECKeyPair(d, new BigInteger(1, q.GetEncoded(true)));
+                var gen = new ECKeyPairGenerator();
+                var keyGenParam = new KeyGenerationParameters(new SecureRandom(), 256);
+                gen.Init(keyGenParam);
+                var keyPair = gen.GenerateKeyPair();
+                D = ((ECPrivateKeyParameters)keyPair.Private).D;
+                Q = ((ECPublicKeyParameters)keyPair.Public).Q;
+
+                pkArray = BigIntegers.AsUnsignedByteArray(D);
+
+            }
+            return new ECKeyPair(new BigInteger(1, Q.GetEncoded(true)), D);
         }
         static private BigInteger Hash(ECPoint q, ECPoint pubKey, byte[] msg)
         {

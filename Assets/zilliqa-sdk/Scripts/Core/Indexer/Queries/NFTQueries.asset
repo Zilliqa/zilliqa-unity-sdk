@@ -312,7 +312,7 @@ MonoBehaviour:
     isComplete: 1
   - name: GetNFTsByWalletAddress
     type: 0
-    query: "query GetNFTsByWalletAddress{\n    user(  input :{ address :\"0x3a869435fd3b34d313b0c5ba5cd478c8bd0b90ac\"}
+    query: "query GetNFTsByWalletAddress{\n    user(  input :{ address :\"0x8254b2c9acdf181d5d6796d63320fbb20d4edd12\"}
       ){\n        address\n        ownedAssets{\n            assetsList{\n               
       contractAddress\n                spenderAddress\n                operatorAddress\n               
       tokenId\n                tokenUri\n                minterAddress\n           
@@ -996,8 +996,8 @@ MonoBehaviour:
     isComplete: 1
   - name: GetNFTMetadata
     type: 0
-    query: "query GetNFTMetadata{\n    assetById(  input :{ contractAddress :\"0xe52cb846a86ffe28b3c40e99f3c842e6ad55b594\",
-      tokenId :\"47\"} ){\n        tokenId\n        tokenUri\n        name\n       
+    query: "query GetNFTMetadata{\n    assetById(  input :{ contractAddress :\"0x638a429b1f0dc1dd206c3030295255d7dbf45501\",
+      tokenId :\"2\"} ){\n        tokenId\n        tokenUri\n        name\n       
       description\n        externalUrl\n        ownerAddress\n        minterAddress\n       
       contractAddress\n        resource\n        attributes{\n            traitType\n           
       value\n        }\n        resourceMimetype\n    }\n}"
@@ -1470,7 +1470,7 @@ MonoBehaviour:
   - name: GetFixedPriceOffers
     type: 0
     query: "query GetFixedPriceOffers{\n    assetById(  input :{ contractAddress
-      :\"0x638a429b1f0dc1dd206c3030295255d7dbf45501\", tokenId :\"9\"} ){\n       
+      :\"0xe52cb846a86ffe28b3c40e99f3c842e6ad55b594\", tokenId :\"39\"} ){\n       
       listingData{\n            sourceId\n            data{\n                ZILLIQA_FIXED_PRICE{\n                   
       othersOffers{\n                        maker\n                        unit\n                       
       amount\n                        currency\n                        expirationInBlockNumber\n       
@@ -1779,7 +1779,7 @@ MonoBehaviour:
   - name: GetAuctionOffersByNFTId
     type: 0
     query: "query GetAuctionOffersByNFTId{\n    assetById(  input :{ contractAddress
-      :\"0x638a429b1f0dc1dd206c3030295255d7dbf45501\", tokenId :\"9\"} ){\n       
+      :\"0xe52cb846a86ffe28b3c40e99f3c842e6ad55b594\", tokenId :\"30\"} ){\n       
       tokenId\n        tokenUri\n        name\n        description\n        externalUrl\n       
       ownerAddress\n        minterAddress\n        contractAddress\n        attributes{\n           
       traitType\n            value\n        }\n        listingData{\n           

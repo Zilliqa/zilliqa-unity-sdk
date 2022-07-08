@@ -27,7 +27,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
 
     [Header("Keys Pair")]
     private string Address = "8254b2C9aCdf181d5d6796d63320fBb20D4Edd12";
-    private string privateKey = "3375F915F3F9AE35E6B301B7670F53AD1A5BE15D8221EC7FD5E503F21D3450C8";
+    private string privateKey = "41CBBBDDE1C31F18197056A3762C8E22CE423A65B7340575F43E3EC947AFFE74";
     private string publicKey;
     private bool autoNonce = true;
 
@@ -46,6 +46,7 @@ public class CreateTransaction : ZilliqaMonoBehaviour
         string checksummed = AddressUtils.ToCheckSumAddress(toAddress);
         publicKey = CryptoUtil.GetPublicKeyFromPrivateKey(privateKey, true);
         ecKeyPair = new ECKeyPair(new BigInteger(publicKey, 16), new BigInteger(privateKey, 16));
+        Address = CryptoUtil.GetAddressFromPrivateKey(privateKey);
     }
 
     private void Start()
