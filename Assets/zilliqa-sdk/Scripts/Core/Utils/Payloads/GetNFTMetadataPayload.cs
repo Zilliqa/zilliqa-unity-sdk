@@ -1,8 +1,6 @@
+using GamingHub_SDK.Models.Payloads;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Zilliqa.Requests
 {
@@ -12,45 +10,7 @@ namespace Zilliqa.Requests
         public NFTMetadata assetById;
     }
 
-    [Serializable]
-    public class NFTMetadata : NFTAsset
-    {
-        public string description;
-        public string externalUrl;
-        public string ownerAddress;
-        public string resourceMimetype;
-        public NFTAttributes[] attributes;
-        public Sprite image;
-
-        public NFTMetadata()
-        {
-            description = "Unavailable";
-            externalUrl = "Unavailable";
-            ownerAddress = "Unavailable";
-            resourceMimetype = "Unavailable";
-            attributes = new NFTAttributes[0];
-            image = null;
-        }
-
-        public NFTMetadata(Sprite placeholderImage)
-        {
-            description = "Unavailable";
-            externalUrl = "Unavailable";
-            ownerAddress = "Unavailable";
-            resourceMimetype = "Unavailable";
-            attributes = new NFTAttributes[0];
-            image = placeholderImage;
-        }
-    }
-
-    [Serializable]
-    public class NFTAttributes
-    {
-        public string traitType;
-        public string value;
-    }
-
-    [Serializable]
+   [Serializable]
     public class GetAuctionOffersByNFTIdPayload
     {
         public AuctionedNFT assetById;

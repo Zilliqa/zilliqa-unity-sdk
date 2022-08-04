@@ -8,6 +8,8 @@ using Zilliqa.Core;
 using Zilliqa.Utils;
 using Zilliqa.Core.Crypto;
 using Zilliqa.Requests;
+using Zilliqa.Marketplace;
+using GamingHub_SDK.Models.Payloads;
 
 public class CreateNFTFixedPriceOrder : ZilliqaMonoBehaviour
 {

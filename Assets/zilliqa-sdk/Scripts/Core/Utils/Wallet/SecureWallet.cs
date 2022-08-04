@@ -104,8 +104,10 @@ public class SecureWallet : Wallet
     }
 
 
+    public static SecureWallet Decrypt(string walletKeyJson, string passphrase)
+        => Decrypt(WalletKey.FromJson(walletKeyJson), passphrase);
 
-    public static Wallet Decrypt(WalletKey walletKey, string passphrase)
+    public static SecureWallet Decrypt(WalletKey walletKey, string passphrase)
     {
         byte[] tempDerivedK = GenerateDerivedKey(passphrase, walletKey.scrypt);
         byte[] _derivedKey = CryptoUtil.GenerateRandomBytes(walletKey.scrypt.dklen);
@@ -141,7 +143,7 @@ public class SecureWallet : Wallet
         Debug.Log("private key on login " + ByteUtil.ByteArrayToHexString(_privateKey));
         //Debug.Log("Login Succesful");
 
-        return new Wallet(ByteUtil.ByteArrayToHexString(_privateKey));
+        return new SecureWallet(ByteUtil.ByteArrayToHexString(_privateKey));
     }
 
     private static byte[] GenerateDerivedKey(string passphrase, KDFParams scryptParams)
@@ -150,6 +152,7 @@ public class SecureWallet : Wallet
     }
 }
 
+[Serializable]
 public class WalletKey
 {
     public string secretCipher;
@@ -173,5 +176,6 @@ public class WalletKey
     }
 
     public string ToJson() => JsonConvert.SerializeObject(this);
+    public static WalletKey FromJson(string json) => JsonConvert.DeserializeObject<WalletKey>(json);
 
 }
