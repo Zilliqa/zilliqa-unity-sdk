@@ -23,7 +23,7 @@ Assets/Prefabs/ - prefabs for each of the blockchain methods;</br>
 Assets/Scenes/  - sample test scene, you can use this one for your tests and also the benchmarking scene with all the API ready for benchmarks;</br>
 Assets/Scripts/ - scripts used by each of the prefabs plus general usage scripts;</br>
 </br>
-Documentation/ - doxygen documentation webpages, up-to-date with the latest changes;<br>
+Assets/zilliqa-sdk/Documentation/ - doxygen documentation webpages, up-to-date with the latest changes;<br>
 
 Install note:</br>
 In order to use this git in your Unity3D project, don't forget to first unpack:</br>
