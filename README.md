@@ -6,7 +6,7 @@ contact:</br>
  Valentin Cobelea - valentin@zilliqa.com</br>
  Brahim Jomni - brahim@zilliqa.com
 
-This is the very first public version of the Zilliqa's Unity3D SDK.</br>
+This is our public version of the Zilliqa's Unity3D SDK.</br>
 It contains all the blockchain related API rpc calls.</br>
 More to come in terms of features.
 
