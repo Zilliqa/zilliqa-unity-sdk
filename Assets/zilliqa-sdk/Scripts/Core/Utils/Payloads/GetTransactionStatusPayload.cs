@@ -1,7 +1,10 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zilliqa.Core;
+
 namespace Zilliqa.Requests
 {
     public class GetTransactionStatusPayload : ResponsePayload
@@ -16,8 +19,9 @@ namespace Zilliqa.Requests
         [JsonProperty("amount")]
         public string Amount;
 
+        [JsonConverter(typeof(TransactionDataConverter))]
         [JsonProperty("data")]
-        public string Data;
+        public TransactionData Data;
 
         [JsonProperty("epochInserted")]
         public string EpochInserted;
@@ -64,6 +68,41 @@ namespace Zilliqa.Requests
         /// false : not yet, it is pending
         /// </summary>
         public bool HasFinalState => ModificationState == TransactionModificationState.Final;
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+    }
+
+    [Serializable]
+    public class TransactionData
+    {
+        [JsonProperty("_tag")]
+        public string tag;
+        [JsonProperty("params")]
+        public List<TransactionDataParam> parameters;
+
+        public string GetValue(string paramName)
+        {
+            for (int i = 0; i < parameters.Count; i++)
+            {
+                if (parameters[i].vname.ToLower() == paramName.ToLower())
+                {
+                    return parameters[i].value;
+                }
+            }
+
+            return "";
+        }
+    }
+
+    [Serializable]
+    public class TransactionDataParam
+    {
+        public string vname;
+        public string type;
+        public string value;
     }
 
     public enum TransactionModificationState

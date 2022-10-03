@@ -7,11 +7,31 @@ using UnityEngine.Networking;
 using Zilliqa.Utils;
 using Zilliqa.Core.Crypto;
 using Zilliqa.Requests;
+using System.Threading;
 
 namespace Zilliqa.Core
 {
-    public partial class ZilliqaRPC
+    public delegate void NotificationEvent(INotification txStatus);
+    public interface INotification
     {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public TransactionModificationState Status { get; set; }
+    }
+
+    public interface IStaticNotifier
+    {
+        public static NotificationEvent OnNotification { get; set; }
+    }
+
+    public interface INotifier
+    {
+        public NotificationEvent OnNotification { get; set; }
+    }
+    public partial class ZilliqaRPC : IStaticNotifier
+    {
+        public static NotificationEvent OnNotification { get; set; }
+
         /// <summary>
         /// Create a new Transaction object and send it to the network to be processed. 
         /// </summary>
@@ -33,13 +53,13 @@ namespace Zilliqa.Core
             //Create the request with the given parameters
             ZilRequest createTxReq = new ZilRequest("CreateTransaction", new object[] { transactionParam });
             CreateTransactionResponse result = null;
-            _ = await PostRequest<CreateTransactionResponse>(createTxReq, (response, error) =>
+            _ = await Post<CreateTransactionResponse>(createTxReq, (response, error) =>
             {
                 if (response.result != null)
                 {
                     result = response;
                     Debug.Log("Info: " + response.result.Info + "\n" + "Tx hash: " + "0x" + response.result.TranID);
-                    _ = ListenForTransactionStatusUpdate(response.result.TranID, onProcessed);
+                    Task.Run(async () => await ListenForTransactionStatusUpdate(response.result.TranID, onProcessed));
                 }
                 else if (error != null)
                 {
@@ -165,7 +185,7 @@ namespace Zilliqa.Core
         {
             ZilRequest req = new ZilRequest("GetTransactionsForTxBlockEx", new object[] { txBlockNumber, pageNumber });
             var result = await PostRequest(req, onComplete);
-            
+
             return result;
         }
 
@@ -191,7 +211,7 @@ namespace Zilliqa.Core
         {
             GetTransactionStatusResponse result = null;
             ZilRequest getTxBlockListingReq = new ZilRequest("GetTransactionStatus", new object[] { transactionID });
-            _ = await PostRequest<GetTransactionStatusResponse>(getTxBlockListingReq, (response, error) =>
+            _ = await Post<GetTransactionStatusResponse>(getTxBlockListingReq, (response, error) =>
             {
                 if (response.result != null)
                 {
@@ -264,6 +284,8 @@ namespace Zilliqa.Core
         /// <returns></returns>
         private static async Task ListenForTransactionStatusUpdate(string transactionID, Action<GetTransactionStatusPayload> onTransactionProcessed = null)
         {
+            var notification = new Notification();
+
             int currentAttemptCount = 0;
             bool hasFinalState = false;
             while (!hasFinalState)
@@ -272,9 +294,18 @@ namespace Zilliqa.Core
                 {
                     hasFinalState = txStatus.HasFinalState;
                     if (txStatus.HasFinalState)
+                    {
                         onTransactionProcessed?.Invoke(txStatus);
+                    }
+
+                    notification = TransactionStringifier.AsNotification(txStatus, notification);
+                    
+
+                    OnNotification?.Invoke(notification);
+                    
                 });
                 currentAttemptCount++;
+                Thread.Sleep(1000);
             }
         }
 

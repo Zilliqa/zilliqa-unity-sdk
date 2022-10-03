@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Zilliqa.Utils;
 using Zilliqa.Requests;
+using System.Net;
+using System.IO;
 
 namespace Zilliqa.Core
 {
@@ -184,7 +186,7 @@ namespace Zilliqa.Core
                where T : ZilResponse
         {
             string json = request.ToJson();
-            Debug.Log(json);
+            //Debug.Log(json);
             using UnityEngine.Networking.UnityWebRequest webRequest = new UnityWebRequest(apiUrl, "POST");
             byte[] rawData = Encoding.UTF8.GetBytes(json);
 
@@ -197,13 +199,56 @@ namespace Zilliqa.Core
             switch (webRequest.result)
             {
                 case UnityWebRequest.Result.Success:
-                    Debug.Log("response " + webRequest.downloadHandler.text);
+                    //Debug.Log("response " + webRequest.downloadHandler.text);
                     var response = JsonConvert.DeserializeObject<T>(webRequest.downloadHandler.text);
                     onComplete?.Invoke(response, response.error);
                     return response;
                 default:
                     return null;
             }
+        }
+
+        protected static async Task<T> Post<T>(ZilRequest req, Action<T, ZilResponse.Error> onComplete = null)
+            where T : ZilResponse
+        {
+            string json = req.ToJson();
+
+            // Create a request using a URL that can receive a post. 
+            WebRequest request = WebRequest.Create(apiUrl);
+            // Set the Method property of the request to POST.
+            request.Method = "POST";
+            // Create POST data and convert it to a byte array.
+            byte[] byteArray = Encoding.UTF8.GetBytes(json);
+            // Set the ContentType property of the WebRequest.
+            request.ContentType = "application/json";
+            // Set the ContentLength property of the WebRequest.
+            request.ContentLength = byteArray.Length;
+            // Get the request stream.
+            Stream dataStream = request.GetRequestStream();
+            // Write the data to the request stream.
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            // Close the Stream object.
+            dataStream.Close();
+            // Get the response.
+            WebResponse response = request.GetResponse();
+            // Display the status.
+            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            // Get the stream containing content returned by the server.
+            dataStream = response.GetResponseStream();
+            // Open the stream using a StreamReader for easy access.
+            StreamReader reader = new StreamReader(dataStream);
+            // Read the content.
+            string responseFromServer = reader.ReadToEnd();
+            // Display the content.
+            Console.WriteLine(responseFromServer);
+            var result = JsonConvert.DeserializeObject<T>(responseFromServer);
+            onComplete?.Invoke(result, result.error);
+            // Clean up the streams.
+            reader.Close();
+            dataStream.Close();
+            response.Close();
+
+            return result;
         }
         #endregion
 

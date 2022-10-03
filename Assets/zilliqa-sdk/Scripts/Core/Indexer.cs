@@ -43,7 +43,7 @@ public class Indexer
         UnityWebRequest re = await api.Post(query);
         var response = JsonConvert.DeserializeObject<GetNFTMetadataResponse>(re.downloadHandler.text);
 
-        Debug.Log("GetNFTMetadata Object\n" + JsonConvert.SerializeObject(response));
+        //Debug.Log("GetNFTMetadata Object\n" + JsonConvert.SerializeObject(response));
 
         onComplete?.Invoke(response);
 
@@ -75,8 +75,9 @@ public class Indexer
         return response;
     }
 
-    public static async Task<GetGetAuctionOffersByNFTIdResponse> GetNFTAuctionOffersByNFTId(string tokenAddress, string tokenId, GraphApi api, Action<GetGetAuctionOffersByNFTIdResponse> onComplete = null)
+    public static async Task<GetGetAuctionOffersByNFTIdResponse> GetNFTAuctionOffersByNFTId(string tokenAddress, string tokenId, Action<GetGetAuctionOffersByNFTIdResponse> onComplete = null)
     {
+        GraphApi api = IndexerManager.Instance.indexerAPI;
         //contractAddress = TestWallets.FixedPriceSmartContract0;
         api.SetAuthToken(indexerToken);
 

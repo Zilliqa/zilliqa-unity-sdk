@@ -27,7 +27,7 @@ namespace Zilliqa.Core
             else
             {
                 ZilRequest getBalanceReq = new ZilRequest("GetBalance", sender.Address);
-                await PostRequest<GetBalanceResponse>(getBalanceReq, (response, error) =>
+                await Post<GetBalanceResponse>(getBalanceReq, (response, error) =>
                 {
                     if (response.result != null)
                     {

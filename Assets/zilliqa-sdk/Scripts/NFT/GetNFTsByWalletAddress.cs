@@ -24,10 +24,11 @@ public class GetNFTsByWalletAddress : MonoBehaviour
         query.SetArgs(new { input = new { address = walletAddress} });
 
         UnityWebRequest re = await indexer.Post(query);
+        Debug.Log("Query response as text " + re.downloadHandler.text);
         var response = JsonConvert.DeserializeObject<NFTsByUserResponse>(re.downloadHandler.text);
 
         Debug.Log("GetNFTsByUser Object\n" + JsonConvert.SerializeObject(response));
-        textArea.text = JsonConvert.SerializeObject(response);
+       // textArea.text = JsonConvert.SerializeObject(response);
     }
 
     private void Start()
